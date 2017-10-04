@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Clientmanagements</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="clientmanagement in vm.clientmanagements"
+       ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="clientmanagement.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="clientmanagement.user" ng-bind="clientmanagement.user.displayName"></span>
+        <span ng-if="!clientmanagement.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="clientmanagement.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.clientmanagements.$resolved && !vm.clientmanagements.length">
+    No Clientmanagements yet, why don't you <a ui-sref="clientmanagements.create">create one</a>?
+  </div>
+</section>
