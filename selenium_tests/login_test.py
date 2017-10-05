@@ -32,3 +32,5 @@ except WebDriverException:
     raise Exception("Didn't log in, but should've")
 else:
     print("Logged in")
+
+driver.close()
