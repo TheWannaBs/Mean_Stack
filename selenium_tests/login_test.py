@@ -15,10 +15,9 @@ elem.send_keys(Keys.RETURN)
 try:
     elem = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Invalid username or password']")))
 except WebDriverException:
-    print("Something went wrong here")
-    assert False
+    raise Exception("Did I log in here?")
 else:
-    print("This is right")
+    print("Invalid user and pass, this is right")
 
 elem = getElement(driver, "//input[@id='username']")
 elem.clear()
@@ -27,4 +26,9 @@ elem = getElement(driver, "//input[@id='password']")
 elem.clear()
 elem.send_keys("AHeuser10!")
 elem.send_keys(Keys.RETURN)
-assert("mainmenu" in driver.current_url)
+try:
+    WebDriverWait(driver, 10).until(EC.url_contains("mainmenu"))
+except WebDriverException:
+    raise Exception("Didn't log in, but should've")
+else:
+    print("Logged in")
