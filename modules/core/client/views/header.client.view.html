@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="mainmenu" class="navbar-brand">K9 Partners for Patriots</a>
+    <a ui-sref="mainmenu" class="navbar-brand">Home</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
@@ -25,6 +25,13 @@
         <a ui-sref="authentication.signup">Sign Up</a>
       </li>
       <li class="divider-vertical"></li> -->
+      <li>
+        <p style="padding-top: 15px; color: rgba(255, 255, 255, 0.9);" ng-bind="authentication.user.displayName"></p>
+      </li>
+      <li>
+        <style>p.indent{ padding-left: 2.3em }</style>
+        <p class="indent"></p>
+      </li>
       <li ui-sref-active="active">
         <a href="/api/auth/signout" target="_self">Logout</a>
       </li>
@@ -36,7 +43,7 @@
     <!-- <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+          <<img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
