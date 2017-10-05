@@ -6,7 +6,12 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="mainmenu" class="navbar-brand">Home</a>
+    <ul class="nav navbar-nav navbar-left" ng-show="authentication.user" style="padding-top: 10px">
+      <a class="btn btn-danger btn-sm" href="" ng-click="goBack()">Back</a>
+      <style>p.indent{ padding-right: 2.3em }</style>
+      <p class="indent"></p>
+    </ul>  
+    <a class="navbar-brand" href="" ng-click="goToMainMenu()">Home</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <!-- <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
