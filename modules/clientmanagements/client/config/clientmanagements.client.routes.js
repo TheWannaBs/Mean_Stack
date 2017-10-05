@@ -24,7 +24,7 @@
         }
       })
       .state('clientmanagements.create', {
-        url: '/create',
+        url: '/client/views/form-clientmanagement.client.view.html',
         templateUrl: 'modules/clientmanagements/client/views/form-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',

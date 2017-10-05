@@ -13,9 +13,33 @@ var ClientmanagementSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Clientmanagement name',
+    required: 'Please fill Client Name',
     trim: true
   },
+  phone: {
+    type: String, //just in case there are hyphens or paraenthesis
+    default: '',
+    required: 'Please fill in Client Phone Number',
+    trim: true
+  },
+  email: {
+    type: String,
+    default: '',
+    required: 'Please fill email',
+    trim: true
+  },
+  dogName: {
+    type: String,
+    default: '',
+    required: 'Please fill dogName',
+    trim: true
+  },
+  dogID: {
+    type: String,
+    default: '',
+    required: 'Please fill dogID',
+    trim: true
+  },   
   created: {
     type: Date,
     default: Date.now
