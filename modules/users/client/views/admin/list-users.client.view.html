@@ -4,8 +4,14 @@
       <div class="col-md-4">
         <h1>Users</h1>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
+      <div class="col-md-4" style="margin-top: 2em;">
         <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+      </div>
+      <div class="col-md-4">
+        <div class="pull-right" style="margin-top: 2em;">
+          <span><a class="btn btn-primary" ui-sref="admin.user-log">User Log</a></span>
+          <span><a class="btn btn-success" ui-sref="authentication.signup">Create User</a></span>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +22,5 @@
       <p class="list-group-item-text" ng-bind="user.email"></p>
     </a>
   </div>
-
   <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 </section>

@@ -10,6 +10,11 @@ var mongoose = require('mongoose'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
+owasp.config({
+  minLength: 4,
+  minOptionalTestsToPass: 1,
+});
+
 /**
  * A Validation function for local strategy properties
  */
@@ -113,7 +118,9 @@ UserSchema.pre('save', function (next) {
  */
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
-    var result = owasp.test(this.password);
+    var result = {
+      errors: [],
+    };
     if (result.errors.length) {
       var error = result.errors.join(' ');
       this.invalidate('password', error);
