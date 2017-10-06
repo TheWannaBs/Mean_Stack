@@ -1,0 +1,38 @@
+<section>
+    <div class="page-header" ng-hide="">
+        <h1>Edit Inventory</h1>
+    </div>
+    <div class="col-md-offset-1 col-md-10">
+        <form name="vm.form.inventorymanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.inventorymanagementForm.$valid)"
+            novalidate>
+            <fieldset>
+                <div class="form-group" show-errors>
+                    <label class="control-label" for="tag">Tags</label>
+                    <input name="name" type="text" ng-model="vm.inventorymanagement.tags" id="tags" class="form-control" placeholder="tags" required/>
+                    <div ng-messages="vm.form.inventorymanagementForm.tags.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Inventory tag is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" show-errors>
+                    <label class="control-label" for="upc">UPC</label>
+                    <input name="upc" type="text" ng-model="vm.inventorymanagement.upc" id="upc" class="form-control" placeholder="upc" required/>
+                    <div ng-messages="vm.form.inventorymanagementForm.upc.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">UPC is required.</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <input name="description" type="text" ng-model="vm.inventorymanagement.description" id="description" class="form-control"
+                        placeholder="description" />
+                </div>
+                <div class="form-group pull-right">
+                    <input type="submit" value="Update Inventory" class="btn btn-primary"/>
+                    <input type="button" value="Cancel" class="btn" ui-sref="inventorymanagements.view({ inventorymanagementId: vm.inventorymanagement._id})"/>
+                </div>
+                <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
