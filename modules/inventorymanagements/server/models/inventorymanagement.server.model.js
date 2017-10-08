@@ -40,7 +40,7 @@ var InventorymanagementSchema = new Schema({
 });
 
 InventorymanagementSchema.pre('save', function (next) {
-  var currentTime = new Date;
+  var currentTime = new Date();
   this.updated = currentTime;
   if (!this.created) {
     this.created = currentTime;
