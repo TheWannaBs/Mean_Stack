@@ -1,26 +1,29 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.clientmanagement.name"></h1>
-  </div>
-  <div class="pull-right"
-       ng-show="vm.clientmanagement.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.clientmanagement.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.clientmanagement.user"
-            ng-bind="vm.clientmanagement.user.displayName"></span>
-      <span ng-if="!vm.clientmanagement.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.clientmanagement.content"></p>
+    <div class="col-md-offset-1 col-md-10">
+        <div ng-show="error" class="text-danger">
+            <strong ng-bind="error"></strong>
+        </div>
+        <div class="jumbotron">
+            <img id="loader" ng-show="loading" src="/../../img/484.gif">
+            <div ng-show="vm.clientmanagement">
+                <h2>Client Information</h2>
+                <p>Name: {{vm.clientmanagement.name}}</p>
+                <p>Phone #: {{vm.clientmanagement.phone}}</p>
+                <p>Email: {{vm.clientmanagement.email}}</p>
+                <p>Dog Name: {{vm.clientmanagement.dogName}}</p>
+                <p>Dog ID: {{vm.clientmanagement.dogID}}</p>
+                <p><input type="checkbox" value= "clientmanagement.Inactive"> Inactive </input></p>
+                <br>
+                <a class="btn btn-primary" ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Edit
+                </a>
+                <a class="btn btn-danger" ng-click="vm.remove()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    Remove
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
