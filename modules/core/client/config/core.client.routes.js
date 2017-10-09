@@ -21,7 +21,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url: '/mainmenu',
       templateUrl: 'modules/core/client/views/mainmenu.client.view.html',
       data: {
-        roles: ['user', 'admin']
+        roles: ['user']
+      }
+    })
+    .state('mainmenuadmin', {
+      url: '/mainmenuadmin',
+      templateUrl: 'modules/core/client/views/mainmenuadmin.client.view.html',
+      data: {
+        roles: ['admin']
       }
     })
     .state('not-found', {
