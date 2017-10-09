@@ -72,7 +72,6 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
-<<<<<<< HEAD
 
 # Visual Studio Code
 #==========
