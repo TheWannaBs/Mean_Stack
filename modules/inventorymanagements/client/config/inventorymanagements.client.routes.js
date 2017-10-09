@@ -12,7 +12,10 @@
       .state('inventorymanagements', {
         abstract: true,
         url: '/inventorymanagements',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        data: {
+          roles: ['user', 'admin'],
+        }
       })
       .state('inventorymanagements.list', {
         url: '',
@@ -32,7 +35,6 @@
           inventorymanagementResolve: newInventorymanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Inventory Create'
         }
       })
@@ -45,7 +47,6 @@
           inventorymanagementResolve: getInventorymanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Edit Inventory {{ inventorymanagementResolve.upc }}'
         }
       })
