@@ -12,9 +12,9 @@
       .state('clientmanagements', {
         abstract: true,
         url: '/clientmanagements',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
         data: {
-        roles: ['admin']
+          roles: ['admin']
         }
       })
       .state('clientmanagements.list', {
