@@ -31,8 +31,8 @@ angular.module('users').config(['$stateProvider',
       })
       .state('authentication', {
         abstract: true,
-        url: '',
-        templateUrl: 'modules/core/client/views/home.client.view.html'
+        url: '/authentication',
+        templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html'
       })
       .state('authentication.signup', {
         url: '/signup',
@@ -65,7 +65,7 @@ angular.module('users').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/password/reset-password-success.client.view.html'
       })
       .state('password.reset.form', {
-        url: '/:token',
+        url: '/:userId',
         templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
       });
   }
