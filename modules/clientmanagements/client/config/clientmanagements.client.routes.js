@@ -13,6 +13,9 @@
         abstract: true,
         url: '/clientmanagements',
         template: '<ui-view/>'
+        data: {
+        roles: ['admin']
+        }
       })
       .state('clientmanagements.list', {
         url: '/list',
@@ -32,7 +35,6 @@
           clientmanagementResolve: newClientmanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Clientmanagements Create'
         }
       })
@@ -45,7 +47,6 @@
           clientmanagementResolve: getClientmanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Edit Clientmanagement {{ clientmanagementResolve.name }}'
         }
       })
