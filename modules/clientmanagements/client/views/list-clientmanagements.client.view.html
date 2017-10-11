@@ -1,0 +1,42 @@
+<section>
+  <br>
+  <a class="btn btn-default" ui-sref="clientmanagements.create">Create</a>
+  <button type ="button" class="btn btn-default" onclick="window.print()">Print</button>
+  <br>
+    <div class="col-md-offset-1 col-md-10">
+        <div ng-show="error" class="text-danger">
+            <strong ng-bind="error"></strong>
+        </div>
+        <div ng-show="success" class="text-success">
+            <strong ng-bind="success"></strong>
+        </div>
+        <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+        </div>
+        <div class="tableWrapper">
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="thead-inverse">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Dog Name</th>
+                    <th>Dog ID</a></th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr ng-repeat="clientmanagement in vm.clientmanagements | filter: query" ui-sref= "clientmanagements.view({clientmanagementId:
+                  clientmanagement._id})">
+                    <td>{{clientmanagement.name}}</td>
+                    <td>{{clientmanagement.phone}}</td>
+                    <td>{{clientmanagement.email}}</td>
+                    <td>{{clientmanagement.dogName}}</td>
+                    <td>{{clientmanagement.dogID}}</td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+        <img id="loader" ng-show="loading" src="/../../img/484.gif">
+    </div>
+  </section>
