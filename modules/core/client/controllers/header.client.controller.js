@@ -15,9 +15,48 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 
+    // Redirect to appropriate main menu
+    $scope.goToMainMenu = function() {
+      if ("admin" === Authentication.user.roles[0]) {
+        $state.go('mainmenuadmin');
+      } else {
+        $state.go('mainmenu');
+      }
+    };
+
+    // Back button logic
+    /*$scope.goBack = function() {
+      if ("admin" === Authentication.user.roles[0]) {
+        if($state.current.name === 'admin.users') {
+          $state.go('mainmenuadmin');
+        } else if ($state.current.name === ) {
+          $state.go('mainmenuadmin');
+        } else if ($state.current.name === ) {
+          $state.go('mainmenuadmin');
+        } else if ($state.current.name === ) {
+          $state.go();
+        } else if ($state.current.name === ) {
+          $state.go();
+        } else if ($state.current.name === ) {
+          $state.go();
+        } else if ($state.current.name === ) {
+          $state.go();
+        }
+      } else {
+        if($state.current.name === ) {
+          $state.go('mainmenu');
+        } else if ($state.current.name === ) {
+          $state.go();
+        } else if ($state.current.name === ) {
+          $state.go();
+        }
+      }
+    };*/
+
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
+
   }
 ]);

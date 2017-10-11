@@ -1,0 +1,33 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.clientmanagement._id ? 'Edit Clientmanagement' : 'New Clientmanagement'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
+          <label class="control-label" for="name">Phone:</label>
+          <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone" required>
+          <label class="control-label" for="name">Email:</label>
+          <input name="email" type="text" ng-model="vm.clientmanagement.email" id="email" class="form-control" placeholder="Email" required>
+          <label class="control-label" for="name">DogName:</label>
+          <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName" required>
+          <label class="control-label" for="name">DogID:</label>
+          <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID" required>
+          <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Clientmanagement name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
+
+          </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -6,9 +6,9 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
     //If user is signed in then redirect back home
-    if ($scope.authentication.user) {
-      $location.path('/');
-    }
+    //if ($scope.authentication.user) {
+    //  $location.path('/');
+    //}
 
     // Submit forgotten password account id
     $scope.askForPasswordReset = function (isValid) {
@@ -42,7 +42,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
         return false;
       }
 
-      $http.post('/api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function (response) {
+      $http.post('/api/auth/changePassword/' + $stateParams.userId).success(function (response) {
         // If successful show success message and clear form
         $scope.passwordDetails = null;
 
