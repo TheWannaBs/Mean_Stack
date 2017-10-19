@@ -61,6 +61,10 @@
         data: {
           pageTitle: 'Inventory {{ inventorymanagementResolve.tags }}'
         }
+      })
+      .state('inventorymanagements.move', {
+        url: '/moveitems',
+        templateUrl: 'modules/inventorymanagements/client/views/move-inv.client.view.html'
       });
   }
 
