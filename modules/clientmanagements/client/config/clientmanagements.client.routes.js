@@ -61,6 +61,12 @@
         data: {
           pageTitle: 'Clientmanagement {{ clientmanagementResolve.name }}'
         }
+      })
+      .state('clientmanagements.move', {
+        url: '/moveitems',
+        templateUrl: 'modules/clientmanagements/client/views/move-inv.client.view.html',
+        controller: 'ClientmanagementsListController',
+        controllerAs: 'vm'
       });
   }
 
