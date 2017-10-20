@@ -70,7 +70,7 @@
           $state.go("inventorymanagements.view");
         });
     }
-    
+
     function discBtn() {
       if (vm.inventorymanagement.discontinue) {
         return "Recontinue";
@@ -78,8 +78,6 @@
       else {
         return "Discontinue";
       }
-    }  
-
-  
+    }
   }
 }());
