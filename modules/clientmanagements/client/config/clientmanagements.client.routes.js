@@ -13,9 +13,12 @@
         abstract: true,
         url: '',
         template: '<ui-view/>'
+        //data: {
+        //  roles : ['user', 'admin']
+        //}
       })
       .state('clientmanagements.list', {
-        url: '/clientmanagements',
+        url: 'clientmanagements',//'/clientmanagements/client/views/list-clientmanagements.client.view.html',//'list',
         templateUrl: 'modules/clientmanagements/client/views/list-clientmanagements.client.view.html',
         controller: 'ClientmanagementsListController',
         controllerAs: 'vm',
@@ -24,7 +27,7 @@
         }
       })
       .state('clientmanagements.create', {
-        url: '/client/views/form-clientmanagement.client.view.html',
+        url: '/client/views/form-clientmanagement.client.view.html',//'/create',
         templateUrl: 'modules/clientmanagements/client/views/form-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',
@@ -37,7 +40,7 @@
         }
       })
       .state('clientmanagements.edit', {
-        url: '/:clientmanagementId/edit',
+        url: '/:clientmanagementId/edit',//'client/views/form-clientmanagement.client.view.html'//
         templateUrl: 'modules/clientmanagements/client/views/form-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',
@@ -50,7 +53,7 @@
         }
       })
       .state('clientmanagements.view', {
-        url: '/:clientmanagementId',
+        url: '/:clientmanagementId',//'client/views/view-clientmanagement.client.view.htmt'//
         templateUrl: 'modules/clientmanagements/client/views/view-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',

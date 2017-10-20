@@ -8,7 +8,8 @@
 
   ClientmanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'clientmanagementResolve'];
 
-  function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement) {
+  function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement)
+  {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,7 +18,44 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    //vm.clientRoles = clientRoles;
 
+    /*$scope.options = [{
+    name: 'java',
+    value: true,
+    }, {
+    name: 'c#',
+    value: false
+    }, {
+    name: 'angular',
+    value: true
+    }, {
+    name: 'r',
+    value: false
+    }, {
+    name: 'python',
+    value: true
+    }, {
+    name: 'c++',
+    value: true
+    }];
+
+    $scope.save = function() {
+      var optionsCSV = '';
+      $scope.options.forEach(function(option) {
+        if (option.value) {
+          // If this is not the first item
+          if (optionsCSV) {
+            optionsCSV += ','
+          }
+          optionsCSV += option.name;
+        }
+      })
+      // Save the csv to your db (replace alert with your code)
+      alert(optionsCSV);
+    };         
+    */  
+      
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -26,7 +64,8 @@
     }
 
     // Save Clientmanagement
-    function save(isValid) {
+    function save(isValid)
+    {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.clientmanagementForm');
         return false;
@@ -40,7 +79,7 @@
       }
 
       function successCallback(res) {
-        $state.go('clientmanagements.view', {
+        $state.go('clientmanagements.list', {
           clientmanagementId: res._id
         });
       }
@@ -48,6 +87,14 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
-    }
-  }
+    }//save Clentmanagement
+    
+    //function clientRoles()
+    //{
+      //vm.clientmanagement.clientroles.$update();
+    //}
+      
+      
+      
+  }//big func end
 }());
