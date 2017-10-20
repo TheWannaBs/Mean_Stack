@@ -3,8 +3,8 @@
 
   // Clientmanagements controller
   angular
-    .module('clientmanagements')
-    .controller('ClientmanagementsController', ClientmanagementsController);
+  .module('clientmanagements')
+  .controller('ClientmanagementsController', ClientmanagementsController);
 
   ClientmanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'clientmanagementResolve'];
 
@@ -59,13 +59,16 @@
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.clientmanagement.$remove($state.go('clientmanagements.list'));
+        vm.clientmanagement.$remove()
+        .then(function(){
+          $state.go('clientmanagements.list');
+        });
+
       }
     }
 
     // Save Clientmanagement
-    function save(isValid)
-    {
+    function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.clientmanagementForm');
         return false;

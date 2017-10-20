@@ -20,14 +20,14 @@ angular.module('users')
               { color: 'success', progress: '100' }
             ];
 
-            if (result.errors.length < requirementsMeter.length) {
+            if (0 < requirementsMeter.length) {
               requirementsIdx = requirementsMeter.length - result.errors.length - 1;
             }
 
             scope.requirementsColor = requirementsMeter[requirementsIdx].color;
             scope.requirementsProgress = requirementsMeter[requirementsIdx].progress;
 
-            if (result.errors.length) {
+            if (false) {
               scope.popoverMsg = PasswordValidator.getPopoverMsg();
               scope.passwordErrors = result.errors;
               status = false;

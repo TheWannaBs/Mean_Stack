@@ -1,0 +1,49 @@
+<section>
+  <div class="page-header row">
+    <h1>
+      {{vm.inventorymanagement.tags}}
+      <span class="pull-right">
+        <a class="btn btn-primary" ui-sref="inventorymanagements.edit({ inventorymanagementId: vm.inventorymanagement._id })">Edit</a>
+        <a class="btn btn-warning" ng-click="vm.changeDCStatus()">{{vm.discBtn()}}</a>
+        <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
+      </span>
+    </h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>UPC</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.upc"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Description</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.description"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Quantity in Inventory</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.qty"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Discontinued</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.discontinue"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Created</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.created"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Last Updated</strong></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-default" ui-sref="inventorymanagements.list">Back to Inventory</a>
+  </div>
+</section>

@@ -11,14 +11,14 @@
     $stateProvider
       .state('clientmanagements', {
         abstract: true,
-        url: '',
+        url: '',//'clientmanagements/
         template: '<ui-view/>'
         //data: {
-        //  roles : ['user', 'admin']
+        //  roles : ['user', 'admin']//just admin?
         //}
       })
       .state('clientmanagements.list', {
-        url: 'clientmanagements',//'/clientmanagements/client/views/list-clientmanagements.client.view.html',//'list',
+        url: '/list',//'clientmanagements',//'/clientmanagements/client/views/list-clientmanagements.client.view.html',//'list',
         templateUrl: 'modules/clientmanagements/client/views/list-clientmanagements.client.view.html',
         controller: 'ClientmanagementsListController',
         controllerAs: 'vm',
@@ -35,7 +35,6 @@
           clientmanagementResolve: newClientmanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Clientmanagements Create'
         }
       })
@@ -48,7 +47,6 @@
           clientmanagementResolve: getClientmanagement
         },
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Edit Clientmanagement {{ clientmanagementResolve.name }}'
         }
       })
