@@ -9,11 +9,14 @@
         <input type="file" accept="image/*;capture=camera"></input>
       </center>
       <center style="padding-top: 20px;">
-        <input type="text" placeholder="UPC - Will autofill after successful scan" style="width: 270px;"></input>
+        <datalist id="Inventory">
+          <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
+        </datalist>
+        <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" style="width: 270px;"></input>
       </center>
       <center style="padding-top: 20px;">
         <datalist id="Clients">
-          <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} - {{clientmanagement.email}}"></option>
+          <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} --- {{clientmanagement.email}}"></option>
           <!--option value="John Smith"></option>
           <option value="Adam West"></option>
           <option value="Carrey Oon"></option>

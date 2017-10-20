@@ -65,7 +65,7 @@
       .state('clientmanagements.move', {
         url: '/moveitems',
         templateUrl: 'modules/clientmanagements/client/views/move-inv.client.view.html',
-        controller: 'ClientmanagementsListController',
+        controller: 'ClientInventorymanagementsListController',
         controllerAs: 'vm'
       });
   }
