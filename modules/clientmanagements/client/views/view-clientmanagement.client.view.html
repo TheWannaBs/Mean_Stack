@@ -1,29 +1,63 @@
 <section>
-  <div class="page-header">
-    <div class="col-md-offset-1 col-md-10">
-        <div ng-show="error" class="text-danger">
-            <strong ng-bind="error"></strong>
-        </div>
-        <div class="jumbotron">
-            <img id="loader" ng-show="loading" src="/../../img/484.gif">
-            <div ng-show="vm.clientmanagement">
-                <h2>Client Information</h2>
-                <p>Name: {{vm.clientmanagement.name}}</p>
-                <p>Phone #: {{vm.clientmanagement.phone}}</p>
-                <p>Email: {{vm.clientmanagement.email}}</p>
-                <p>Dog Name: {{vm.clientmanagement.dogName}}</p>
-                <p>Dog ID: {{vm.clientmanagement.dogID}}</p>
-                <p><input type="checkbox" value= "clientmanagement.Inactive"> Inactive </input></p>
-                <br>
-                <a class="btn btn-primary" ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    Edit
-                </a>
-                <a class="btn btn-danger" ng-click="vm.remove()">
-                    <i class="glyphicon glyphicon-trash"></i>
-                    Remove
-                </a>
+    <div class="page-header row">
+        <h1>
+            {{vm.clientmanagement.name}}
+            <small ng-class="vm.labelDisp()" ng-hide="{vm.clientmanagement.inactive === false}">{{vm.labelText()}}</small>
+            <span class="pull-right">
+                <a class="btn btn-primary" ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">Edit</a>
+                <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
+                <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
+            </span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Phone Number</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.phone"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Email</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.email"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Dog Name</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.dogName"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Dog ID</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.dogID"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Created</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.created"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Last Updated</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.updated"></div>
             </div>
         </div>
     </div>
+    <div class="pull-right">
+        <a class="btn btn-default" ui-sref="clientmanagements.list">Back to List</a>
+    </div>
 </section>
+
