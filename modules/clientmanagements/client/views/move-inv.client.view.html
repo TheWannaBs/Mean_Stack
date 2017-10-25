@@ -1,35 +1,34 @@
 <section>
-    <div class="page-header">
-      <center>
-        <h1>Move Inventory</h1>
-      </center>
+  <div class="page-header">
+    <center>
+      <h3>Move Inventory</h3>
+    </center>
+  </div>
+  <center style="padding-bottom: 20px;">
+    <input type="file" accept="image/*;capture=camera"></input>
+  </center>
+  <datalist id="Inventory">
+    <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
+  </datalist>
+  <center>
+    <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: query | filter: query: true">
+      <p>Item Tags: {{inventorymanagement.tags}}</p>
+      <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
+      <p>Inactive: {{inventorymanagement.discontinue}}</p>
     </div>
-    <div>
-      <center>
-        <input type="file" accept="image/*;capture=camera"></input>
-      </center>
-      <center style="padding-top: 20px;">
-        <datalist id="Inventory">
-          <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
-        </datalist>
-        <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" style="width: 270px;"></input>
-      </center>
-      <center style="padding-top: 20px;">
-        <datalist id="Clients">
-          <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} --- {{clientmanagement.email}}"></option>
-          <!--option value="John Smith"></option>
-          <option value="Adam West"></option>
-          <option value="Carrey Oon"></option>
-          <option value="Mai Wei"></option>
-          <option value="Ward Sun"></option>
-          <option value="Bill Nye"></option-->
-        </datalist>
-        <input type="text" list="Clients" placeholder="Client Name" style="width: 270px;"></input>
-      </center>
-      <center style="padding-top: 20px;">
-        <a class="btn btn-primary">Cancel</a>
-        <a class="btn btn-warning">Move To Client</a>
-        <a class="btn btn-warning">Move To Inventory</a>
-      </center>
-    </div>
-  </section>
+  </center>
+  <center>
+    <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="query.upc" style="width: 270px;"></input>
+  </center>
+  <center style="padding-top: 20px;">
+    <datalist id="Clients">
+      <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} --- {{clientmanagement.email}}"></option>
+    </datalist>
+    <input type="text" list="Clients" placeholder="Client Name" style="width: 270px;"></input>
+  </center>
+  <center style="padding-top: 20px;">
+    <a class="btn btn-primary">Cancel</a>
+    <a class="btn btn-warning">Move To Client</a>
+    <a class="btn btn-warning">Move To Inventory</a>
+  </center>
+</section>

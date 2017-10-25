@@ -7,7 +7,13 @@
 
   angular
     .module('inventorymanagements')
-    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
+    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
+    .filter("emptyifblank", function(){ return function(object, query){
+      if(!query)
+        return {};
+      else
+        return object;
+    };});
 
   ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService'];
 
