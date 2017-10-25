@@ -62,11 +62,14 @@
           pageTitle: 'Clientmanagement {{ clientmanagementResolve.name }}'
         }
       })
-      .state('clientmanagements.move', {
+      .state('moveinventory', {
         url: '/moveitems',
         templateUrl: 'modules/clientmanagements/client/views/move-inv.client.view.html',
         controller: 'ClientInventorymanagementsListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 

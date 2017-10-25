@@ -15,12 +15,22 @@
         return object;
     };});
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', '$scope', '$state', 'Authentication'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, $scope, $state, Authentication) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
     vm.inventorymanagements = InventorymanagementsService.query();
+    $scope.$state = $state;
+    $scope.authentication = Authentication;
+
+    $scope.cancelButton = function() {
+      if ("admin" === Authentication.user.roles[0]) {
+        $state.go('mainmenuadmin');
+      } else {
+        $state.go('mainmenu');
+      }
+    };
   }
 }());
