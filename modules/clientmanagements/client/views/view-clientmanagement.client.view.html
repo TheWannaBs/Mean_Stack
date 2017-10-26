@@ -50,6 +50,20 @@
             <hr/>
             <div class="row">
                 <div class="col-md-3">
+                    <strong>Branch</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.branchText()"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Rank</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.rank"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
                     <strong>Last Updated</strong>
                 </div>
                 <div class="col-md-6" ng-bind="vm.clientmanagement.updated"></div>
@@ -60,4 +74,3 @@
         <a class="btn btn-default" ui-sref="clientmanagements.list">Back to List</a>
     </div>
 </section>
-

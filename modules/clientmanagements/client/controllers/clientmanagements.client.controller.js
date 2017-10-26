@@ -5,7 +5,6 @@
   angular
   .module('clientmanagements')
   .controller('ClientmanagementsController', ClientmanagementsController);
-
   ClientmanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'clientmanagementResolve'];
 
   function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement) {
@@ -22,7 +21,7 @@
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
-
+    vm.branchText = branchText;
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -47,7 +46,7 @@
       }
 
       function successCallback(res) {
-        $state.go('clientmanagements.list', {
+        $state.go('clientmanagements.view', {
           clientmanagementId: res._id
         });
       }
@@ -98,6 +97,8 @@
       }
     }
 
+
+
     //Change Activity Button Text
     function buttonText() {
       if (vm.clientmanagement.inactive) {
@@ -106,6 +107,28 @@
       else {
         return "inactive";
       }
+    }
+    function branchText(){
+      var branch = '';
+      if(vm.clientmanagement.airForce){
+        branch += 'Air Force, ';
+      }
+      if(vm.clientmanagement.army){
+        branch += 'Army, ';
+      }
+      if(vm.clientmanagement.coastGuard){
+        branch += 'Coast Guard, ';
+      }
+      if(vm.clientmanagement.marines){
+        branch += 'Marines, ';
+      }
+      if(vm.clientmanagement.nationalGuard){
+        branch += 'National Guard, ';
+      }
+      if(vm.clientmanagement.navy){
+        branch += 'Navy ';
+      }
+      return branch;
     }
   }
 }());

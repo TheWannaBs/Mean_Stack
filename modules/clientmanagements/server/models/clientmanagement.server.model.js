@@ -13,36 +13,72 @@ var ClientmanagementSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Clientmanagement name',
+    required: 'Please fill in client name',
     trim: true
   },
   phone: {
     type: String, //just in case there are hyphens or paraenthesis
     default: '',
-    required: 'Please fill in Client Phone Number',
+    required: 'Please fill in client phone number',
     trim: true
   },
   email: {
     type: String,
     default: '',
-    required: 'Please fill email',
+    required: 'Please fill in email',
     trim: true
   },
   dogName: {
     type: String,
     default: '',
-    required: 'Please fill dogName',
+    required: 'Please fill in dog name',
     trim: true
   },
   dogID: {
     type: String,
     default: '',
-    required: 'Please fill dogID',
+    required: 'Please fill in Dog ID',
     trim: true
   },
   inactive: {
     type: Boolean,
     default: '',
+    trim: true
+  },
+  airForce: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  marines: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  navy: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  army: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  coastGuard: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  nationalGuard: {
+    type: Boolean,
+    default: '',
+    trim: true
+  },
+  rank: {
+    type: String,
+    default: '',
+    required: 'Please fill in a rank',
     trim: true
   },
   created: Date,
