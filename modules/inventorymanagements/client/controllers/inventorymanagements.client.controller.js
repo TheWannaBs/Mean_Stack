@@ -67,7 +67,7 @@
     //Change Activity of Item
     function changeStatus () {
       if ($window.confirm("Are you sure you want to change this item's activity?")) {
-        vm.inventorymanagement.discontinue = !vm.inventorymanagement.discontinue;
+        vm.inventorymanagement.inactive = !vm.inventorymanagement.inactive;
         vm.inventorymanagement.$update(vm.inventorymanagement)
           .then(function () {
             $state.go("inventorymanagements.view");
@@ -77,7 +77,7 @@
 
     //Display Inactive Label
     function labelDisp () {
-      if (vm.inventorymanagement.discontinue) {
+      if (vm.inventorymanagement.inactive) {
         return "label label-warning";
       }
       else {
@@ -87,7 +87,7 @@
 
     //Display Lable Text
     function labelText () {
-      if (vm.inventorymanagement.discontinue) {
+      if (vm.inventorymanagement.inactive) {
         return "Inactive";
       }
       else {
@@ -97,7 +97,7 @@
 
     //Change Activity Button Color
     function buttonColor () {
-      if (vm.inventorymanagement.discontinue) {
+      if (vm.inventorymanagement.inactive) {
         return "btn btn-success";
       }
       else {
@@ -106,12 +106,12 @@
     }
 
     //Change Activity Button Text
-    function buttonText () {
-      if (vm.inventorymanagement.discontinue) {
-        return "Recontinue";
+    function buttonText() {
+      if (vm.clientmanagement.inactive) {
+        return "Activate";
       }
       else {
-        return "Discontinue";
+        return "Deactivate";
       }
     }
 

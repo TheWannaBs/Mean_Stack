@@ -102,10 +102,10 @@
     //Change Activity Button Text
     function buttonText() {
       if (vm.clientmanagement.inactive) {
-        return "Recontinue";
+        return "Activate";
       }
       else {
-        return "inactive";
+        return "Deactivate";
       }
     }
     function branchText(){
