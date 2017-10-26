@@ -8,7 +8,7 @@
 
   InventorymanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'inventorymanagementResolve'];
 
-  function InventorymanagementsController ($scope, $state, $window, Authentication, inventorymanagement) {
+  function InventorymanagementsController($scope, $state, $window, Authentication, inventorymanagement) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,9 +17,11 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.changeDCStatus = changeDCStatus;
-    vm.discBtn = discBtn;
-    vm.headSort = "tags";
+    vm.changeStatus = changeStatus;
+    vm.labelDisp = labelDisp;
+    vm.labelText = labelText;
+    vm.buttonColor = buttonColor;
+    vm.buttonText = buttonText;
 
     // Remove existing Inventorymanagement
     function remove() {
@@ -28,7 +30,6 @@
           .then(function () {
             $state.go("inventorymanagements.list");
           });
-        //vm.inventorymanagement.$remove($state.go('inventorymanagements.list'));
       }
     }
 
@@ -63,23 +64,56 @@
       }
     }
 
-    function changeDCStatus() {
-      vm.inventorymanagement.discontinue = !vm.inventorymanagement.discontinue;
-      vm.inventorymanagement.$update(vm.inventorymanagement)
-        .then(function () {
-          $state.go("inventorymanagements.view");
-        });
+    //Change Activity of Item
+    function changeStatus () {
+      if ($window.confirm("Are you sure you want to change this item's activity?")) {
+        vm.inventorymanagement.discontinue = !vm.inventorymanagement.discontinue;
+        vm.inventorymanagement.$update(vm.inventorymanagement)
+          .then(function () {
+            $state.go("inventorymanagements.view");
+          });
+      }
     }
-    
-    function discBtn() {
+
+    //Display Inactive Label
+    function labelDisp () {
+      if (vm.inventorymanagement.discontinue) {
+        return "label label-warning";
+      }
+      else {
+        return "";
+      }
+    }
+
+    //Display Lable Text
+    function labelText () {
+      if (vm.inventorymanagement.discontinue) {
+        return "Inactive";
+      }
+      else {
+        return "";
+      }
+    }
+
+    //Change Activity Button Color
+    function buttonColor () {
+      if (vm.inventorymanagement.discontinue) {
+        return "btn btn-success";
+      }
+      else {
+        return "btn btn-warning";
+      }
+    }
+
+    //Change Activity Button Text
+    function buttonText () {
       if (vm.inventorymanagement.discontinue) {
         return "Recontinue";
       }
       else {
         return "Discontinue";
       }
-    }  
+    }
 
-  
   }
 }());

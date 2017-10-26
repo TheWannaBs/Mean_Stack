@@ -29,6 +29,7 @@ ng-model="vm.clientmanagement.clientroles"
 ng-checked="all"
 do clickey mouse... href="";ss
 -->
+
 <section>
   <div class="page-header">
     <h1>{{vm.clientmanagement._id ? 'Edit Client' : 'Create A New Client Below'}}</h1>
@@ -86,6 +87,25 @@ do clickey mouse... href="";ss
               </label>
             </li>
           </ul> -->
+            
+        <!-- ng-model="choice.checked"
+             scan -- li
+<ul>
+ <li ng-repeat="item in choices">
+  <input type="checkbox" name="skills" ng-model="item.checked" ng-click="doTheThings(item)"> {{item.Name}}
+ </li>
+ng-   change="validate(choice.name)"
+ng-required="checkBoxArray.length==0" 
+</ul>
+           --> 
+            
+          <!--<ng-form name="myForm">-->
+          <li ng-repeat="choice in choices">
+          <input type="checkbox" name="skills" ng-checked="vm.clientanagement.clientroles" ng-click="doTheThings(choice)">
+            {{choice.name}}
+          </li>
+          <!--</ng-form>-->
+    
           <label>Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="foster"></label>
           <label>Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff"></label> 
           <label>Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor"></label>

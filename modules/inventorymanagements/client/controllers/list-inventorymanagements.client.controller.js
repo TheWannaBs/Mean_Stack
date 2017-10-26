@@ -11,5 +11,10 @@
     var vm = this;
 
     vm.inventorymanagements = InventorymanagementsService.query();
+    vm.headSort = "tags";
+
+    vm.showNoInactive = function (item) {
+      return item.discontinue === false;
+    };
   }
 }());
