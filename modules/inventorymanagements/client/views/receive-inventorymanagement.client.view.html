@@ -1,28 +1,30 @@
 <section>
-  <div class="page-header" ng-hide="">
-    <h1>Recieve Inventory</h1>
+  <div class="page-header">
+    <center>
+      <h3>Receive Inventory</h3>
+    </center>
   </div>
-  <div class="col-md-offset-1 col-md-10">
-    <a class="btn btn-primary btn-block" ui-sref="inventorymanagements.scan">Scan</a>
-    <form name="vm.form.inventorymanagementForm" class="form-horizontal"
-    ng-submit="vm.recieve(vm.form.inventorymanagementForm.upc, vm.form.inventorymanagementForm.quantity)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="upc">UPC</label>
-          <input name="upc" type="text" id="upc" class="form-control" placeholder="UPC"/>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="quantity">Quantity</label>
-          <input name="quantity" type="text" id="quantity" class="form-control" placeholder="Quantity"/>
-        </div>
-        <div class="form-group pull-right">
-          <input type="submit" value="Submit" class="btn btn-primary"/>
-          <input type="button" value="Cancel" class="btn" ui-sref="inventorymanagements.list"/>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+  <center style="padding-bottom: 20px;">
+    <input type="file" accept="image/*;capture=camera"></input>
+  </center>
+  <datalist id="Inventory">
+    <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
+  </datalist>
+  <center>
+    <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: query | filter: query: true">
+      <p>Item Tags: {{inventorymanagement.tags}}</p>
+      <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
+      <p>Inactive: {{inventorymanagement.discontinue}}</p>
+    </div>
+  </center>
+  <center>
+    <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" class="form-control" ng-model="query.upc" style="width: 300px;"></input>
+  </center>
+  <center style="padding-top: 20px;">
+    <input name="quantity" type="text" id="quantity" class="form-control" placeholder="Quantity" style="width: 300px;"/>
+  </center>
+  <center style="padding-top: 20px;">
+    <a class="btn btn-primary" ui-sref="inventorymanagements.list">Cancel</a>
+    <a class="btn btn-warning">Move To Inventory</a>
+  </center>
 </section>
