@@ -45,8 +45,14 @@ var ClientmanagementSchema = new Schema({
     default: '',
     trim: true
   },
+  inventory: [{
+    tags: String,
+    upc: String,
+    qty: Number
+  }],
   created: Date,
   updated: Date
+  
  /* user: {
     type: Schema.ObjectId,
     ref: 'User'
