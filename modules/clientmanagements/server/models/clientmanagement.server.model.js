@@ -40,19 +40,27 @@ var ClientmanagementSchema = new Schema({
     required: 'Please fill dogID',
     trim: true
   },
-  Inactive: {
+  inactive: {
     type: Boolean,
     default: '',
     trim: true
   },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  user: {
+  created: Date,
+  updated: Date
+ /* user: {
     type: Schema.ObjectId,
     ref: 'User'
   }
+  */
+});
+
+ClientmanagementSchema.pre('save', function (next) {
+  var currentTime = new Date();
+  this.updated = currentTime;
+  if (!this.created) {
+    this.created = currentTime;
+  }
+  next();
 });
 
 mongoose.model('Clientmanagement', ClientmanagementSchema);

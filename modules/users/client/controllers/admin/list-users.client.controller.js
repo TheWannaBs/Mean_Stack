@@ -2,6 +2,7 @@
 
 angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
   function ($scope, $filter, Admin) {
+    $scope.headSort = "username";
     Admin.query(function (data) {
       $scope.users = data;
       $scope.buildPager();
@@ -22,10 +23,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-    };
-
-    $scope.pageChanged = function () {
-      $scope.figureOutItemsToDisplay();
     };
   }
 ]);

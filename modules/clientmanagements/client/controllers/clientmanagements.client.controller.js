@@ -17,6 +17,11 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.changeStatus = changeStatus;
+    vm.labelDisp = labelDisp;
+    vm.labelText = labelText;
+    vm.buttonColor = buttonColor;
+    vm.buttonText = buttonText;
 
     // Remove existing Clientmanagement
     function remove() {
@@ -49,6 +54,57 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
+      }
+    }
+
+    //Change Activity of Item
+    function changeStatus() {
+      if ($window.confirm("Are you sure you want to change this item's activity?")) {
+        vm.clientmanagement.inactive = !vm.clientmanagement.inactive;
+        vm.clientmanagement.$update(vm.clientmanagement)
+          .then(function () {
+            $state.go("clientmanagements.view");
+          });
+      }
+    }
+
+    //Display Inactive Label
+    function labelDisp() {
+      if (vm.clientmanagement.inactive) {
+        return "label label-warning";
+      }
+      else {
+        return "";
+      }
+    }
+
+    //Display Lable Text
+    function labelText() {
+      if (vm.clientmanagement.inactive) {
+        return "Inactive";
+      }
+      else {
+        return "";
+      }
+    }
+
+    //Change Activity Button Color
+    function buttonColor() {
+      if (vm.clientmanagement.inactive) {
+        return "btn btn-success";
+      }
+      else {
+        return "btn btn-warning";
+      }
+    }
+
+    //Change Activity Button Text
+    function buttonText() {
+      if (vm.clientmanagement.inactive) {
+        return "Activate";
+      }
+      else {
+        return "Deactivate";
       }
     }
   }
