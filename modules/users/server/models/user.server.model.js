@@ -80,13 +80,8 @@ var UserSchema = new Schema({
     default: ['user'],
     required: 'Please provide at least one role'
   },
-  updated: {
-    type: Date
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
+  created: Date,
+  updated: Date,
   /* For reset password */
   resetPasswordToken: {
     type: String
@@ -94,6 +89,15 @@ var UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date
   }
+});
+
+UserSchema.pre('save', function (next) {
+  var currentTime = new Date();
+  this.updated = currentTime;
+  if (!this.created) {
+    this.created = currentTime;
+  }
+  next();
 });
 
 /**
