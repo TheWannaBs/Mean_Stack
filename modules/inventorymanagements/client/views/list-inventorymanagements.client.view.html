@@ -1,7 +1,16 @@
 <section>
-  <div class="page-header">
-    <h1>Inventory</h1>
+  <div class="page-header row">
+    <h1>
+      Inventory List
+      <span class="pull-right">
+        <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Item</a>
+        <a class="btn btn-primary" ui-sref="">Receive Items</a>
+        <a class="btn btn-primary" ui-sref="">Move Items</a>
+        <a class="btn btn-default" ui-sref="">Print</a>
+      </span>
+    </h1>
   </div>
+
   <div class="col-md-offset-1 col-md-10">
     <div class="input-group" id="searchBar">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
@@ -30,8 +39,6 @@
         </tbody>
       </table>
     </div>
-    <div>
-      <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Item</a>
-    </div>
+    <img id="loader" ng-show="loading" src="/../../img/484.gif">
   </div>
 </section>

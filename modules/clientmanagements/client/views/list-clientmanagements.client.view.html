@@ -1,7 +1,14 @@
 <section>
-    <div class="page-header">
-        <h1>Client List</h1>
+    <div class="page-header row">
+        <h1>
+            Client List
+            <span class="pull-right">
+                <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Client</a>
+                <a class="btn btn-default" ui-sref="">Print</a>
+            </span>
+        </h1>
     </div>
+
     <div class="col-md-offset-1 col-md-10">
         <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1">
@@ -40,9 +47,5 @@
             </table>
         </div>
         <img id="loader" ng-show="loading" src="/../../img/484.gif">
-        <div>
-            <a class="btn btn-primary" ui-sref="clientmanagements.create">Create Client</a>
-            <button type="button" class="btn btn-default" onclick="window.print()">Print</button>
-        </div>
     </div>
   </section>

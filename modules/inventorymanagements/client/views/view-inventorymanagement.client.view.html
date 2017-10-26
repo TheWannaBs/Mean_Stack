@@ -29,18 +29,13 @@
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Discontinued</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.discontinue"></div>
-      </div>
-      <hr/>
-      <div class="row">
         <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.created"></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.created | date : 'short'"></div>
       </div>
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Last Updated</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated"></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated | date : 'short'"></div>
       </div>
     </div>
   </div>

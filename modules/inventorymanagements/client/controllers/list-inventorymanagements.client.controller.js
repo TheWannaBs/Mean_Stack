@@ -14,7 +14,7 @@
     vm.headSort = "tags";
 
     vm.showNoInactive = function (item) {
-      return item.discontinue === false;
+      return item.inactive === false;
     };
   }
 }());
