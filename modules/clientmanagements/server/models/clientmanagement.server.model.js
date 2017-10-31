@@ -49,50 +49,65 @@ var ClientmanagementSchema = new Schema({
     //type: Schema.ObjectId,
     //ref: 'user'      
   //}*/
-  clientroles: {//type: Schema.ObjectId,    
-    //type: String,
-    //enum: ['IT','Design','Technology']      
-    //enum NN{
-    //  test1 = 'IT',
-    //  test2 = 'Design',
-    //  test3 = 'Technology'
-    //},
-    type: [{
-      type: String,
-      default: 'IT',
-      enum: ['IT','Design','Technology']
-    }],
-    //default: 'IT',
-    //enum: ['IT','Design','Technology'],
-    //enum: ['foster','staff','sponsor','veteran','volunter'],
-    //required: 'Title cannot be blank',
-    //trim: true
-    //type: [{
-    //salutation: {
-    //  type: String,
-    //  enum: ['foster','staff','sponsor','veteran','volunter']//possibleRoles//user,admin
-    //  default: '',
-    //  required: '',
-    //  trim: true,
-    //}],
-    //},
-    //default: ['veteran']
-    //required: 'Please provide at least one role'
-    //ref: 'clientroles'
-    //required: true
+  clientrolesFoster: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesStaff: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesSponsor: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesVeteran: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesVolunteer: {
+    type: Boolean,
+    default: '',
+    trim: true      
   },
   inactive: {
     type: Boolean,
     default: '',
     trim: true
   },
+  /*inventoryTags: {
+      type: String,
+      default: '',
+      trim: true
+  },
+  inventoryUPC: {
+      type: String,
+      default: '',
+      trim: true
+  },
+  inventoryQty: {
+      type: Number,
+      default: '',
+      trim: true
+  },*/    
+  inventory: [{
+    tags: String,//String,// default:''},
+    upc: String,//String,// default:''},
+    qty: Number//Number//, default: 0}
+  }],
+  //salutation: {type: String, enum: ['Mr.', 'Mrs.', 'Ms.']},
   created: Date,
   updated: Date
- /* user: {
+  /* user: {
     type: Schema.ObjectId,
     ref: 'User'
   }
   */
+  //reviews: []
 });
 
 ClientmanagementSchema.pre('save', function (next) {
@@ -103,7 +118,7 @@ ClientmanagementSchema.pre('save', function (next) {
   }
   next();
 });
-module.exports = mongoose.model('Clientmanagement', ClientmanagementSchema);
+mongoose.model('Clientmanagement', ClientmanagementSchema);//module.exports = 
 //ClientmanagementSchema.virtual('possibleRoles').get(function () {
 //    return possibleRoles;
 //});
