@@ -25,7 +25,7 @@
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
     vm.displayClientRoles = displayClientRoles;//list of clientroles
-    //vm.displayClientInventory = displayClientInventory;  
+    vm.displayClientInventory = displayClientInventory;  
       
     $scope.checkBoxModel = {//vm.lists =
       value1 : 'foster',
@@ -141,39 +141,33 @@
       //vm.clientmanagement.clientroles.$update();
     //}
     
-    /*function displayClientInventory() {
-      var val = '';
-          /*<center>
-    <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: serial | filter: serial: true">
-      <p>Item Tags: {{inventorymanagement.tags}}</p>
-      <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
-      <p>Inactive: {{inventorymanagement.discontinue}}</p>
-    </div>
-  </center>*/
-      
+    function displayClientInventory() {
+      var val = 'Client Inventory';      
       //if(vm.clientmanagement.salutation.enumValues === undefined)
       //  {val += 'null'; alert('Null');}
       //else
       //  {val += 'not null'; alert('Not Null');}
-      //val += vm.clientmanagement.inventory.tags;
+      val += 'Tags: ' + vm.clientmanagement.inventory.length// + '\n';
+      //val += 'UPC: ' + vm.clientmangement.inventory.upc + '\n';
+      //val += 'Quantity: ' + vm.clientmanagement.inventory.qty;
       //val += (Clientmanagement.schema.path('salutation').enumValues);
       //val += vm.clientmanagement.inventory;//vm.clientmanagement.inventory.UPC;// + (vm.inventory.qty).toString();
-      return val;        
-    }*/
+      return val;
+    }
       
     function displayClientRoles() {
       var list = '';
       if(vm.clientmanagement.clientrolesFoster)
-        list += 'Foster ,';
+        list += 'Foster, ';
       if(vm.clientmanagement.clientrolesStaff)
-        list += 'Staff ,';
+        list += 'Staff, ';
       if(vm.clientmanagement.clientrolesSponsor)
-        list += 'Sponsor ,';
+        list += 'Sponsor, ';
       if(vm.clientmanagement.clientrolesVeteran)
-        list += 'Veteran ,';
+        list += 'Veteran, ';
       if(vm.clientmanagement.clientrolesVolunteer)
-        list += 'Volunteer ,';
-      return list;
+        list += 'Volunteer, ';
+      return list.slice(0,list.length-2);
     }      
       
     //Save Foster Checkbox Values

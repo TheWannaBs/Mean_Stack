@@ -95,9 +95,9 @@ var ClientmanagementSchema = new Schema({
       trim: true
   },*/    
   inventory: [{
-    tags: { type: String},//String,// default:''},
-    upc: { type: String},//String,// default:''},
-    qty: { type: Number}//Number//, default: 0}
+    tags: String,//String,// default:''},
+    upc: String,//String,// default:''},
+    qty: Number//Number//, default: 0}
   }],
   //salutation: {type: String, enum: ['Mr.', 'Mrs.', 'Ms.']},
   created: Date,
