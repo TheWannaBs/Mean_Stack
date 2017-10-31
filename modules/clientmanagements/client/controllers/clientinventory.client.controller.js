@@ -60,11 +60,12 @@
         if (invResult !== -1 && clientResult !== -1) {
           // found an item with this upc and a client with the right name and email combo
           var alreadyHas = false;
-          for(i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
+          for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
             if (vm.clientmanagements[clientResult].inventory[i].upc === vm.inventorymanagements[invResult].upc) {
               // client already has this, increase by one
               vm.clientmanagements[clientResult].inventory[i].qty += 1;
               alreadyHas = true;
+              break;
             }
           }
           if (!alreadyHas) {
@@ -75,6 +76,58 @@
             });
           }
           vm.inventorymanagements[invResult].qty -= 1;
+          vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
+          vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
+        }
+      }
+      function successCallback(res) {
+        // TODO: what should this do? clear fields? go back home?
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    };
+
+    $scope.moveToInventory = function () {
+      if ($scope.serial && $scope.nameAndEmail) {
+        var clientInfo = $scope.nameAndEmail.split(" --- ");
+        var clientResult = -1;
+        for (var i = 0; i < vm.clientmanagements.length; i++) {
+          if (vm.clientmanagements[i].name === clientInfo[0] && vm.clientmanagements[i].email === clientInfo[1]) {
+            clientResult = i;
+            break;
+          }
+        }
+        var invResult = -1;
+        for (i = 0; i < vm.inventorymanagements.length; i++) {
+          if (vm.inventorymanagements[i].upc === $scope.serial.upc) {
+            invResult = i;
+            break;
+          }
+        }
+        if (invResult !== -1 && clientResult !== -1) {
+          // client and item exist, now check if client has that item
+          var alreadyHas = false;
+          for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
+            if (vm.clientmanagements[clientResult].inventory[i].upc === vm.inventorymanagements[invResult].upc) {
+              // client already has this, now decrement by 1 and check if item should be removed
+              vm.clientmanagements[clientResult].inventory[i].qty -= 1;
+              if (vm.clientmanagements[clientResult].inventory[i].qty === 0) {
+                // remove this item from their inventory
+                vm.clientmanagements[clientResult].inventory.splice(i, 1);
+              }
+              alreadyHas = true;
+              break;
+            }
+          }
+          if (!alreadyHas) {
+            // client doesn't have this item, nothing to transfer
+            // alert popup?
+            console.log("Client doesn't have this item");
+            return;
+          }
+          vm.inventorymanagements[invResult].qty += 1;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
           vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
         }
