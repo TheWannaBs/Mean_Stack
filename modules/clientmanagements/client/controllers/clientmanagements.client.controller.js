@@ -24,7 +24,17 @@
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
-
+    vm.displayClientRoles = displayClientRoles;//list of clientroles
+    //vm.displayClientInventory = displayClientInventory;  
+      
+    $scope.checkBoxModel = {//vm.lists =
+      value1 : 'foster',
+      value2 : 'staff',
+      value3 : 'sponsor',
+      value4 : 'veteran',
+      value5 : 'volunteer'
+    };
+      
     $scope.choices = [{ "name":"IT" },{ "name":"Design" },{ "name":"Technology" }];
     $scope.checkBoxArray = [];
     $scope.validate = function(value)
@@ -42,10 +52,15 @@
     $scope.disableButton = true;
     $scope.doTheThings = function (choice)
     {
-      if (choice.checked) 
-        $scope.disableButton = true;
-      else 
-        $scope.disableButton = false;
+      if (choice.checked)
+      {
+        //$scope.disableButton = true;
+        //client
+      }
+          else
+      {
+        //$scope.disableButton = false;
+      }
     };  
       
     /*$scope.options = [{
@@ -110,7 +125,7 @@
       }
 
       function successCallback(res) {
-        $state.go('clientmanagements.list', {
+        $state.go('clientmanagements.view', {
           clientmanagementId: res._id
         });
       }
@@ -125,8 +140,91 @@
     //{
       //vm.clientmanagement.clientroles.$update();
     //}
+    
+    /*function displayClientInventory() {
+      var val = '';
+          /*<center>
+    <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: serial | filter: serial: true">
+      <p>Item Tags: {{inventorymanagement.tags}}</p>
+      <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
+      <p>Inactive: {{inventorymanagement.discontinue}}</p>
+    </div>
+  </center>*/
       
+      //if(vm.clientmanagement.salutation.enumValues === undefined)
+      //  {val += 'null'; alert('Null');}
+      //else
+      //  {val += 'not null'; alert('Not Null');}
+      //val += vm.clientmanagement.inventory.tags;
+      //val += (Clientmanagement.schema.path('salutation').enumValues);
+      //val += vm.clientmanagement.inventory;//vm.clientmanagement.inventory.UPC;// + (vm.inventory.qty).toString();
+      return val;        
+    }*/
       
+    function displayClientRoles() {
+      var list = '';
+      if(vm.clientmanagement.clientrolesFoster)
+        list += 'Foster ,';
+      if(vm.clientmanagement.clientrolesStaff)
+        list += 'Staff ,';
+      if(vm.clientmanagement.clientrolesSponsor)
+        list += 'Sponsor ,';
+      if(vm.clientmanagement.clientrolesVeteran)
+        list += 'Veteran ,';
+      if(vm.clientmanagement.clientrolesVolunteer)
+        list += 'Volunteer ,';
+      return list;
+    }      
+      
+    //Save Foster Checkbox Values
+    function changeStatusFoster() {
+      vm.clientmanagement.clientrolesFoster = !vm.clientmanagement.clientrolesFoster;
+      //vm.list = vm.list + "Foster, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Staff Checkbox Values
+    function changeStatusStaff() {
+      vm.clientmanagement.clientrolesStaff = !vm.clientmanagement.clientrolesStaff;
+      vm.list += "Staff, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Sponsor Checkbox Values
+    function changeStatusSponsor() {
+      vm.clientmanagement.clientrolesSponsor = !vm.clientmanagement.clientrolesSponsor;
+      //vm.list += "Sponsor, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Veteran Checkbox Values
+    function changeStatusVeteran() {
+      vm.clientmanagement.clientrolesVeteran = !vm.clientmanagement.clientrolesVeteran;
+      //vm.list += "Veteran, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Volunteer Checkbox Values
+    function changeStatusVolunteer() {
+      vm.clientmanagement.clientrolesVolunteer = !vm.clientmanagement.clientrolesVolunteer;
+      //vm.list += "Volunteer, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
       
   //}//big func end
 
