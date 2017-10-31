@@ -10,11 +10,6 @@ var mongoose = require('mongoose'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
-owasp.config({
-  minLength: 4,
-  minOptionalTestsToPass: 1,
-});
-
 /**
  * A Validation function for local strategy properties
  */
@@ -80,18 +75,13 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
-    }],
-    default: ['user'],
-    required: 'Please provide at least one role'
+      enum: ['foster','staff','sponsor','veteran','volunter']//user,admin
+    }]
+    //default: ['user'],
+    //required: 'Please provide at least one role'
   },
-  updated: {
-    type: Date
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
+  created: Date,
+  updated: Date,
   /* For reset password */
   resetPasswordToken: {
     type: String
@@ -99,6 +89,15 @@ var UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date
   }
+});
+
+UserSchema.pre('save', function (next) {
+  var currentTime = new Date();
+  this.updated = currentTime;
+  if (!this.created) {
+    this.created = currentTime;
+  }
+  next();
 });
 
 /**
@@ -118,9 +117,7 @@ UserSchema.pre('save', function (next) {
  */
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
-    var result = {
-      errors: [],
-    };
+    var result = owasp.test(this.password);
     if (result.errors.length) {
       var error = result.errors.join(' ');
       this.invalidate('password', error);

@@ -31,7 +31,7 @@ var InventorymanagementSchema = new Schema({
     type: String,
     default: '',
   },
-  discontinue: {
+  inactive: {
     type: Boolean,
     default: false,
   },
