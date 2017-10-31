@@ -3,7 +3,7 @@
         <h1>
             Client List
             <span class="pull-right">
-                <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Client</a>
+                <a class="btn btn-primary" ui-sref="clientmanagements.create">Create Client</a>
                 <a class="btn btn-default" ui-sref="">Print</a>
             </span>
         </h1>
@@ -41,6 +41,8 @@
                         <td>{{clientmanagement.email}}</td>
                         <td>{{clientmanagement.dogName}}</td>
                         <td>{{clientmanagement.dogID}}</td>
+                        <td ng-bind="vm.displayClientRoles()"></td>
+                        <!--<td ng-bind="vm.displayClientInventory()"></td>-->
                         <td ng-bind="clientmanagement.updated | date : 'short'"></td>
                     </tr>
                 </tbody>
