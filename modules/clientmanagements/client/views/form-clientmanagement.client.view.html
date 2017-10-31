@@ -99,19 +99,44 @@ ng-required="checkBoxArray.length==0"
 </ul>
            --> 
             
-          <!--<ng-form name="myForm">-->
+          <!--<ng-form name="myForm">
           <li ng-repeat="choice in choices">
           <input type="checkbox" name="skills" ng-checked="vm.clientanagement.clientroles" ng-click="doTheThings(choice)">
             {{choice.name}}
-          </li>
+          </li>-->
           <!--</ng-form>-->
-    
-          <label>Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="foster"></label>
-          <label>Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff"></label> 
-          <label>Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor"></label>
-          <label>Veteran: <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Veteran"></label>
-          <label>Volunteer: <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Volunteer"></label>
+          
+          <!--
+          <form ng-app="checkboxExample" name="myForm" ng-controller="ClientManagementController">
+            <label> Value1: <input type="checkbox" ng-model="vm.checkBoxModel.value1"> Foster </label> <br/>
+            <label> Value2: <input type="checkbox" ng-model="checkBoxModel.value2"> Staff </label> <br/>
+            <label> Value3: <input type="checkbox" ng-model="checkBoxModel.value3"> Sponsor </label> <br/>
+            <label> Value4: <input type="checkbox" ng-model="checkBoxModel.value4"> Veteran </label> <br/>
+            <label> Value5: <input type="checkbox" ng-model="checkBoxModel.value5"> Volunteer </label> <br/>
+            <tt>value1 = {{checkBoxModel.value1}}</tt><br/>
+            <tt>value2 = {{checkBoxModel.value2}}</tt><br/>
+            <tt>value3 = {{checkBoxModel.value3}}</tt><br/>
+            <tt>value4 = {{checkBoxModel.value4}}</tt><br/>
+            <tt>value5 = {{checkBoxModel.value5}}</tt><br/>
+          </form>            
+            
+            
+          <form ng-app="checkboxExample" name="myForm" ng-controller="ClientManagementsController">
+          
+          <li ng-repeat="choice in checkBoxModel">
+          <input type="checkbox" ng-checked="vm.clientanagement.clientroles" ng-click="doTheThings(choice)">
+            {{choice}}
+          </li>
+          -->
+            
+          <label>Foster: <input name="foster" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesFoster === false}" ng-model="vm.clientmanagement.clientrolesFoster" ngTrueValue="true" ngFalseValue="false" id="foster" placeholder="Foster" ng-click="vm.changeStatusFoster()"></label>
+          <label>Staff: <input name="staff" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesStaff" ngTrueValue="true" ngFalseValue="false" id="staff" placeholder="Staff" ng-click="vm.changeStatusStaff()"></label> 
+          <label>Sponsor: <input name="sponsor" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesSponsor" ngTrueValue="true" ngFalseValue="false" id="sponsor" placeholder="Sponsor" ng-click="vm.changeStatusSponsor()"></label>
+          <label>Veteran: <input name="veteran" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesVeteran" ngTrueValue="true" ngFalseValue="false" id="veteran" placeholder="Veteran" ng-click="vm.changeStatusVeteran()"></label>
+          <label>Volunteer: <input name="volunteer" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesVolunteer" ngTrueValue="true" ngFalseValue="false" id="volunteer" placeholder="Volunteer" ng-click="vm.changeStatusVolunteer()"></label>
           <br>
+          <label>
+          <!--alert('Test?');-->
             
           <label class="control-label" for="name">Name:</label>
           <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
@@ -123,7 +148,21 @@ ng-required="checkBoxArray.length==0"
           <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName" required>
           <label class="control-label" for="name">DogID:</label>
           <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID" required>
-
+           <!--
+          <label class="control-label" for="name">ClientRoles: </label>
+          <br>
+          <form name="myForm" ng-controller="ClientManagementsController">
+              Foster:
+              <input type="checkbox" ng-checked="vm.clientmanagement.clientroles" ng-model="clientmanagements.value1">
+              <br/>
+              Staff:
+              <input type="checkbox" ng-model="clientmanagements.value2">
+              <br/>
+          <br/>
+                
+          </form>
+            -->
+            
           <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>
           </div>
