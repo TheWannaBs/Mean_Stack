@@ -43,11 +43,19 @@
             <hr/>
             <div class="row">
                 <div class="col-md-3">
+                    <strong>Client Roles</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.displayClientRoles()"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
                     <strong>Created</strong>
                 </div>
                 <div class="col-md-6" ng-bind="vm.clientmanagement.created | date : 'short'"></div>
             </div>
             <hr/>
+            
             <div class="row">
                 <div class="col-md-3">
                     <strong>Last Updated</strong>
