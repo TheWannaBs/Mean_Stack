@@ -4,7 +4,7 @@
       Inventory List
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Item</a>
-        <a class="btn btn-primary" ui-sref="">Receive Items</a>
+        <a class="btn btn-warning" ui-sref="inventorymanagements.receive">Receive Items</a>
         <a class="btn btn-primary" ui-sref="">Move Items</a>
         <a class="btn btn-default" ui-sref="">Print</a>
       </span>
@@ -17,7 +17,7 @@
       <input type="text" class="form-control" placeholder="Search" ng-model="query">
     </div><br/>
     <div class="input-group" id="showdisc">
-      <input class="form-check-input" type="checkbox" ng-model="checkModel"/><small class="form-check-label">Show Inactive Items</small> 
+      <input class="form-check-input" type="checkbox" ng-model="checkModel"/><small class="form-check-label">Show Inactive Items</small>
     </div>
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">

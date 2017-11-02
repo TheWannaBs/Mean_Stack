@@ -43,11 +43,19 @@
             <hr/>
             <div class="row">
                 <div class="col-md-3">
+                    <strong>Client Roles</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.displayClientRoles()"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
                     <strong>Created</strong>
                 </div>
                 <div class="col-md-6" ng-bind="vm.clientmanagement.created | date : 'short'"></div>
             </div>
             <hr/>
+            
             <div class="row">
                 <div class="col-md-3">
                     <strong>Branch</strong>
@@ -67,6 +75,39 @@
                     <strong>Last Updated</strong>
                 </div>
                 <div class="col-md-6" ng-bind="vm.clientmanagement.updated | date : 'short'"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Inventory</strong>
+                </div>
+                <div class="col-md-6">
+                    <!-- <div ng-repeat="item in vm.clientmanagement.inventory">
+                        <p>Tags: {{item.tags}}</p>
+                        <p>UPC: {{item.upc}}</p>
+                        <p>Quantity: {{item.qty}}</p>
+                        <hr/>
+                    </div> -->
+                    <div class="tableWrapper">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-default">
+                                <tr>
+                                    <th>Tags</th>
+                                    <th>UPC</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in vm.clientmanagement.inventory">
+                                    <td>{{item.tags}}</td>
+                                    <td>{{item.upc}}</td>
+                                    <td>{{item.qty}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <img id="loader" ng-show="loading" src="/../../img/484.gif">
+                </div>
             </div>
         </div>
     </div>

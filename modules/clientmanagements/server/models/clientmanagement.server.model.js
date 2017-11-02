@@ -7,7 +7,6 @@ var ClientmanagementSchema = new Schema({
     type: String,
     default: '',
     required: 'Please fill in client name',
-
     trim: true
   },
   phone: {
@@ -31,8 +30,33 @@ var ClientmanagementSchema = new Schema({
   dogID: {
     type: String,
     default: '',
-    required: 'Please fill in Dog ID',
+    required: 'Please fill in dog ID',
     trim: true
+  },
+  clientrolesFoster: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesStaff: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesSponsor: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesVeteran: {
+    type: Boolean,
+    default: '',
+    trim: true      
+  },
+  clientrolesVolunteer: {
+    type: Boolean,
+    default: '',
+    trim: true      
   },
   inactive: {
     type: Boolean,
@@ -79,6 +103,11 @@ var ClientmanagementSchema = new Schema({
     type: String,
     default: '',
   },
+  inventory: [{
+    tags: String,
+    upc: String,
+    qty: Number
+  }],
   created: Date,
   updated: Date
 });
@@ -91,4 +120,4 @@ ClientmanagementSchema.pre('save', function (next) {
   }
   next();
 });
-module.exports = mongoose.model('Clientmanagement', ClientmanagementSchema);
+mongoose.model('Clientmanagement', ClientmanagementSchema);

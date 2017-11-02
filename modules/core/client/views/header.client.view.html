@@ -7,24 +7,12 @@
       <span class="icon-bar"></span>
     </button>
     <ul class="nav navbar-nav navbar-left" ng-show="authentication.user" style="padding-top: 10px">
-      <a class="btn btn-danger btn-sm" href="" ng-click="goBack()">Back</a>
       <style>p.indent{ padding-right: 2.3em }</style>
       <p class="indent"></p>
     </ul>  
     <a class="navbar-brand" href="" ng-click="goToMainMenu()">Home</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-    <!-- <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
-      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
-        <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-        <ul ng-switch-when="dropdown" class="dropdown-menu">
-          <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
-            <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-          </li>
-      </ul>
-        <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-      </li>
-    </ul> -->
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li>
         <p style="padding-top: 15px; color: rgba(255, 255, 255, 0.9);" ng-bind="authentication.user.displayName"></p>

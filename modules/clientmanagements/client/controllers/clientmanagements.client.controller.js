@@ -23,8 +23,8 @@
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
     vm.branchText = branchText;
-
-
+    vm.displayClientRoles = displayClientRoles;//list of clientroles
+    
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -35,6 +35,8 @@
 
       }
     }
+      
+    // Save Clientmanagement
     function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.clientmanagementForm');
@@ -58,6 +60,71 @@
         vm.error = res.data.message;
       }
     }
+      
+    function displayClientRoles() {
+      var list = '';
+      if(vm.clientmanagement.clientrolesFoster)
+        list += 'Foster, ';
+      if(vm.clientmanagement.clientrolesStaff)
+        list += 'Staff, ';
+      if(vm.clientmanagement.clientrolesSponsor)
+        list += 'Sponsor, ';
+      if(vm.clientmanagement.clientrolesVeteran)
+        list += 'Veteran, ';
+      if(vm.clientmanagement.clientrolesVolunteer)
+        list += 'Volunteer, ';
+      return list.slice(0,list.length-2);
+    }      
+      
+    //Save Foster Checkbox Values
+    function changeStatusFoster() {
+      vm.clientmanagement.clientrolesFoster = !vm.clientmanagement.clientrolesFoster;
+      //vm.list = vm.list + "Foster, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Staff Checkbox Values
+    function changeStatusStaff() {
+      vm.clientmanagement.clientrolesStaff = !vm.clientmanagement.clientrolesStaff;
+      vm.list += "Staff, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Sponsor Checkbox Values
+    function changeStatusSponsor() {
+      vm.clientmanagement.clientrolesSponsor = !vm.clientmanagement.clientrolesSponsor;
+      //vm.list += "Sponsor, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Veteran Checkbox Values
+    function changeStatusVeteran() {
+      vm.clientmanagement.clientrolesVeteran = !vm.clientmanagement.clientrolesVeteran;
+      //vm.list += "Veteran, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Volunteer Checkbox Values
+    function changeStatusVolunteer() {
+      vm.clientmanagement.clientrolesVolunteer = !vm.clientmanagement.clientrolesVolunteer;
+      //vm.list += "Volunteer, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
 
     //Change Activity of Item
     function changeStatus() {
