@@ -27,6 +27,12 @@
     $scope.$state = $state;
     $scope.authentication = Authentication;
 
+    function toasty() {
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+
     $scope.cancelButton = function () {
       if ("admin" === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
@@ -36,7 +42,13 @@
     };
 
     $scope.moveToClient = function () {
-      if ($scope.serial && $scope.nameAndEmail) {
+      if (!$scope.serial && !$scope.nameAndEmail) {
+        alert("You must fill in a Client and UPC first");
+      } else if (!$scope.serial) {
+        alert("You must fill in a UPC first");
+      } else if (!$scope.nameAndEmail) {
+        alert("You must fill in a Client first");
+      } else {
         var invResult = -1;
         for (var i = 0; i < vm.inventorymanagements.length; i++) {
           if (vm.inventorymanagements[i].upc === $scope.serial.upc) {
@@ -45,8 +57,8 @@
           }
         }
         if (vm.inventorymanagements[invResult].qty === 0) {
-          // popup something?
-          console.log("You can't move nothing");
+          // out of stock
+          alert("This item is out of stock");
           return;
         }
         var clientInfo = $scope.nameAndEmail.split(" --- ");
@@ -57,7 +69,13 @@
             break;
           }
         }
-        if (invResult !== -1 && clientResult !== -1) {
+        if (invResult === -1 && clientResult === -1) {
+          alert("That Client and UPC don't exist");
+        } else if (invResult === -1) {
+          alert("That UPC doesn't exist");
+        } else if (clientResult === -1) {
+          alert("That Client doesn't exist");
+        } else {
           // found an item with this upc and a client with the right name and email combo
           var alreadyHas = false;
           for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
@@ -78,10 +96,15 @@
           vm.inventorymanagements[invResult].qty -= 1;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
           vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
+          // gimme that toast
+          toasty();
+          // clear upc field
+          $scope.serial = null;
         }
       }
       function successCallback(res) {
-        // TODO: what should this do? clear fields? go back home?
+        // toasty
+        // console.log("success");
       }
 
       function errorCallback(res) {
@@ -90,7 +113,13 @@
     };
 
     $scope.moveToInventory = function () {
-      if ($scope.serial && $scope.nameAndEmail) {
+      if (!$scope.serial && !$scope.nameAndEmail) {
+        alert("You must fill in a Client and UPC first");
+      } else if (!$scope.serial) {
+        alert("You must fill in a UPC first");
+      } else if (!$scope.nameAndEmail) {
+        alert("You must fill in a Client first");
+      } else {
         var clientInfo = $scope.nameAndEmail.split(" --- ");
         var clientResult = -1;
         for (var i = 0; i < vm.clientmanagements.length; i++) {
@@ -106,7 +135,13 @@
             break;
           }
         }
-        if (invResult !== -1 && clientResult !== -1) {
+        if (invResult === -1 && clientResult === -1) {
+          alert("That Client and UPC don't exist");
+        } else if (invResult === -1) {
+          alert("That UPC doesn't exist");
+        } else if (clientResult === -1) {
+          alert("That Client doesn't exist");
+        } else {
           // client and item exist, now check if client has that item
           var alreadyHas = false;
           for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
@@ -123,17 +158,21 @@
           }
           if (!alreadyHas) {
             // client doesn't have this item, nothing to transfer
-            // alert popup?
-            console.log("Client doesn't have this item");
+            alert("Client doesn't have this item");
             return;
           }
           vm.inventorymanagements[invResult].qty += 1;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
           vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
+          // get toasty
+          toasty();
+          // clear upc field
+          $scope.serial = null;
         }
       }
       function successCallback(res) {
-        // TODO: what should this do? clear fields? go back home?
+        // more toast
+        // console.log("success");
       }
 
       function errorCallback(res) {
