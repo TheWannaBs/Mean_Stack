@@ -123,6 +123,28 @@ ng-required="checkBoxArray.length==0"
           <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName" required>
           <label class="control-label" for="name">DogID:</label>
           <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID" required>
+          <label class="control-label" for="branch">Branch:</label>
+          <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.airForce">
+            Airforce
+            <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.marines">
+            Marines
+            <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.navy">
+            Navy
+            <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.army">
+            Army
+            <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.coastGuard">
+            Coast Guard
+            <br>
+            <input type="checkbox" ng-model="vm.clientmanagement.nationalGuard">
+            National Guard
+          <br>
+          <label class="control-label" for="name">Rank:</label>
+          <input name="rank" type="text" ng-model="vm.clientmanagement.rank" id="rank" class="form-control" placeholder="Rank" required>
 
           <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>

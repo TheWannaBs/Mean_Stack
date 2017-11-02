@@ -5,7 +5,6 @@
   angular
   .module('clientmanagements')
   .controller('ClientmanagementsController', ClientmanagementsController);
-
   ClientmanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'clientmanagementResolve'];
 
   function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement)
@@ -24,66 +23,8 @@
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
+    vm.branchText = branchText;
 
-    $scope.choices = [{ "name":"IT" },{ "name":"Design" },{ "name":"Technology" }];
-    $scope.checkBoxArray = [];
-    $scope.validate = function(value)
-    {
-      if ($scope.checkBoxArray.indexOf(value) === -1)
-      {
-        $scope.checkBoxArray.push(value);
-      }
-      else
-      {
-        $scope.checkBoxArray.splice($scope.checkBoxArray.indexOf(value), 1);
-      }
-    };
-      
-    $scope.disableButton = true;
-    $scope.doTheThings = function (choice)
-    {
-      if (choice.checked) 
-        $scope.disableButton = true;
-      else 
-        $scope.disableButton = false;
-    };  
-      
-    /*$scope.options = [{
-    name: 'java',
-    value: true,
-    }, {
-    name: 'c#',
-    value: false
-    }, {
-    name: 'angular',
-    value: true
-    }, {
-    name: 'r',
-    value: false
-    }, {
-    name: 'python',
-    value: true
-    }, {
-    name: 'c++',
-    value: true
-    }];
-
-    $scope.save = function() {
-      var optionsCSV = '';
-      $scope.options.forEach(function(option) {
-        if (option.value) {
-          // If this is not the first item
-          if (optionsCSV) {
-            optionsCSV += ','
-          }
-          optionsCSV += option.name;
-        }
-      })
-      // Save the csv to your db (replace alert with your code)
-      alert(optionsCSV);
-    };         
-    */  
-      
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -110,7 +51,7 @@
       }
 
       function successCallback(res) {
-        $state.go('clientmanagements.list', {
+        $state.go('clientmanagements.view', {
           clientmanagementId: res._id
         });
       }
@@ -171,6 +112,8 @@
       }
     }
 
+
+
     //Change Activity Button Text
     function buttonText() {
       if (vm.clientmanagement.inactive) {
@@ -179,6 +122,28 @@
       else {
         return "Deactivate";
       }
+    }
+    function branchText(){
+      var branch = '';
+      if(vm.clientmanagement.airForce){
+        branch += 'Air Force, ';
+      }
+      if(vm.clientmanagement.army){
+        branch += 'Army, ';
+      }
+      if(vm.clientmanagement.coastGuard){
+        branch += 'Coast Guard, ';
+      }
+      if(vm.clientmanagement.marines){
+        branch += 'Marines, ';
+      }
+      if(vm.clientmanagement.nationalGuard){
+        branch += 'National Guard, ';
+      }
+      if(vm.clientmanagement.navy){
+        branch += 'Navy ';
+      }
+      return branch;
     }
   }
 }());
