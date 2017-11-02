@@ -1,11 +1,18 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.clientmanagement._id ? 'Edit Clientmanagement' : 'New Clientmanagement'}}</h1>
+    <h1>{{vm.clientmanagement._id ? 'Edit Client' : 'Create A Client Below'}}</h1>
   </div>
+  <p><font color="grey" style="margin-top: 1000px"><b>All entires with * are <em>required</em> fields.</b></font></p>
   <div class="col-md-12">
     <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
+          <label>Foster: <input name="foster" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesFoster === false}" ng-model="vm.clientmanagement.clientrolesFoster" ngTrueValue="true" ngFalseValue="false" id="foster" placeholder="Foster" ng-click="vm.changeStatusFoster()"></label>
+          <label>Staff: <input name="staff" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesStaff" ngTrueValue="true" ngFalseValue="false" id="staff" placeholder="Staff" ng-click="vm.changeStatusStaff()"></label> 
+          <label>Sponsor: <input name="sponsor" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesSponsor" ngTrueValue="true" ngFalseValue="false" id="sponsor" placeholder="Sponsor" ng-click="vm.changeStatusSponsor()"></label>
+          <label>Veteran: <input name="veteran" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesVeteran" ngTrueValue="true" ngFalseValue="false" id="veteran" placeholder="Veteran" ng-click="vm.changeStatusVeteran()"></label>
+          <label>Volunteer: <input name="volunteer" type="checkbox" ng-hide="{vm.clientmanagement.clientrolesStaff === false}" ng-model="vm.clientmanagement.clientrolesVolunteer" ngTrueValue="true" ngFalseValue="false" id="volunteer" placeholder="Volunteer" ng-click="vm.changeStatusVolunteer()"></label>
+          <br>
           <label class="control-label" for="name">Name</label>
           <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
           <label class="control-label" for="name">Phone:</label>
