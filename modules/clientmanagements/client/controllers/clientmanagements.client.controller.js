@@ -196,6 +196,9 @@
       if(vm.clientmanagement.navy){
         branch += 'Navy, ';
       }
+      if(branch){
+        branch = branch.substring(0, branch.length-2);
+      }
       return branch;
     }
   }
