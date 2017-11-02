@@ -22,6 +22,7 @@
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
+    vm.branchText = branchText;
     vm.displayClientRoles = displayClientRoles;//list of clientroles
     
     // Remove existing Clientmanagement
@@ -174,6 +175,31 @@
       else {
         return "Deactivate";
       }
+    }
+    function branchText(){
+      var branch = '';
+      if(vm.clientmanagement.airForce){
+        branch += 'Air Force, ';
+      }
+      if(vm.clientmanagement.army){
+        branch += 'Army, ';
+      }
+      if(vm.clientmanagement.coastGuard){
+        branch += 'Coast Guard, ';
+      }
+      if(vm.clientmanagement.marines){
+        branch += 'Marines, ';
+      }
+      if(vm.clientmanagement.nationalGuard){
+        branch += 'National Guard, ';
+      }
+      if(vm.clientmanagement.navy){
+        branch += 'Navy, ';
+      }
+      if(branch){
+        branch = branch.substring(0, branch.length-2);
+      }
+      return branch;
     }
   }
 }());

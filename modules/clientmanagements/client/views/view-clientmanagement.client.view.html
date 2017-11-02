@@ -58,6 +58,20 @@
             
             <div class="row">
                 <div class="col-md-3">
+                    <strong>Branch</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.branchText()"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Rank</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.rank"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
                     <strong>Last Updated</strong>
                 </div>
                 <div class="col-md-6" ng-bind="vm.clientmanagement.updated | date : 'short'"></div>

@@ -19,7 +19,7 @@
         <br/>
         <div class="input-group" id="showdisc">
             <input class="form-check-input" type="checkbox" ng-model="checkModel" />
-            <small class="form-check-label">Show Inactive Items</small>
+            <small class="form-check-label"> Show Inactive Items</small>
         </div>
         <div class="tableWrapper">
             <table class="table table-bordered table-striped table-hover">
@@ -30,7 +30,11 @@
                         <th ng-click="vm.headSort = 'email'">Email</th>
                         <th ng-click="vm.headSort = 'dogName'">Dog Name</th>
                         <th ng-click="vm.headSort = 'dogID'">Dog ID</th>
+                        <!--<th ng-click="vm.headSort = 'branch'">Branch</th>
+                        !-->
+                        <th ng-click="vm.headSort = 'rank'">Rank</th>
                         <th ng-click="vm.headSort = 'updated'">Last Updated</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +45,9 @@
                         <td>{{clientmanagement.email}}</td>
                         <td>{{clientmanagement.dogName}}</td>
                         <td>{{clientmanagement.dogID}}</td>
+                        <!--<td ng-bind="vm.branchText()"></td>
+                        !-->
+                        <td>{{clientmanagement.rank}}</td>
                         <td ng-bind="vm.displayClientRoles()"></td>
                         <td ng-bind="clientmanagement.updated | date : 'short'"></td>
                     </tr>
@@ -49,4 +56,4 @@
         </div>
         <img id="loader" ng-show="loading" src="/../../img/484.gif">
     </div>
-</section>
+  </section>
