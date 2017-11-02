@@ -31,7 +31,7 @@
                         <th ng-click="vm.headSort = 'dogName'">Dog Name</th>
                         <th ng-click="vm.headSort = 'dogID'">Dog ID</th>
                         <!--<th ng-click="vm.headSort = 'branch'">Branch</th>
-                        !-->
+                        -->
                         <th ng-click="vm.headSort = 'rank'">Rank</th>
                         <th ng-click="vm.headSort = 'updated'">Last Updated</th>
 
@@ -48,7 +48,8 @@
                         <!--<td ng-bind="vm.branchText()"></td>
                         !-->
                         <td>{{clientmanagement.rank}}</td>
-                        <td ng-bind="vm.displayClientRoles()"></td>
+                        <!--<td ng-bind="vm.displayClientRoles()"></td>
+                        -->
                         <td ng-bind="clientmanagement.updated | date : 'short'"></td>
                     </tr>
                 </tbody>
