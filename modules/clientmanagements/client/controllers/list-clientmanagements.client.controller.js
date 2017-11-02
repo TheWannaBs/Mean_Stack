@@ -11,5 +11,10 @@
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
+    vm.headSort = "tags";
+
+    vm.showNoInactive = function (item) {
+      return item.inactive === false;
+    };
   }
 }());
