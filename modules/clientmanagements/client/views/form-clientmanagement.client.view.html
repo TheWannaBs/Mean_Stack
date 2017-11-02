@@ -1,28 +1,60 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.clientmanagement._id ? 'Edit Clientmanagement' : 'New Clientmanagement'}}</h1>
+    <h1>{{vm.clientmanagement._id ? 'Edit Client' : 'Create A New Client Below'}}</h1>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-offset-1 col-md-10">
     <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
-          <label class="control-label" for="name">Phone:</label>
-          <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone" required>
-          <label class="control-label" for="name">Email:</label>
-          <input name="email" type="text" ng-model="vm.clientmanagement.email" id="email" class="form-control" placeholder="Email" required>
-          <label class="control-label" for="name">DogName:</label>
-          <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName" required>
-          <label class="control-label" for="name">DogID:</label>
-          <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID" required>
-          <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Clientmanagement name is required.</p>
-          </div>
+          <label> Types of clients: </label>
+          <br>
+          Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="foster">
+          Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff">
+          Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor">
+          Veteran: <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Veteran">
+          Volunteer: <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Volunteer">
+          <br>
         </div>
+        <label class="control-label" for="name">Name:</label>
+        <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
+        <label class="control-label" for="name">Phone:</label>
+        <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone" required>
+        <label class="control-label" for="name">Email:</label>
+        <input name="email" type="text" ng-model="vm.clientmanagement.email" id="email" class="form-control" placeholder="Email" required>
+        <label class="control-label" for="name">Dog Name:</label>
+        <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName" required>
+        <label class="control-label" for="name">Dog ID:</label>
+        <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID" required>
+        <label class="control-label" for="branch">Branch:</label>
+        <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.airForce">
+          Airforce
+          <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.marines">
+          Marines
+          <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.navy">
+          Navy
+          <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.army">
+          Army
+          <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.coastGuard">
+          Coast Guard
+          <br>
+          <input type="checkbox" ng-model="vm.clientmanagement.nationalGuard">
+          National Guard
+        <br>
+        <label class="control-label" for="name">Rank:</label>
+        <input name="rank" type="text" ng-model="vm.clientmanagement.rank" id="rank" class="form-control" placeholder="Rank" required>
+        <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>
+        </div>
+        <br>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
-
+          <div class="form-group pull-right">
+          <button type="submit" class="btn btn-default" href="/client/views/view-clientmanagement.client.view.html">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
+          <input type="button" value="Cancel" class="btn" ui-sref="clientmanagements.list"/>
           </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>

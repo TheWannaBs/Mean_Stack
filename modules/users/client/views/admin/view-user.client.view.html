@@ -1,15 +1,13 @@
 <section>
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-6">
-        <h1>User: <span ng-bind="user.username"></span></h1>
-      </div>
-      <div class="col-md-4">
+  <div class="page-header row">
+    <h1>
+      {{user.username}}
+      <span class="pull-right">
         <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})">Edit</a>
         <a class="btn btn-warning" ui-sref="password.reset.form">Forgot Password</a>
         <a class="btn btn-danger" ng-click="remove();" ng-if="user._id !== authentication.user._id">Delete</a>
-      </div>
-    </div>
+      </span>
+    </h1>
   </div>
 
   <div class="row">
@@ -29,11 +27,11 @@
         <div class="col-md-6" ng-bind="user.email"></div>
       </div>
       <hr/>
-      <div class="row">
+      <!--div class="row">
         <div class="col-md-3"><strong>Password</strong></div>
         <div class="col-md-6" ng-bind="user.password"></div>
       </div>
-      <hr/>
+      <hr/-->
       <div class="row">
         <div class="col-md-3"><strong>Provider</strong></div>
         <div class="col-md-6" ng-bind="user.provider"></div>
@@ -41,12 +39,12 @@
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="user.created"></div>
+        <div class="col-md-6" ng-bind="user.created | date : 'short'"></div>
       </div>
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Updated</strong></div>
-        <div class="col-md-6" ng-bind="user.updated"></div>
+        <div class="col-md-6" ng-bind="user.updated | date : 'short'"></div>
       </div>
       <hr/>
       <div class="row">
@@ -54,5 +52,8 @@
         <div class="col-md-6" ng-bind="user.roles"></div>
       </div>
     </div>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-default" ui-sref="admin.users">Back to User List</a>
   </div>
 </section>

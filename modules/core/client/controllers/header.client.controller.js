@@ -24,35 +24,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       }
     };
 
-    // Back button logic
-    /*$scope.goBack = function() {
-      if ("admin" === Authentication.user.roles[0]) {
-        if($state.current.name === 'admin.users') {
-          $state.go('mainmenuadmin');
-        } else if ($state.current.name === ) {
-          $state.go('mainmenuadmin');
-        } else if ($state.current.name === ) {
-          $state.go('mainmenuadmin');
-        } else if ($state.current.name === ) {
-          $state.go();
-        } else if ($state.current.name === ) {
-          $state.go();
-        } else if ($state.current.name === ) {
-          $state.go();
-        } else if ($state.current.name === ) {
-          $state.go();
-        }
-      } else {
-        if($state.current.name === ) {
-          $state.go('mainmenu');
-        } else if ($state.current.name === ) {
-          $state.go();
-        } else if ($state.current.name === ) {
-          $state.go();
-        }
-      }
-    };*/
-
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;

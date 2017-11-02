@@ -2,9 +2,10 @@
   <div class="page-header row">
     <h1>
       {{vm.inventorymanagement.tags}}
+      <small ng-class="vm.labelDisp()" ng-hide="{vm.inventorymanagement.discontinue === false}">{{vm.labelText()}}</small>
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="inventorymanagements.edit({ inventorymanagementId: vm.inventorymanagement._id })">Edit</a>
-        <a class="btn btn-warning" ng-click="vm.changeDCStatus()">{{vm.discBtn()}}</a>
+        <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
         <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
       </span>
     </h1>
@@ -28,18 +29,13 @@
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Discontinued</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.discontinue"></div>
-      </div>
-      <hr/>
-      <div class="row">
         <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.created"></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.created | date : 'short'"></div>
       </div>
       <hr/>
       <div class="row">
         <div class="col-md-3"><strong>Last Updated</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated"></div>
+        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated | date : 'short'"></div>
       </div>
     </div>
   </div>
