@@ -75,6 +75,10 @@ var ClientmanagementSchema = new Schema({
     required: 'Please fill in a rank',
     trim: true
   },
+  branchString: {
+    type: String,
+    default: '',
+  },
   created: Date,
   updated: Date
 });
