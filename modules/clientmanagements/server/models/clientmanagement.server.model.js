@@ -3,9 +3,10 @@
 /**
  * Module dependencies.
  */
+//var mongoose = require('./index');
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-
+//var possibleRoles = ['foster','staff','sponsor','veteran','volunter'];
 /**
  * Clientmanagement Schema
  */
@@ -14,6 +15,7 @@ var ClientmanagementSchema = new Schema({
     type: String,
     default: '',
     required: 'Please fill in client name',
+
     trim: true
   },
   phone: {
@@ -39,6 +41,46 @@ var ClientmanagementSchema = new Schema({
     default: '',
     required: 'Please fill in Dog ID',
     trim: true
+  },
+  /*created: {
+    type: Date,
+    default: Date.now
+  },
+  //user: {
+    //type: Schema.ObjectId,
+    //ref: 'user'      
+  //}*/
+  clientroles: {//type: Schema.ObjectId,    
+    //type: String,
+    //enum: ['IT','Design','Technology']      
+    //enum NN{
+    //  test1 = 'IT',
+    //  test2 = 'Design',
+    //  test3 = 'Technology'
+    //},
+    type: [{
+      type: String,
+      default: 'IT',
+      enum: ['IT','Design','Technology']
+    }],
+    //default: 'IT',
+    //enum: ['IT','Design','Technology'],
+    //enum: ['foster','staff','sponsor','veteran','volunter'],
+    //required: 'Title cannot be blank',
+    //trim: true
+    //type: [{
+    //salutation: {
+    //  type: String,
+    //  enum: ['foster','staff','sponsor','veteran','volunter']//possibleRoles//user,admin
+    //  default: '',
+    //  required: '',
+    //  trim: true,
+    //}],
+    //},
+    //default: ['veteran']
+    //required: 'Please provide at least one role'
+    //ref: 'clientroles'
+    //required: true
   },
   inactive: {
     type: Boolean,
@@ -98,5 +140,11 @@ ClientmanagementSchema.pre('save', function (next) {
   }
   next();
 });
-
-mongoose.model('Clientmanagement', ClientmanagementSchema);
+module.exports = mongoose.model('Clientmanagement', ClientmanagementSchema);
+//ClientmanagementSchema.virtual('possibleRoles').get(function () {
+//    return possibleRoles;
+//});
+//var ClientModel = mongoose.model('Clientmanagement', ClientmanagementSchema);
+//console.log(ClientModel.schema.path('clientroles').enumValues);
+//var temp = new ClientModel();
+//console.log(temp.schema.path('salutation').enumValues);

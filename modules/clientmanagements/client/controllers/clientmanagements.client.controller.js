@@ -7,7 +7,8 @@
   .controller('ClientmanagementsController', ClientmanagementsController);
   ClientmanagementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'clientmanagementResolve'];
 
-  function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement) {
+  function ClientmanagementsController ($scope, $state, $window, Authentication, clientmanagement)
+  {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,12 +17,14 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    //vm.clientRoles = clientRoles;
     vm.changeStatus = changeStatus;
     vm.labelDisp = labelDisp;
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
     vm.branchText = branchText;
+
     // Remove existing Clientmanagement
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -32,6 +35,8 @@
 
       }
     }
+
+    // Save Clientmanagement
     function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.clientmanagementForm');
@@ -54,7 +59,17 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
-    }
+
+    }//save Clentmanagement
+    
+    //function clientRoles()
+    //{
+      //vm.clientmanagement.clientroles.$update();
+    //}
+      
+      
+      
+  //}//big func end
 
     //Change Activity of Item
     function changeStatus() {

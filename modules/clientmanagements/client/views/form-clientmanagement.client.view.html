@@ -1,12 +1,119 @@
+<!--<html>
+<head>
+    <title>Client Creation View</title>
+</head>
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('MyApp', [])
+        app.controller('MyController', function ($scope, $window) {
+            $scope.CheckPassport = function () {
+                if ($scope.HasPassport) {
+                    $window.alert("CheckBox is checked.");
+                } else {
+                    $window.alert("CheckBox is not checked.");
+                }
+            };
+        });
+    </script>
+    <div ng-app="MyApp" ng-controller="MyController">
+        Do you have Passport?
+        <label for="chkPassport">
+            <input id="chkPassport" type="checkbox" ng-model="HasPassport" />
+        </label>
+        <input type="button" value = "Check Passport" ng-click = "CheckPassport()" />
+    </div>
+</body>
+
+ng-model="vm.clientmanagement.clientroles"
+ng-checked="all"
+do clickey mouse... href="";ss
+-->
+
 <section>
   <div class="page-header">
-    <h1>{{vm.clientmanagement._id ? 'Edit Clientmanagement' : 'New Clientmanagement'}}</h1>
+    <h1>{{vm.clientmanagement._id ? 'Edit Client' : 'Create A New Client Below'}}</h1>
+  </div> 
+  <!--<label>Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="Foster"></label>
+  <label>Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff"></label> 
+  <label>Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor"></label>
+  <label>Veteran: <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Veteran"></label>
+  <label>Volunteer: <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Volunteer"></label>
+  <br>-->
+  <!--<input type='checkbox' ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'>
+    <ul id="date">
+    <li><input id="start" name="start" size="5" type="text" class="small" value="1" /></li>
+    <li><input id="end" name="end" size="5" type="text" class="small" value="2" /></li>
+    </ul>
+    <tt>value1 = {{checkboxModel.value1}}</tt><br/>
+    <tt>value1 = {{checkboxModel.value1}}</tt><br/>
+ </form>
+    </body>
+  <!--<label ng-repeat="role in roles">
+    <input type="checkbox" checklist-model="user.roles" checklist-value="role"> {{role}}
+  </label>
+  <tr ng-repeat="media in allMedia">
+  <div ng-repeat="mediaFromLead in mediaIdFromSpecificLead">
+    <input type="checkbox" ng-checked="media.Id == mediaFromLead" />
   </div>
+  </tr>-->
+  
+  <!--<div>
+  <div>
+    <div class="form-group"  ng-repeat="option in options">
+      <label>{{option.name}}</label>
+      <input type="checkbox" ng-model="option.value">  
+    </div>
+  </div>
+  <hr>
+  <button class="btn btn-primary" ng-click="save()">save</button> 
+  </div>
+  -->  
+  <br>
+  <p><font color="grey" style="margin-top: 1000px"><b>All entires with * are <em>required</em> fields.</b></font></p>
+  <!--<a class="btn btn-warning">Foaaaaarm</a>-->
   <div class="col-md-12">
-    <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
+    <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>       
       <fieldset>
+        <!--<h2>{{vm.user._id ? 'Option1' : 'Option2']}</h2>
+        <legend>Type Information Below to Create Client</legend>-->
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
+          <!--
+          <ul>
+            <li ng-repeat="item in possibleRoles">
+              <label>
+                <input type="checkbox" ng-model="item.checked">
+                {{item.name}}
+              </label>
+            </li>
+          </ul> -->
+            
+        <!-- ng-model="choice.checked"
+             scan -- li
+<ul>
+ <li ng-repeat="item in choices">
+  <input type="checkbox" name="skills" ng-model="item.checked" ng-click="doTheThings(item)"> {{item.Name}}
+ </li>
+ng-   change="validate(choice.name)"
+ng-required="checkBoxArray.length==0" 
+</ul>
+           --> 
+            
+          <!--<ng-form name="myForm">-->
+          <li ng-repeat="choice in choices">
+          <input type="checkbox" name="skills" ng-checked="vm.clientanagement.clientroles" ng-click="doTheThings(choice)">
+            {{choice.name}}
+          </li>
+          <!--</ng-form>-->
+    
+          <label>Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="foster"></label>
+          <label>Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff"></label> 
+          <label>Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor"></label>
+          <label>Veteran: <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Veteran"></label>
+          <label>Volunteer: <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Volunteer"></label>
+          <br>
+            
+          <label class="control-label" for="name">Name:</label>
           <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
           <label class="control-label" for="name">Phone:</label>
           <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone" required>
@@ -38,12 +145,22 @@
           <br>
           <label class="control-label" for="name">Rank:</label>
           <input name="rank" type="text" ng-model="vm.clientmanagement.rank" id="rank" class="form-control" placeholder="Rank" required>
+
           <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Clientmanagement name is required.</p>
+            <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>
           </div>
+          <!--<div ng-messages="vm.form.clientmanagementForm.phone.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">The phone entry must be entered. Thank you.</p>
+          </div>
+          <div ng-messages="vm.form.clientmanagementForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">The email entry must be entered. Thank you.</p>
+          </div>-->
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
+
+          <button type="submit" class="btn btn-default" href="/client/views/view-clientmanagement.client.view.html">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
+          <!--<button type="submit" class="btn btn-default">{{vm.clientmanagement._id ? 'Update' : 'Create'}}</button>
+          <meta http=equiv="refresh" content="0"; url="http://localhost:3000" />-->
 
           </div>
         <div ng-show="vm.error" class="text-danger">
