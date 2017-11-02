@@ -70,14 +70,13 @@ var ClientmanagementSchema = new Schema({
     default: '',
     trim: true
   },
-  //salutation: {type: String, enum: ['Mr.', 'Mrs.', 'Ms.']},
+  inventory: [{
+    tags: String,
+    upc: String,
+    qty: Number
+  }],
   created: Date,
   updated: Date
-  /* user: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  }*/
-  //reviews: []
 });
 
 ClientmanagementSchema.pre('save', function (next) {
