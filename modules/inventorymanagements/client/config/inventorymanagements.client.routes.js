@@ -26,6 +26,15 @@
           pageTitle: 'Inventory List'
         }
       })
+      .state('inventorymanagements.receive', {
+        url: '/receive',
+        templateUrl: 'modules/inventorymanagements/client/views/receive-inventorymanagement.client.view.html',
+        controller: 'InventorymanagementsReceiveController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Receive Inventory'
+        }
+      })
       .state('inventorymanagements.create', {
         url: '/create',
         templateUrl: 'modules/inventorymanagements/client/views/create-inventorymanagement.client.view.html',
