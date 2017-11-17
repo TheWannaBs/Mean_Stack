@@ -17,13 +17,14 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.changeStatus = changeStatus;
+    vm.branchText = branchText;//list of branches
+    vm.displayClientRoles = displayClientRoles;//list of clientroles
+    vm.changeStatus = changeStatus;//changes activity of a client
     vm.labelDisp = labelDisp;
     vm.labelText = labelText;
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
-    vm.branchText = branchText;
-    vm.displayClientRoles = displayClientRoles;//list of clientroles
+    vm.printPage = printPage;
     
     // Remove existing Clientmanagement
     function remove() {
@@ -74,58 +75,35 @@
       if(vm.clientmanagement.clientrolesVolunteer)
         list += 'Volunteer, ';
       return list.slice(0,list.length-2);
-    }      
-      
-    //Save Foster Checkbox Values
-    function changeStatusFoster() {
-      vm.clientmanagement.clientrolesFoster = !vm.clientmanagement.clientrolesFoster;
-      //vm.list = vm.list + "Foster, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Staff Checkbox Values
-    function changeStatusStaff() {
-      vm.clientmanagement.clientrolesStaff = !vm.clientmanagement.clientrolesStaff;
-      vm.list += "Staff, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Sponsor Checkbox Values
-    function changeStatusSponsor() {
-      vm.clientmanagement.clientrolesSponsor = !vm.clientmanagement.clientrolesSponsor;
-      //vm.list += "Sponsor, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Veteran Checkbox Values
-    function changeStatusVeteran() {
-      vm.clientmanagement.clientrolesVeteran = !vm.clientmanagement.clientrolesVeteran;
-      //vm.list += "Veteran, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Volunteer Checkbox Values
-    function changeStatusVolunteer() {
-      vm.clientmanagement.clientrolesVolunteer = !vm.clientmanagement.clientrolesVolunteer;
-      //vm.list += "Volunteer, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-
+    }    
+    
+    //returns a string of branches the client was apart of
+    function branchText() {
+      var branch = '';
+      if (vm.clientmanagement.airForce) {
+        branch += 'Air Force, ';
+      }
+      if (vm.clientmanagement.army) {
+        branch += 'Army, ';
+      }
+      if (vm.clientmanagement.coastGuard) {
+        branch += 'Coast Guard, ';
+      }
+      if (vm.clientmanagement.marines) {
+        branch += 'Marines, ';
+      }
+      if (vm.clientmanagement.nationalGuard) {
+        branch += 'National Guard, ';
+      }
+      if (vm.clientmanagement.navy) {
+        branch += 'Navy, ';
+      }
+      if (branch) {
+        branch = branch.substring(0, branch.length - 2);
+      }
+      return branch;
+    }
+    
     //Change Activity of Item
     function changeStatus() {
       if ($window.confirm("Are you sure you want to change this item's activity?")) {
@@ -176,30 +154,60 @@
         return "Deactivate";
       }
     }
-    function branchText(){
-      var branch = '';
-      if(vm.clientmanagement.airForce){
-        branch += 'Air Force, ';
-      }
-      if(vm.clientmanagement.army){
-        branch += 'Army, ';
-      }
-      if(vm.clientmanagement.coastGuard){
-        branch += 'Coast Guard, ';
-      }
-      if(vm.clientmanagement.marines){
-        branch += 'Marines, ';
-      }
-      if(vm.clientmanagement.nationalGuard){
-        branch += 'National Guard, ';
-      }
-      if(vm.clientmanagement.navy){
-        branch += 'Navy, ';
-      }
-      if(branch){
-        branch = branch.substring(0, branch.length-2);
-      }
-      return branch;
-    }
+
+
+
+    /*
+    //Save Foster Checkbox Values
+    function changeStatusFoster() {
+      vm.clientmanagement.clientrolesFoster = !vm.clientmanagement.clientrolesFoster;
+      //vm.list = vm.list + "Foster, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Staff Checkbox Values
+    function changeStatusStaff() {
+      vm.clientmanagement.clientrolesStaff = !vm.clientmanagement.clientrolesStaff;
+      vm.list += "Staff, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Sponsor Checkbox Values
+    function changeStatusSponsor() {
+      vm.clientmanagement.clientrolesSponsor = !vm.clientmanagement.clientrolesSponsor;
+      //vm.list += "Sponsor, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Veteran Checkbox Values
+    function changeStatusVeteran() {
+      vm.clientmanagement.clientrolesVeteran = !vm.clientmanagement.clientrolesVeteran;
+      //vm.list += "Veteran, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+      
+    //Save Volunteer Checkbox Values
+    function changeStatusVolunteer() {
+      vm.clientmanagement.clientrolesVolunteer = !vm.clientmanagement.clientrolesVolunteer;
+      //vm.list += "Volunteer, ";
+      vm.clientmanagement.$update(vm.clientmanagement)
+        .then(function () {
+          $state.go("clientmanagements.view");
+        });
+    }//end func
+
+    */
   }
 }());

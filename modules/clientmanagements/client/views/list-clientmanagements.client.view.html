@@ -4,12 +4,12 @@
             Client List
             <span class="pull-right">
                 <a class="btn btn-primary" ui-sref="clientmanagements.create">Create Client</a>
-                <a class="btn btn-default" ui-sref="">Print</a>
+                <button class="btn btn-default" ng-click="vm.printPage('printable')">Print List</a>
             </span>
         </h1>
     </div>
 
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-md-offset-1 col-md-10" id="printable">
         <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1">
                 <span class="glyphicon glyphicon-search"></span>
