@@ -1,0 +1,48 @@
+<section>
+  <div class="page-header row">
+    <h1>
+      User Log
+      <span class="pull-right">
+        <a class="btn btn-default" ui-sref="">Print</a>
+      </span>
+    </h1>
+  </div>
+
+
+  <div class="col-md-offset-1 col-md-10">
+    <div class="input-group" id="searchBar">
+      <span class="input-group-addon" id="sizing-addon1">
+        <span class="glyphicon glyphicon-search"></span>
+      </span>
+      <input type="text" class="form-control" placeholder="Search" ng-model="query">
+    </div>
+    <br/>
+    <div class="tableWrapper">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-default">
+          <tr>
+            <th ng-click="vm.headSort = 'user'">User</th>
+            <th ng-click="vm.headSort = 'client.name'">Client Name</th>
+            <th ng-click="vm.headSort = 'move_from_inventory'">Direction</th>
+            <th ng-click="vm.headSort = 'item.tags'">Inventory Item</th>
+            <th ng-click="vm.headSort = 'qty_moved'">Quantity Moved</th>
+            <th ng-click="vm.headSort = 'timestamp'">Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort" ui-sref="userlogs.view({ userlogId: userlog._id})">
+            <td>{{userlog.user}}</td>
+            <td>{{userlog.client.name}}</td>
+            <td>{move_from_inventory ? "<-" : "->"}</td>
+            <td>{{userlog.qty_moved}}</td>
+            <td>{{userlog.timestamp}}</td>
+            <td ng-bind="userlog.timestamp | date : 'short'"></td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
+        ng-change="pageChanged()"></pagination>
+      </section>
+    </div>
+  </div>
+</section>
