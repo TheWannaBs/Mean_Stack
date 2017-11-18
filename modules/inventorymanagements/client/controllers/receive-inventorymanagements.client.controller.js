@@ -29,9 +29,10 @@
         alert("You must fill in Quantity first");
       } else {
         if($scope.quantity <= 0) {
-          alert("Quantity must be greater than 0")
+          alert("Quantity must be greater than 0");
         }
         else {
+          // look for upc in database
           for (var i = 0; i < vm.inventorymanagements.length; i++) {
             if (vm.inventorymanagements[i].upc === $scope.upc.upc) {
               invResult = i;
@@ -41,8 +42,9 @@
           // if upc isn't in database, go to create view
           if(invResult === -1) {
             //TODO: figure out stateParams for create view
-            $state.go('inventorymanagements.create');//, $state.upc.upc);
+            $state.go('inventorymanagements.create({ upc: $scope.upc.upc, quantity: $scope.quantity })');
           }
+          //else update quantity and update database
           else {
             var quan = parseInt($scope.quantity);
             vm.inventorymanagements[invResult].qty += quan;
@@ -54,7 +56,6 @@
 
 
       function successCallback(res) {
-        //TODO: also needs to pop-up a success message
         // toast
         toasty();
         // reset quantity field

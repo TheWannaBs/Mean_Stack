@@ -25,6 +25,11 @@
                     <input name="description" type="text" ng-model="vm.inventorymanagement.description" id="description" class="form-control"
                         placeholder="description" />
                 </div>
+                <div class="form-group">
+                  <label class="control-label" for="qty">Quantity</label>
+                  <input name="qty" type="text" ng-model="vm.inventorymanagement.qty" id="qty" class="form-control"
+                    placeholder="qty"/>
+                </div>
                 <div class="form-group pull-right">
                     <input type="submit" value="Update Inventory" class="btn btn-primary"/>
                     <input type="button" value="Cancel" class="btn" ui-sref="inventorymanagements.view({ inventorymanagementId: vm.inventorymanagement._id})"/>
