@@ -11,37 +11,33 @@ var mongoose = require('mongoose'),
  */
 var UserlogSchema = new Schema({
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String,
+    trim: true
   },
-  client: {
-    name: {
-      type: String,
-      trim: true
-    },
-    roles: {
-      type: String,
-      trim: true
-    }
+  clientName: {
+    type: String,
+    trim: true
   },
-  item: {
-    tags: {
-      type: String,
-      trim: true
-    },
-    upc: {
-      type: String,
-      trim: true
-    },
+  clientRoles: {
+    type: String,
+    trim: true
   },
-  move_from_inventory: Boolean,
+  itemTags: {
+    type: String,
+    trim: true
+  },
+  itemUpc: {
+    type: String,
+    trim: true
+  },
+  direction: String,
   qty_moved: Number,
-  time: Date
+  timestamp: Date
 });
 
 UserlogSchema.pre('save', function (next) {
   var currentTime = new Date();
-  this.time = currentTime;
+  this.timestamp = currentTime;
   next();
 });
 

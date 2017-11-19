@@ -31,6 +31,9 @@
         templateUrl: 'modules/inventorymanagements/client/views/receive-inventorymanagement.client.view.html',
         controller: 'InventorymanagementsReceiveController',
         controllerAs: 'vm',
+        resolve: {
+          userlogResolve: newUserlog
+        },
         data: {
           pageTitle: 'Receive Inventory'
         }
@@ -85,5 +88,11 @@
 
   function newInventorymanagement(InventorymanagementsService) {
     return new InventorymanagementsService();
+  }
+  
+  newUserlog.$inject = ['UserlogsService'];
+
+  function newUserlog(UserlogsService) {
+    return new UserlogsService();
   }
 }());

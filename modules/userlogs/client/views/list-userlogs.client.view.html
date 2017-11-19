@@ -22,9 +22,9 @@
         <thead class="thead-default">
           <tr>
             <th ng-click="vm.headSort = 'user'">User</th>
-            <th ng-click="vm.headSort = 'client.name'">Client Name</th>
+            <th ng-click="vm.headSort = 'clientName'">Client Name</th>
             <th ng-click="vm.headSort = 'move_from_inventory'">Direction</th>
-            <th ng-click="vm.headSort = 'item.tags'">Inventory Item</th>
+            <th ng-click="vm.headSort = 'itemTags'">Inventory Item</th>
             <th ng-click="vm.headSort = 'qty_moved'">Quantity Moved</th>
             <th ng-click="vm.headSort = 'timestamp'">Timestamp</th>
           </tr>
@@ -32,10 +32,10 @@
         <tbody>
           <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort" ui-sref="userlogs.view({ userlogId: userlog._id})">
             <td>{{userlog.user}}</td>
-            <td>{{userlog.client.name}}</td>
-            <td>{move_from_inventory ? "<-" : "->"}</td>
+            <td>{{userlog.clientName}}</td>
+            <td>{userlog.direction}</td>
+            <td>{{userlog.itemTags}}</td>
             <td>{{userlog.qty_moved}}</td>
-            <td>{{userlog.timestamp}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
           </tr>
         </tbody>
