@@ -59,8 +59,8 @@
       var item = vm.inventorymanagements[i];
 
       //create new user log with receve data
-      vm.userlog.user = Authentication.user.username; //TODO: THIS BE FUNKY
-      console.log(vm.userlog.user);
+      vm.userlog.username = Authentication.user.username; 
+      console.log(vm.userlog.username);
       vm.userlog.clientName = "RECIEVE";
       vm.userlog.clientRoles = "";
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;

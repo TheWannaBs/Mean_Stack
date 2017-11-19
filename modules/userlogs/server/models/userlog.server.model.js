@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
  * Userlog Schema
  */
 var UserlogSchema = new Schema({
-  user: {
+  username: {
     type: String,
     trim: true
   },

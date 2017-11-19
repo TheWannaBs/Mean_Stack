@@ -21,7 +21,7 @@
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
           <tr>
-            <th ng-click="vm.headSort = 'user'">User</th>
+            <th ng-click="vm.headSort = 'username'">User</th>
             <th ng-click="vm.headSort = 'clientName'">Client Name</th>
             <th ng-click="vm.headSort = 'move_from_inventory'">Direction</th>
             <th ng-click="vm.headSort = 'itemTags'">Inventory Item</th>
@@ -31,9 +31,9 @@
         </thead>
         <tbody>
           <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort" ui-sref="userlogs.view({ userlogId: userlog._id})">
-            <td>{{userlog.user}}</td>
+            <td>{{userlog.username}}</td>
             <td>{{userlog.clientName}}</td>
-            <td>{userlog.direction}</td>
+            <td>{{userlog.direction}}</td>
             <td>{{userlog.itemTags}}</td>
             <td>{{userlog.qty_moved}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
