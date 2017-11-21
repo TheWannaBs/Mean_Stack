@@ -91,7 +91,7 @@
           var alreadyHas = false;
           for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
             if (vm.clientmanagements[clientResult].inventory[i].upc === vm.inventorymanagements[invResult].upc) {
-              // client already has this, increase by one
+              // client already has this, increase by qty
               vm.clientmanagements[clientResult].inventory[i].qty += $scope.qty;
               alreadyHas = true;
               break;
