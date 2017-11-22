@@ -42,42 +42,6 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Userlog
- */
-exports.update = function(req, res) {
-  var userlog = req.userlog;
-
-  userlog = _.extend(userlog, req.body);
-
-  userlog.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(userlog);
-    }
-  });
-};
-
-/**
- * Delete an Userlog
- */
-exports.delete = function(req, res) {
-  var userlog = req.userlog;
-
-  userlog.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(userlog);
-    }
-  });
-};
-
-/**
  * List of Userlogs
  */
 exports.list = function(req, res) {

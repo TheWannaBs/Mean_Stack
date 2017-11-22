@@ -18,10 +18,6 @@ var UserlogSchema = new Schema({
     type: String,
     trim: true
   },
-  clientRoles: {
-    type: String,
-    trim: true
-  },
   itemTags: {
     type: String,
     trim: true

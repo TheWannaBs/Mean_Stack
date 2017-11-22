@@ -30,11 +30,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort" ui-sref="userlogs.view({ userlogId: userlog._id})">
+          <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort">
             <td>{{userlog.username}}</td>
             <td>{{userlog.clientName}}</td>
             <td>{{userlog.direction}}</td>
-            <td>{{userlog.itemTags}}</td>
+            <td>{{userlog.itemTags}} {{userlog.ItemUpc}}</td>
             <td>{{userlog.qty_moved}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
           </tr>

@@ -1,3 +1,6 @@
+
+//TODO: Decide if we need this controller????
+
 (function () {
   'use strict';
 
@@ -17,13 +20,6 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-
-    // Remove existing Userlog
-    function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.userlog.$remove($state.go('userlogs.list'));
-      }
-    }
 
     // Save Userlog
     function save(isValid) {
