@@ -107,7 +107,7 @@
 
     //Change Activity Button Text
     function buttonText() {
-      if (vm.clientmanagement.inactive) {
+      if (vm.inventorymanagement.inactive) {
         return "Activate";
       }
       else {
