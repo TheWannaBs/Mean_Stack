@@ -41,8 +41,10 @@
           }
           // if upc isn't in database, go to create view
           if(invResult === -1) {
-            //TODO: figure out stateParams for create view
-            $state.go('inventorymanagements.create({ upc: $scope.upc.upc, quantity: $scope.quantity })');
+            $state.go('inventorymanagements.create', {
+              'upc': $scope.upc.upc,
+              'quantity': $scope.quantity
+            });
           }
           //else update quantity and update database
           else {
