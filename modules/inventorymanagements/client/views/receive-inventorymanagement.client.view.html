@@ -10,6 +10,9 @@
   <datalist id="Inventory">
     <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
   </datalist>
+  <center style="padding-bottom: 5px;">
+    <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+  </center>
   <center>
     <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: upc | filter: upc: true">
       <p>Item Tags: {{inventorymanagement.tags}}</p>
@@ -18,10 +21,17 @@
     </div>
   </center>
   <center>
-    <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" class="form-control" ng-model="upc.upc" style="width: 300px;"></input>
-  </center>
-  <center style="padding-top: 20px;">
-    <input name="quantity" type="text" id="quantity" class="form-control" placeholder="Quantity" ng-model="quantity" style="width: 300px;"/>
+    <fieldset data-ng-repeat="choice in choices" style="padding: 2px;">
+      <div class="col-sm-6">
+        <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="choice.upc.upc" style="width: 300px;"></input>
+      </div>
+      <div class="col-sm-1">
+        <input name="quantity" type="text" id="quantity" class="form-control" placeholder="0" ng-model="choice.quantity" style="width: 50px;"></input>
+      </div>
+      <div class="col-sm-1">
+        <button class="remove" ng-click="removeChoice()">-</button>
+      </div>
+    </fieldset>
   </center>
   <center style="padding-top: 20px;">
     <a class="btn btn-primary" ui-sref="inventorymanagements.list">Cancel</a>
