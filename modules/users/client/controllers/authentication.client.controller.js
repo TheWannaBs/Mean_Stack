@@ -47,7 +47,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        if ("admin" === Authentication.user.roles[0]) {
+        if ('admin' === Authentication.user.roles[0]) {
           $state.go('mainmenuadmin');
         } else {
           $state.go('mainmenu');
