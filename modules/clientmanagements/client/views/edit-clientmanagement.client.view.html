@@ -9,14 +9,14 @@
                 <div class="form-group" show-errors>
                     <label> Types of clients: </label>
                     <br> Foster:
-                    <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster"
+                    <input name="foster" type="checkbox" ng-model="vm.clientmanagement.clientrolesFoster" id="foster"
                         placeholder="foster"> Staff:
-                    <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff"> Sponsor:
-                    <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor"
+                    <input name="staff" type="checkbox" ng-model="vm.clientmanagement.clientrolesStaff" id="staff" placeholder="Staff"> Sponsor:
+                    <input name="sponsor" type="checkbox" ng-model="vm.clientmanagement.clientrolesSponsor" id="sponsor"
                         placeholder="Sponsor"> Veteran:
-                    <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer"
+                    <input name="veteran" type="checkbox" ng-model="vm.clientmanagement.clientrolesVeteran" id="volunteer"
                         placeholder="Veteran"> Volunteer:
-                    <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer"
+                    <input name="volunteer" type="checkbox" ng-model="vm.clientmanagement.clientrolesVolunteer" id="volunteer"
                         placeholder="Volunteer">
                     <br>
                 </div>
@@ -62,6 +62,7 @@
                     <div ng-show="vm.error" class="text-danger">
                         <strong ng-bind="vm.error"></strong>
                     </div>
+              </div>
             </fieldset>
         </form>
         </div>

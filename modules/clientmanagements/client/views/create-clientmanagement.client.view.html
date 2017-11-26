@@ -8,11 +8,11 @@
         <div class="form-group" show-errors>
           <label> Types of clients: </label>
           <br>
-          Foster: <input name="foster" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="foster" placeholder="foster">
-          Staff: <input name="staff" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="staff" placeholder="Staff">
-          Sponsor: <input name="sponsor" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="sponsor" placeholder="Sponsor">
-          Veteran: <input name="veteran" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Veteran">
-          Volunteer: <input name="volunteer" type="checkbox" ng-checked="vm.clientmanagement.clientroles" id="volunteer" placeholder="Volunteer">
+          Foster: <input name="foster" type="checkbox" ng-model="vm.clientmanagement.clientrolesFoster" id="foster" placeholder="foster">
+          Staff: <input name="staff" type="checkbox" ng-model="vm.clientmanagement.clientrolesStaff" id="staff" placeholder="Staff">
+          Sponsor: <input name="sponsor" type="checkbox" ng-model="vm.clientmanagement.clientrolesSponsor" id="sponsor" placeholder="Sponsor">
+          Veteran: <input name="veteran" type="checkbox" ng-model="vm.clientmanagement.clientrolesVeteran" id="volunteer" placeholder="Veteran">
+          Volunteer: <input name="volunteer" type="checkbox" ng-model="vm.clientmanagement.clientrolesVolunteer" id="volunteer" placeholder="Volunteer">
           <br>
         </div>
         <label class="control-label" for="name">Name:</label>
@@ -56,6 +56,7 @@
           <input type="submit" value="Create Client" class="btn btn-primary" />
           <input type="button" value="Cancel" class="btn" ui-sref="clientmanagements.list"/>
           </div>
+        </div>  
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
