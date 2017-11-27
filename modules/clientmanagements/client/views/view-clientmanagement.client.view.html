@@ -82,12 +82,6 @@
                     <strong>Inventory</strong>
                 </div>
                 <div class="col-md-6">
-                    <!-- <div ng-repeat="item in vm.clientmanagement.inventory">
-                        <p>Tags: {{item.tags}}</p>
-                        <p>UPC: {{item.upc}}</p>
-                        <p>Quantity: {{item.qty}}</p>
-                        <hr/>
-                    </div> -->
                     <div class="tableWrapper">
                         <table class="table table-bordered table-striped">
                             <thead class="thead-default">
@@ -95,6 +89,7 @@
                                     <th>Tags</th>
                                     <th>UPC</th>
                                     <th>Quantity</th>
+                                    <th>Delete Item</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,6 +97,9 @@
                                     <td>{{item.tags}}</td>
                                     <td>{{item.upc}}</td>
                                     <td>{{item.qty}}</td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" ng-click="vm.removeItem(item)">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button></td>
                                 </tr>
                             </tbody>
                         </table>
