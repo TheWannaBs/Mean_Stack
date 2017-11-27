@@ -28,7 +28,7 @@
       if ($window.confirm('Are you sure you want to delete?')) {
         vm.inventorymanagement.$remove()//vm.inventorymanagement)
           .then(function () {
-            $state.go("inventorymanagements.list");
+            $state.go('inventorymanagements.list');
           });
       }
     }
@@ -66,11 +66,11 @@
 
     //Change Activity of Item
     function changeStatus () {
-      if ($window.confirm("Are you sure you want to change this item's activity?")) {
+      if ($window.confirm('Are you sure you want to change this item\'s activity?')) {
         vm.inventorymanagement.inactive = !vm.inventorymanagement.inactive;
         vm.inventorymanagement.$update(vm.inventorymanagement)//CHECK IF vm.inventorymanagement.$update() WORKS
           .then(function () {
-            $state.go("inventorymanagements.view");
+            $state.go('inventorymanagements.view');
           });
       }
     }
@@ -78,40 +78,40 @@
     //Display Inactive Label
     function labelDisp () {
       if (vm.inventorymanagement.inactive) {
-        return "label label-warning";
+        return 'label label-warning';
       }
       else {
-        return "";
+        return '';
       }
     }
 
     //Display Lable Text
     function labelText () {
       if (vm.inventorymanagement.inactive) {
-        return "Inactive";
+        return 'Inactive';
       }
       else {
-        return "";
+        return '';
       }
     }
 
     //Change Activity Button Color
     function buttonColor () {
       if (vm.inventorymanagement.inactive) {
-        return "btn btn-success";
+        return 'btn btn-success';
       }
       else {
-        return "btn btn-warning";
+        return 'btn btn-warning';
       }
     }
 
     //Change Activity Button Text
     function buttonText() {
       if (vm.inventorymanagement.inactive) {
-        return "Activate";
+        return 'Activate';
       }
       else {
-        return "Deactivate";
+        return 'Deactivate';
       }
     }
 

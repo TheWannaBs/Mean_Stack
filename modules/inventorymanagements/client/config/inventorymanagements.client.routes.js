@@ -43,6 +43,7 @@
         templateUrl: 'modules/inventorymanagements/client/views/create-inventorymanagement.client.view.html',
         controller: 'InventorymanagementsController',
         controllerAs: 'vm',
+        params: { 'upc': null, 'quantity': null },
         resolve: {
           inventorymanagementResolve: newInventorymanagement
         },
@@ -84,10 +85,13 @@
     }).$promise;
   }
 
-  newInventorymanagement.$inject = ['InventorymanagementsService'];
+  newInventorymanagement.$inject = ['$stateParams', 'InventorymanagementsService'];
 
-  function newInventorymanagement(InventorymanagementsService) {
-    return new InventorymanagementsService();
+  function newInventorymanagement($stateParams, InventorymanagementsService) {
+    return new InventorymanagementsService({
+      'upc': $stateParams.upc,
+      'qty': $stateParams.quantity
+    });
   }
   
   newUserlog.$inject = ['UserlogsService'];
