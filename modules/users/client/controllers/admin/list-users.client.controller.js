@@ -3,6 +3,14 @@
 angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
   function ($scope, $filter, Admin) {
     $scope.headSort = 'username';
+    $scope.reverse = false;
+    $scope.changeSort = changeSort;
+
+    function changeSort(headName) {
+      $scope.headSort = headName;
+      $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
+    }
+
     Admin.query(function (data) {
       $scope.users = data;
       $scope.buildPager();
