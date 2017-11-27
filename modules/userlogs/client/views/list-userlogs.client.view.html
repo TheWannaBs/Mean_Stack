@@ -24,7 +24,8 @@
             <th ng-click="vm.headSort = 'username'">User</th>
             <th ng-click="vm.headSort = 'clientName'">Client Name</th>
             <th ng-click="vm.headSort = 'move_from_inventory'">Direction</th>
-            <th ng-click="vm.headSort = 'itemTags'">Inventory Item</th>
+            <th ng-click="vm.headSort = 'itemUpc'">Inventory UPC</th>
+            <th ng-click="vm.headSort = 'itemTags'">Inventory Tags</th>
             <th ng-click="vm.headSort = 'qty_moved'">Quantity Moved</th>
             <th ng-click="vm.headSort = 'timestamp'">Timestamp</th>
           </tr>
@@ -34,7 +35,8 @@
             <td>{{userlog.username}}</td>
             <td>{{userlog.clientName}}</td>
             <td>{{userlog.direction}}</td>
-            <td>{{userlog.itemTags}} {{userlog.ItemUpc}}</td>
+            <td>{{userlog.itemUpc}}</td>  
+            <td>{{userlog.itemTags}}</td>
             <td>{{userlog.qty_moved}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
           </tr>

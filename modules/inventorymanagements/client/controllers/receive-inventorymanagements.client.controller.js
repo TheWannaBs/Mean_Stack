@@ -45,7 +45,7 @@
       function successCallback(res) {
         //TODO: should this route to same page, or to list? (***This should route to recieve***)
         //TODO: also needs to pop-up a success message
-        $scope.saveUserLog(invResult, quan);
+        $scope.saveUserLog(invResult, quan); 
         $state.go('inventorymanagements.receive');
       }
 
@@ -62,7 +62,6 @@
       vm.userlog.username = Authentication.user.username; 
       console.log(vm.userlog.username);
       vm.userlog.clientName = "RECIEVE";
-      vm.userlog.clientRoles = "";
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;
       vm.userlog.itemUpc = vm.inventorymanagements[i].upc;
       vm.userlog.direction = "->";

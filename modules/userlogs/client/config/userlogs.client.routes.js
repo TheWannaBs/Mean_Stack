@@ -22,7 +22,7 @@
         data: {
           pageTitle: 'Userlogs List'
         }
-      })
+      });
   }
 
   getUserlog.$inject = ['$stateParams', 'UserlogsService'];
@@ -31,5 +31,11 @@
     return UserlogsService.get({
       userlogId: $stateParams.userlogId
     }).$promise;
+  }
+
+  newUserlog.$inject = ['UserlogsService'];
+
+  function newUserlog(UserlogsService) {
+    return new UserlogsService();
   }
 }());
