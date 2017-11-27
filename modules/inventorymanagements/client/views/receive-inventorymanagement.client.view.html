@@ -75,6 +75,10 @@
   <center style="padding-bottom: 20px;">
     <input type="file" accept="image/*;capture=camera"></input>
   </center>
+  <center style="padding-bottom: 20px;">
+    <div id="scanner-container"></div>
+    <input type="button" id="btn" value="Start/Stop the scanner" />
+  </center>
   <datalist id="Inventory">
     <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
   </datalist>
@@ -98,6 +102,9 @@
       </div>
       <div class="col-sm-1">
         <button class="remove" ng-click="removeChoice()">-</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="remove" ng-click="">Scan(NO-WORK)</button>
       </div>
     </fieldset>
   </center>
