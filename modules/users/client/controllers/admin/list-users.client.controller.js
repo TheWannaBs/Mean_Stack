@@ -2,7 +2,7 @@
 
 angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
   function ($scope, $filter, Admin) {
-    $scope.headSort = "username";
+    $scope.headSort = 'username';
     Admin.query(function (data) {
       $scope.users = data;
       $scope.buildPager();
