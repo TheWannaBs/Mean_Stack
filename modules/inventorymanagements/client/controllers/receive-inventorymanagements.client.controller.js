@@ -42,7 +42,6 @@
       // search for UPC in DB. if there, add quantity. if not, send to create page.
       // initial check over array of choices for error
       for (var i = 0; i < $scope.choices.length; i++) {
-        console.log($scope.choices, i, $scope.choices[i]);
         $scope.choices[i].invResult = -1;
         if (!$scope.choices[i].upc.upc && !$scope.choices[i].quantity) {
           alert('You must fill in Quantity and UPC first');
