@@ -46,6 +46,7 @@
     $scope.receive = function() {
       // search for UPC in DB. if there, add quantity. if not, send to create page.
       // initial check over array of choices for error
+      var i2 = 0;
       for (var i = 0; i < $scope.choices.length; i++) {
         $scope.choices[i].invResult = -1;
         if (!$scope.choices[i].upc.upc && !$scope.choices[i].quantity) {
@@ -80,7 +81,7 @@
       }
 
       //if no errors, receive inventory
-      for (var i2 = 0; i2 < $scope.choices.length; i2++) {
+      for (i2 = 0; i2 < $scope.choices.length; i2++) {
         var quan = parseInt($scope.choices[i2].quantity);
         // reset quantity field
         $scope.choices[i2].quantity = null;
@@ -88,13 +89,14 @@
         vm.inventorymanagements[$scope.choices[i2].invResult].qty += quan;
         //update DB
         vm.inventorymanagements[$scope.choices[i2].invResult].$update(successCallback, errorCallback);
+        //save log
+        $scope.saveUserLog($scope.choices[i2].invResult, quan);
       }
 
       function successCallback(res) {
         // toast
         toasty();
         // reload page
-        //$scope.saveUserLog(invResult, quan);
         $state.go('inventorymanagements.receive');
       }
 
