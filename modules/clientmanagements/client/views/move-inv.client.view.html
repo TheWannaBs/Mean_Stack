@@ -95,7 +95,7 @@
       <center>
         <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[0].upc" style="width: 270px;"
           required></input>
-        <input type="number" ng-model="qty[0]" style="width: 50px;"></input>
+        <input id="qty0" type="number" min="1" step="1" ng-model="qty[0]" value="null" style="width: 50px;"></input>
         <button class="btn btn-default btn-sm" ng-click="deleteUPC()">
           <span class="glyphicon glyphicon-minus"></span>
         </button>
