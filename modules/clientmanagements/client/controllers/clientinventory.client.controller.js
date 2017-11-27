@@ -8,7 +8,7 @@
   angular
     .module('inventorymanagements')
     .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
-    .filter("emptyifblank", function () {
+    .filter('emptyifblank', function () {
       return function (object, query) {
         if (!query)
           return {};
@@ -28,13 +28,13 @@
     $scope.authentication = Authentication;
 
     function toasty() {
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+      var x = document.getElementById('snackbar');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
     $scope.cancelButton = function () {
-      if ("admin" === Authentication.user.roles[0]) {
+      if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
       } else {
         $state.go('mainmenu');
@@ -43,11 +43,11 @@
 
     $scope.moveToClient = function () {
       if (!$scope.serial && !$scope.nameAndEmail) {
-        alert("You must fill in a Client and UPC first");
+        alert('You must fill in a Client and UPC first');
       } else if (!$scope.serial) {
-        alert("You must fill in a UPC first");
+        alert('You must fill in a UPC first');
       } else if (!$scope.nameAndEmail) {
-        alert("You must fill in a Client first");
+        alert('You must fill in a Client first');
       } else {
         var invResult = -1;
         for (var i = 0; i < vm.inventorymanagements.length; i++) {
@@ -58,10 +58,10 @@
         }
         if (vm.inventorymanagements[invResult].qty === 0) {
           // out of stock
-          alert("This item is out of stock");
+          alert('This item is out of stock');
           return;
         }
-        var clientInfo = $scope.nameAndEmail.split(" --- ");
+        var clientInfo = $scope.nameAndEmail.split(' --- ');
         var clientResult = -1;
         for (i = 0; i < vm.clientmanagements.length; i++) {
           if (vm.clientmanagements[i].name === clientInfo[0] && vm.clientmanagements[i].email === clientInfo[1]) {
@@ -70,11 +70,11 @@
           }
         }
         if (invResult === -1 && clientResult === -1) {
-          alert("That Client and UPC don't exist");
+          alert('That Client and UPC don\'t exist');
         } else if (invResult === -1) {
-          alert("That UPC doesn't exist");
+          alert('That UPC doesn\'t exist');
         } else if (clientResult === -1) {
-          alert("That Client doesn't exist");
+          alert('That Client doesn\'t exist');
         } else {
           // found an item with this upc and a client with the right name and email combo
           var alreadyHas = false;
@@ -114,13 +114,13 @@
 
     $scope.moveToInventory = function () {
       if (!$scope.serial && !$scope.nameAndEmail) {
-        alert("You must fill in a Client and UPC first");
+        alert('You must fill in a Client and UPC first');
       } else if (!$scope.serial) {
-        alert("You must fill in a UPC first");
+        alert('You must fill in a UPC first');
       } else if (!$scope.nameAndEmail) {
-        alert("You must fill in a Client first");
+        alert('You must fill in a Client first');
       } else {
-        var clientInfo = $scope.nameAndEmail.split(" --- ");
+        var clientInfo = $scope.nameAndEmail.split(' --- ');
         var clientResult = -1;
         for (var i = 0; i < vm.clientmanagements.length; i++) {
           if (vm.clientmanagements[i].name === clientInfo[0] && vm.clientmanagements[i].email === clientInfo[1]) {
@@ -136,11 +136,11 @@
           }
         }
         if (invResult === -1 && clientResult === -1) {
-          alert("That Client and UPC don't exist");
+          alert('That Client and UPC don\'t exist');
         } else if (invResult === -1) {
-          alert("That UPC doesn't exist");
+          alert('That UPC doesn\'t exist');
         } else if (clientResult === -1) {
-          alert("That Client doesn't exist");
+          alert('That Client doesn\'t exist');
         } else {
           // client and item exist, now check if client has that item
           var alreadyHas = false;
@@ -158,7 +158,7 @@
           }
           if (!alreadyHas) {
             // client doesn't have this item, nothing to transfer
-            alert("Client doesn't have this item");
+            alert('Client doesn\'t have this item');
             return;
           }
           vm.inventorymanagements[invResult].qty += 1;

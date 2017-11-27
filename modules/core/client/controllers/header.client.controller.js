@@ -17,7 +17,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     // Redirect to appropriate main menu
     $scope.goToMainMenu = function() {
-      if ("admin" === Authentication.user.roles[0]) {
+      if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
       } else {
         $state.go('mainmenu');

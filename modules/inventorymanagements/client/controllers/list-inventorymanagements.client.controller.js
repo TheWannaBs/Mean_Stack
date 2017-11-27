@@ -11,7 +11,7 @@
     var vm = this;
 
     vm.inventorymanagements = InventorymanagementsService.query();
-    vm.headSort = "tags";
+    vm.headSort = 'tags';
 
     vm.showNoInactive = function (item) {
       return item.inactive === false;
