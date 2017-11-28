@@ -75,57 +75,7 @@
         list += 'Volunteer, ';
       return list.slice(0,list.length-2);
     }      
-      
-    //Save Foster Checkbox Values
-    function changeStatusFoster() {
-      vm.clientmanagement.clientrolesFoster = !vm.clientmanagement.clientrolesFoster;
-      //vm.list = vm.list + "Foster, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Staff Checkbox Values
-    function changeStatusStaff() {
-      vm.clientmanagement.clientrolesStaff = !vm.clientmanagement.clientrolesStaff;
-      vm.list += "Staff, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Sponsor Checkbox Values
-    function changeStatusSponsor() {
-      vm.clientmanagement.clientrolesSponsor = !vm.clientmanagement.clientrolesSponsor;
-      //vm.list += "Sponsor, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Veteran Checkbox Values
-    function changeStatusVeteran() {
-      vm.clientmanagement.clientrolesVeteran = !vm.clientmanagement.clientrolesVeteran;
-      //vm.list += "Veteran, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-      
-    //Save Volunteer Checkbox Values
-    function changeStatusVolunteer() {
-      vm.clientmanagement.clientrolesVolunteer = !vm.clientmanagement.clientrolesVolunteer;
-      //vm.list += "Volunteer, ";
-      vm.clientmanagement.$update(vm.clientmanagement)
-        .then(function () {
-          $state.go("clientmanagements.view");
-        });
-    }//end func
-
+    
     //Change Activity of Item
     function changeStatus() {
       if ($window.confirm("Are you sure you want to change this item's activity?")) {
