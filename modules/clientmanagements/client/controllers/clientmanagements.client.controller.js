@@ -16,6 +16,7 @@
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
+    vm.removeItem = removeItem;
     vm.save = save;
     vm.changeStatus = changeStatus;
     vm.labelDisp = labelDisp;
@@ -23,7 +24,7 @@
     vm.buttonColor = buttonColor;
     vm.buttonText = buttonText;
     vm.branchText = branchText;
-    vm.displayClientRoles = displayClientRoles;//list of clientroles
+    vm.displayClientRoles = displayClientRoles;//list of clientrols
 
     // Remove existing Clientmanagement
     function remove() {
@@ -33,6 +34,19 @@
           $state.go('clientmanagements.list');
         });
 
+      }
+    }
+
+    function removeItem(item) {
+      var index = vm.clientmanagement.inventory.indexOf(item);
+      if ($window.confirm('Are you sure you want to delete this item?')) {
+        vm.clientmanagement.inventory.splice(index, 1);
+        vm.clientmanagement.$update()
+          .then(function (res) {
+            $state.go('clientmanagements.view', {
+              clientmanagementId: res._id
+            });
+          });
       }
     }
 
