@@ -195,8 +195,11 @@
           vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
         }
       }
-      // throw the alerts
-      alert(alerts);
+      if (alerts.length !== 0) {
+        // throw the alerts
+        alert(alerts);  
+      }
+      
       if (skipUPC.length !== upcFields) {
         // gimme that toast
         toasty();
