@@ -17,22 +17,26 @@
       };
     });
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', '$scope', '$state', 'Authentication'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', '$scope', '$state', 'Authentication', '$compile'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, $scope, $state, Authentication) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, $scope, $state, Authentication, $compile) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
     vm.inventorymanagements = InventorymanagementsService.query();
     $scope.$state = $state;
     $scope.authentication = Authentication;
-
+    $scope.serial = [];
+    $scope.qty = [];
+    $scope.nameAndEmail = [];
+    // used for making toast appear
     function toasty() {
       var x = document.getElementById('snackbar');
       x.className = 'show';
       setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
+    // redirects user back to home
     $scope.cancelButton = function () {
       if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
@@ -41,70 +45,166 @@
       }
     };
 
+    // adds another upc and quantity field
+    var upcFields = 1;
+    $scope.addUPC = function () {
+      var newCen = document.createElement('center');
+      newCen.setAttribute('style', 'padding-bottom: 7px;');
+      newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[' + upcFields + '].upc" style="width: 270px;" required></input><input id="qty' + upcFields + '" placeholder="1" min="1" step="1" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
+      $compile(newCen)($scope);
+      document.getElementById('input_upc').appendChild(newCen);
+      upcFields++;
+    };
+
+    // removes the last upc and quantity field
+    $scope.deleteUPC = function () {
+      if (upcFields > 1) {
+        var upcs = document.getElementById('input_upc');
+        upcs.removeChild(upcs.lastChild);
+        upcFields--;
+      }
+    };
+
+    // adds a client field
+    var clientFields = 1;
+    $scope.addClient = function () {
+      var newCen = document.createElement('center');
+      newCen.setAttribute('style', 'padding-bottom: 7px;');
+      newCen.innerHTML = '<input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[' + clientFields + ']" style="width: 320px;" required></input>';
+      $compile(newCen)($scope);
+      document.getElementById('input_client').appendChild(newCen);
+      clientFields++;
+    };
+
+    // removes the last client field
+    $scope.deleteClient = function () {
+      if (clientFields > 1) {
+        var clients = document.getElementById('input_client');
+        clients.removeChild(clients.lastChild);
+        clientFields--;
+      }
+    };
+
+    // checks validity of all upcs/quantities/clients and then moves items from the inventory to the clients
     $scope.moveToClient = function () {
-      if (!$scope.serial && !$scope.nameAndEmail) {
-        alert('You must fill in a Client and UPC first');
-      } else if (!$scope.serial) {
-        alert('You must fill in a UPC first');
-      } else if (!$scope.nameAndEmail) {
-        alert('You must fill in a Client first');
-      } else {
-        var invResult = -1;
-        for (var i = 0; i < vm.inventorymanagements.length; i++) {
-          if (vm.inventorymanagements[i].upc === $scope.serial.upc) {
-            invResult = i;
-            break;
-          }
-        }
-        if (vm.inventorymanagements[invResult].qty === 0) {
-          // out of stock
-          alert('This item is out of stock');
+      // first loop through to verify the fields are valid
+      for (var i = 0; i < upcFields; i++) {
+        // find the qty input field
+        var inpQty = document.getElementById('qty' + i);
+        if (!$scope.serial[i]) {
+          alert('You cannot leave a UPC field blank');
+          return;
+        } else if (!inpQty.checkValidity()) {
+          alert('Quantity must be a nonzero integer');
           return;
         }
-        var clientInfo = $scope.nameAndEmail.split(' --- ');
-        var clientResult = -1;
-        for (i = 0; i < vm.clientmanagements.length; i++) {
-          if (vm.clientmanagements[i].name === clientInfo[0] && vm.clientmanagements[i].email === clientInfo[1]) {
-            clientResult = i;
+      }
+      for (var v = 0; v < clientFields; v++) {
+        if (!$scope.nameAndEmail[v]) {
+          alert('You cannot leave a Client field blank');
+          return;
+        }
+      }
+      var skipUPC = [];
+      var alerts = [];
+      for (i = 0; i < upcFields; i++) {
+        // if quantity is blank, default to 1
+        var quant1 = $scope.qty[i];
+        if ($scope.qty[i] === null || $scope.qty[i] === undefined) {
+          quant1 = 1;
+        }
+        var invResult1 = -1;
+        for (var w2 = 0; w2 < vm.inventorymanagements.length; w2++) {
+          if (vm.inventorymanagements[w2].upc === $scope.serial[i].upc) {
+            invResult1 = w2;
             break;
           }
         }
-        if (invResult === -1 && clientResult === -1) {
-          alert('That Client and UPC don\'t exist');
-        } else if (invResult === -1) {
-          alert('That UPC doesn\'t exist');
-        } else if (clientResult === -1) {
-          alert('That Client doesn\'t exist');
-        } else {
-          // found an item with this upc and a client with the right name and email combo
-          var alreadyHas = false;
-          for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
-            if (vm.clientmanagements[clientResult].inventory[i].upc === vm.inventorymanagements[invResult].upc) {
-              // client already has this, increase by one
-              vm.clientmanagements[clientResult].inventory[i].qty += 1;
-              alreadyHas = true;
-              break;
-            }
-          }
-          if (!alreadyHas) {
-            vm.clientmanagements[clientResult].inventory.push({
-              tags: vm.inventorymanagements[invResult].tags,
-              upc: vm.inventorymanagements[invResult].upc,
-              qty: 1
-            });
-          }
-          vm.inventorymanagements[invResult].qty -= 1;
-          vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
-          vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
-          // gimme that toast
-          toasty();
-          // clear upc field
-          $scope.serial = null;
+        if (invResult1 === -1) {
+          alert('At least one UPC doesn\'t exist');
+          return;
+        }
+        if (vm.inventorymanagements[invResult1].qty < (quant1 * clientFields)) {
+          // out of stock
+          alerts.push('There is not enough of an item (UPC: ' + $scope.serial[i].upc + ') in stock\n\r');
+          // add this to the skip array
+          skipUPC.push(i);
         }
       }
+      for (v = 0; v < clientFields; v++) {
+        var clientInfo1 = $scope.nameAndEmail[v].split(' --- ');
+        var clientResult1 = -1;
+        for (var w1 = 0; w1 < vm.clientmanagements.length; w1++) {
+          if (vm.clientmanagements[w1].name === clientInfo1[0] && vm.clientmanagements[w1].email === clientInfo1[1]) {
+            clientResult1 = w1;
+            break;
+          }
+        }
+        if (clientResult1 === -1) {
+          alert('At least one Client doesn\'t exist');
+          return;
+        }
+      }
+      for (i = 0; i < upcFields; i++) {
+        // if quantity is blank, default to 1
+        var quant = $scope.qty[i];
+        if ($scope.qty[i] === null || $scope.qty[i] === undefined) {
+          quant = 1;
+        }
+        var invResult = -1;
+        for (var w = 0; w < vm.inventorymanagements.length; w++) {
+          if (vm.inventorymanagements[w].upc === $scope.serial[i].upc) {
+            invResult = w;
+            break;
+          }
+        }
+        // clear upc field
+        $scope.serial[i] = null;
+        $scope.qty[i] = null;
+        // skip the indices in skipUPC
+        if (skipUPC.indexOf(i) === -1) {
+          for (v = 0; v < clientFields; v++) {
+            var clientInfo = $scope.nameAndEmail[v].split(' --- ');
+            var clientResult = -1;
+            for (w = 0; w < vm.clientmanagements.length; w++) {
+              if (vm.clientmanagements[w].name === clientInfo[0] && vm.clientmanagements[w].email === clientInfo[1]) {
+                clientResult = w;
+                break;
+              }
+            }
+            // found an item with this upc and a client with the right name and email combo
+            var alreadyHas = false;
+            for (w = 0; w < vm.clientmanagements[clientResult].inventory.length; w++) {
+              if (vm.clientmanagements[clientResult].inventory[w].upc === vm.inventorymanagements[invResult].upc) {
+                // client already has this, increase by qty
+                vm.clientmanagements[clientResult].inventory[w].qty += quant;
+                alreadyHas = true;
+                break;
+              }
+            }
+            if (!alreadyHas) {
+              vm.clientmanagements[clientResult].inventory.push({
+                tags: vm.inventorymanagements[invResult].tags,
+                upc: vm.inventorymanagements[invResult].upc,
+                qty: quant
+              });
+            }
+            vm.inventorymanagements[invResult].qty -= quant;
+            vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
+          }
+          vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
+        }
+      }
+      // throw the alerts
+      alert(alerts);
+      if (skipUPC.length !== upcFields) {
+        // gimme that toast
+        toasty();
+      }
+
       function successCallback(res) {
         // toasty
-        // console.log("success");
+        // console.log('success');
       }
 
       function errorCallback(res) {
@@ -112,67 +212,127 @@
       }
     };
 
+    // checks validity of all upcs/quantities/clients and then moves items from the clients to the inventory
     $scope.moveToInventory = function () {
-      if (!$scope.serial && !$scope.nameAndEmail) {
-        alert('You must fill in a Client and UPC first');
-      } else if (!$scope.serial) {
-        alert('You must fill in a UPC first');
-      } else if (!$scope.nameAndEmail) {
-        alert('You must fill in a Client first');
-      } else {
-        var clientInfo = $scope.nameAndEmail.split(' --- ');
-        var clientResult = -1;
-        for (var i = 0; i < vm.clientmanagements.length; i++) {
-          if (vm.clientmanagements[i].name === clientInfo[0] && vm.clientmanagements[i].email === clientInfo[1]) {
-            clientResult = i;
+      // first loop through to verify the fields are valid
+      for (var i = 0; i < upcFields; i++) {
+        // find the qty input field
+        var inpQty = document.getElementById('qty' + i);
+        if (!$scope.serial[i]) {
+          alert('You cannot leave a UPC field blank');
+          return;
+        } else if (!inpQty.checkValidity()) {
+          alert('Quantity must be a nonzero integer');
+          return;
+        }
+      }
+      for (var v = 0; v < clientFields; v++) {
+        if (!$scope.nameAndEmail[v]) {
+          alert('You cannot leave a Client field blank');
+          return;
+        }
+      }
+
+      for (i = 0; i < upcFields; i++) {
+        // if quantity is blank, default to 1
+        var quant1 = $scope.qty[i];
+        if ($scope.qty[i] === null || $scope.qty[i] === undefined) {
+          quant1 = 1;
+        }
+        var invResult1 = -1;
+        for (var w2 = 0; w2 < vm.inventorymanagements.length; w2++) {
+          if (vm.inventorymanagements[w2].upc === $scope.serial[i].upc) {
+            invResult1 = w2;
             break;
           }
+        }
+        if (invResult1 === -1) {
+          alert('At least one UPC doesn\'t exist');
+          return;
+        }
+      }
+      for (v = 0; v < clientFields; v++) {
+        var clientInfo1 = $scope.nameAndEmail[v].split(' --- ');
+        var clientResult1 = -1;
+        for (var w1 = 0; w1 < vm.clientmanagements.length; w1++) {
+          if (vm.clientmanagements[w1].name === clientInfo1[0] && vm.clientmanagements[w1].email === clientInfo1[1]) {
+            clientResult1 = w1;
+            break;
+          }
+        }
+        if (clientResult1 === -1) {
+          alert('At least one Client doesn\'t exist');
+          return;
+        }
+      }
+
+      var alerts = [];
+      for (i = 0; i < upcFields; i++) {
+        // if quantity is blank, default to 1
+        var quant = $scope.qty[i];
+        if (!$scope.qty[i]) {
+          quant = 1;
         }
         var invResult = -1;
-        for (i = 0; i < vm.inventorymanagements.length; i++) {
-          if (vm.inventorymanagements[i].upc === $scope.serial.upc) {
-            invResult = i;
+        for (var w = 0; w < vm.inventorymanagements.length; w++) {
+          if (vm.inventorymanagements[w].upc === $scope.serial[i].upc) {
+            invResult = w;
             break;
           }
         }
-        if (invResult === -1 && clientResult === -1) {
-          alert('That Client and UPC don\'t exist');
-        } else if (invResult === -1) {
-          alert('That UPC doesn\'t exist');
-        } else if (clientResult === -1) {
-          alert('That Client doesn\'t exist');
-        } else {
+        // clear upc field
+        $scope.serial[i] = null;
+        $scope.qty[i] = null;
+        for (v = 0; v < clientFields; v++) {
+          var clientInfo = $scope.nameAndEmail[v].split(' --- ');
+          var clientResult = -1;
+          for (w = 0; w < vm.clientmanagements.length; w++) {
+            if (vm.clientmanagements[w].name === clientInfo[0] && vm.clientmanagements[w].email === clientInfo[1]) {
+              clientResult = w;
+              break;
+            }
+          }
           // client and item exist, now check if client has that item
           var alreadyHas = false;
-          for (i = 0; i < vm.clientmanagements[clientResult].inventory.length; i++) {
-            if (vm.clientmanagements[clientResult].inventory[i].upc === vm.inventorymanagements[invResult].upc) {
-              // client already has this, now decrement by 1 and check if item should be removed
-              vm.clientmanagements[clientResult].inventory[i].qty -= 1;
-              if (vm.clientmanagements[clientResult].inventory[i].qty === 0) {
+          var notEnough = false;
+          for (w = 0; w < vm.clientmanagements[clientResult].inventory.length; w++) {
+            if (vm.clientmanagements[clientResult].inventory[w].upc === vm.inventorymanagements[invResult].upc) {
+              // client already has this, now decrement by qty and check if item should be removed
+              if (vm.clientmanagements[clientResult].inventory[w].qty < quant) {
+                // client doesn't have >= $scope.qty[i]
+                alerts.push(clientInfo[0] + ' doesn\'t have enough of an item (UPC: ' + vm.inventorymanagements[invResult].upc + '), skipped\n\r');
+                notEnough = true;
+                break;
+              }
+              vm.clientmanagements[clientResult].inventory[w].qty -= quant;
+              if (vm.clientmanagements[clientResult].inventory[w].qty === 0) {
                 // remove this item from their inventory
-                vm.clientmanagements[clientResult].inventory.splice(i, 1);
+                vm.clientmanagements[clientResult].inventory.splice(w, 1);
               }
               alreadyHas = true;
               break;
             }
           }
-          if (!alreadyHas) {
+          if (notEnough) {
+            continue;
+          } else if (!alreadyHas) {
             // client doesn't have this item, nothing to transfer
-            alert('Client doesn\'t have this item');
-            return;
+            alerts.push(clientInfo[0] + ' doesn\'t have an item (UPC: ' + vm.inventorymanagements[invResult].upc + '), skipped\n\r');
+            continue;
           }
-          vm.inventorymanagements[invResult].qty += 1;
+          vm.inventorymanagements[invResult].qty += quant;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
-          vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
-          // get toasty
-          toasty();
-          // clear upc field
-          $scope.serial = null;
         }
+        vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
+      // throw alerts
+      alert(alerts);
+      // get toasty
+      toasty();
+
       function successCallback(res) {
         // more toast
-        // console.log("success");
+        // console.log('success');
       }
 
       function errorCallback(res) {
