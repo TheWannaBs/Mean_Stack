@@ -92,7 +92,7 @@
     </center-->
   <form>
     <div id="input_upc">
-      <center>
+      <center style="padding-bottom: 7px;">
         <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[0].upc" style="width: 270px;"
           required></input>
         <input id="qty0" type="number" min="1" step="1" ng-model="qty[0]" value="null" style="width: 50px;"></input>
@@ -106,7 +106,7 @@
     </div>
     <hr style="width: 400px;">
     <div id="input_client">
-      <center>
+      <center style="padding-bottom: 7px;">
         <input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[0]" style="width: 320px;" required></input>
         <button class="btn btn-default btn-sm" ng-click="deleteClient()">
           <span class="glyphicon glyphicon-minus"></span>
@@ -116,7 +116,8 @@
         </button>
       </center>
     </div>
-    <center style="padding-top: 20px;">
+    <hr style="width: 400px;">
+    <center>
       <a class="btn btn-primary" ng-click="cancelButton()">Cancel</a>
       <a type="submit" class="btn btn-warning" ng-click="moveToClient()">Move To Client</a>
       <a type="submit" class="btn btn-warning" ng-click="moveToInventory()">Move To Inventory</a>
