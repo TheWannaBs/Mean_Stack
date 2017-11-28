@@ -42,22 +42,24 @@
 
       // TODO: move create/update logic to service
       if (vm.inventorymanagement._id) {
-        vm.inventorymanagement.$update(successCallback1, errorCallback);
+        vm.inventorymanagement.$update(successCallback, errorCallback);
       } else {
-        vm.inventorymanagement.$save(successCallback2, errorCallback);
+        vm.inventorymanagement.$save(successCallback, errorCallback);
       }
 
-      function successCallback1(res) {
+      function successCallback(res) {
         $state.go('inventorymanagements.view', {
           inventorymanagementId: res._id
         });
       }
 
+      /*
       function successCallback2(res) {
         $state.go('inventorymanagements.list', {
           inventorymanagementId: res._id
         });
       }
+      */
 
       function errorCallback(res) {
         vm.error = res.data.message;

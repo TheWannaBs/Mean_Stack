@@ -95,7 +95,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           createstate = $state.get('inventorymanagements.create');
-          $templateCache.put('modules/inventorymanagements/client/views/form-inventorymanagement.client.view.html', '');
+          $templateCache.put('modules/inventorymanagements/client/views/create-inventorymanagement.client.view.html', '');
 
           // create mock Inventorymanagement
           mockInventorymanagement = new InventorymanagementsService();
@@ -130,7 +130,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/inventorymanagements/client/views/form-inventorymanagement.client.view.html');
+          expect(createstate.templateUrl).toBe('modules/inventorymanagements/client/views/create-inventorymanagement.client.view.html');
         });
       });
 
@@ -141,7 +141,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           editstate = $state.get('inventorymanagements.edit');
-          $templateCache.put('modules/inventorymanagements/client/views/form-inventorymanagement.client.view.html', '');
+          $templateCache.put('modules/inventorymanagements/client/views/edit-inventorymanagement.client.view.html', '');
 
           // create mock Inventorymanagement
           mockInventorymanagement = new InventorymanagementsService({
@@ -180,7 +180,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/inventorymanagements/client/views/form-inventorymanagement.client.view.html');
+          expect(editstate.templateUrl).toBe('modules/inventorymanagements/client/views/edit-inventorymanagement.client.view.html');
         });
 
         xit('Should go to unauthorized route', function () {

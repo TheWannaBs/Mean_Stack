@@ -95,7 +95,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           createstate = $state.get('clientmanagements.create');
-          $templateCache.put('modules/clientmanagements/client/views/form-clientmanagement.client.view.html', '');
+          $templateCache.put('modules/clientmanagements/client/views/create-clientmanagement.client.view.html', '');
 
           // create mock Clientmanagement
           mockClientmanagement = new ClientmanagementsService();
@@ -130,7 +130,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(createstate.templateUrl).toBe('modules/clientmanagements/client/views/form-clientmanagement.client.view.html');
+          expect(createstate.templateUrl).toBe('modules/clientmanagements/client/views/create-clientmanagement.client.view.html');
         });
       });
 
@@ -141,7 +141,7 @@
 
         beforeEach(inject(function ($controller, $state, $templateCache) {
           editstate = $state.get('clientmanagements.edit');
-          $templateCache.put('modules/clientmanagements/client/views/form-clientmanagement.client.view.html', '');
+          $templateCache.put('modules/clientmanagements/client/views/edit-clientmanagement.client.view.html', '');
 
           // create mock Clientmanagement
           mockClientmanagement = new ClientmanagementsService({
@@ -180,7 +180,7 @@
         });
 
         it('Should have templateUrl', function () {
-          expect(editstate.templateUrl).toBe('modules/clientmanagements/client/views/form-clientmanagement.client.view.html');
+          expect(editstate.templateUrl).toBe('modules/clientmanagements/client/views/edit-clientmanagement.client.view.html');
         });
 
         xit('Should go to unauthorized route', function () {
