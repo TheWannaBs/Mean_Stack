@@ -29,12 +29,14 @@
     $scope.serial = [];
     $scope.qty = [];
     $scope.nameAndEmail = [];
+    // used for making toast appear
     function toasty() {
       var x = document.getElementById('snackbar');
       x.className = 'show';
       setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
+    // redirects user back to home
     $scope.cancelButton = function () {
       if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
@@ -43,20 +45,12 @@
       }
     };
 
-    // function isNonzeroInteger(str) {
-    //   if (str === undefined || str === null) {
-    //     return true;
-    //   }
-    //   var n = Math.floor(Number(str));
-    //   console.log(str + ' vs ' + n);
-    //   return String(n) === String(str) && n > 0;
-    // }
-
+    // adds another upc and quantity field
     var upcFields = 1;
     $scope.addUPC = function () {
       var newCen = document.createElement('center');
       newCen.setAttribute('style', 'padding-bottom: 7px;');
-      newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[' + upcFields + '].upc" style="width: 270px;" required></input><input id="qty' + upcFields + '" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
+      newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[' + upcFields + '].upc" style="width: 270px;" required></input><input id="qty' + upcFields + '" placeholder="1" min="1" step="1" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
       $compile(newCen)($scope);
       document.getElementById('input_upc').appendChild(newCen);
       upcFields++;
