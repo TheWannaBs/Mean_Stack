@@ -56,6 +56,7 @@
       upcFields++;
     };
 
+    // removes the last upc and quantity field
     $scope.deleteUPC = function () {
       if (upcFields > 1) {
         var upcs = document.getElementById('input_upc');
@@ -64,6 +65,7 @@
       }
     };
 
+    // adds a client field
     var clientFields = 1;
     $scope.addClient = function () {
       var newCen = document.createElement('center');
@@ -74,6 +76,7 @@
       clientFields++;
     };
 
+    // removes the last client field
     $scope.deleteClient = function () {
       if (clientFields > 1) {
         var clients = document.getElementById('input_client');
@@ -82,8 +85,8 @@
       }
     };
 
+    // checks validity of all upcs/quantities/clients and then moves items from the inventory to the clients
     $scope.moveToClient = function () {
-
       // first loop through to verify the fields are valid
       for (var i = 0; i < upcFields; i++) {
         // find the qty input field
@@ -209,6 +212,7 @@
       }
     };
 
+    // checks validity of all upcs/quantities/clients and then moves items from the clients to the inventory
     $scope.moveToInventory = function () {
       // first loop through to verify the fields are valid
       for (var i = 0; i < upcFields; i++) {
