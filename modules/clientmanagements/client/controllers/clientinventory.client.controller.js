@@ -328,8 +328,10 @@
         }
         vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
-      // throw alerts
-      alert(alerts);
+      if (alerts.length !== 0) {
+        // throw alerts
+        alert(alerts);
+      }
       // get toasty
       toasty();
 
