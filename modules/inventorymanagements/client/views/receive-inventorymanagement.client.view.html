@@ -1,115 +1,267 @@
 <section>
-  <style>
-    #snackbar {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 2px;
-      padding: 16px;
-      position: fixed;
-      z-index: 1;
-      left: 50%;
+<style>
+  #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+  }
+
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  @-webkit-keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
       bottom: 30px;
-      font-size: 17px;
+      opacity: 1;
     }
+  }
 
-    #snackbar.show {
-      visibility: visible;
-      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
     }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
 
-    @-webkit-keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
+  @-webkit-keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
     }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
 
-    @keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
+  @keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
     }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
 
-    @-webkit-keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
+  @charset "UTF-8";
 
-    @keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
+  .collapsable-source pre {
+      font-size: small;
+  }
+
+  .input-field {
+      display: flex;
+      align-items: center;
+      width: 260px;
+  }
+
+  .input-field label {
+      flex: 0 0 auto;
+      padding-right: 0.5rem;
+  }
+
+  .input-field input {
+      flex: 1 1 auto;
+      height: 20px;
+  }
+
+  .input-field button {
+      flex: 0 0 auto;
+      height: 28px;
+      font-size: 20px;
+      width: 40px;
+  }
+
+  .icon-barcode {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZD0iTTAgNGg0djIwaC00ek02IDRoMnYyMGgtMnpNMTAgNGgydjIwaC0yek0xNiA0aDJ2MjBoLTJ6TTI0IDRoMnYyMGgtMnpNMzAgNGgydjIwaC0yek0yMCA0aDF2MjBoLTF6TTE0IDRoMXYyMGgtMXpNMjcgNGgxdjIwaC0xek0wIDI2aDJ2MmgtMnpNNiAyNmgydjJoLTJ6TTEwIDI2aDJ2MmgtMnpNMjAgMjZoMnYyaC0yek0zMCAyNmgydjJoLTJ6TTI0IDI2aDR2MmgtNHpNMTQgMjZoNHYyaC00eiI+PC9wYXRoPjwvc3ZnPg==);
+  }
+
+  .overlay {
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .overlay__content {
+      top: 50%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-height: 90%;
+      max-width: 800px;
+  }
+
+  .overlay__close {
+      position: absolute;
+      right: 0;
+      padding: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      background-color: white;
+      cursor: pointer;
+      border: 3px solid black;
+      font-size: 1.5rem;
+      margin: -1rem;
+      border-radius: 2rem;
+      z-index: 100;
+      box-sizing: content-box;
+  }
+
+  .overlay__content video {
+      width: 100%;
+      height: 100%;
+  }
+
+  .overlay__content canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+  }
+
+  #interactive.viewport {
+      position: relative;
+  }
+
+  #interactive.viewport > canvas, #interactive.viewport > video {
+      max-width: 100%;
+      width: 100%;
+  }
+
+  canvas.drawing, canvas.drawingBuffer {
+      position: absolute;
+      left: 0;
+      top: 0;
+  }
+
+  /* line 16, ../sass/_viewport.scss */
+  .controls fieldset {
+    border: none;
+  }
+  /* line 19, ../sass/_viewport.scss */
+  .controls .input-group {
+    float: left;
+  }
+  /* line 21, ../sass/_viewport.scss */
+  .controls .input-group input, .controls .input-group button {
+    display: block;
+  }
+  /* line 25, ../sass/_viewport.scss */
+  .controls .reader-config-group {
+    float: right;
+  }
+  /* line 28, ../sass/_viewport.scss */
+  .controls .reader-config-group label {
+    display: block;
+  }
+  /* line 30, ../sass/_viewport.scss */
+  .controls .reader-config-group label span {
+    width: 11rem;
+    display: inline-block;
+    text-align: right;
+  }
+  /* line 37, ../sass/_viewport.scss */
+  .controls:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  @media (max-width: 603px) {
+    /* line 2, ../sass/phone/_core.scss */
+    #container {
+      margin: 10px auto;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
-  </style>
-  <div id="snackbar">Item received successfully</div>
-  <div class="page-header">
-    <center>
-      <h3>Receive Inventory</h3>
-    </center>
+  }
+  @media (max-width: 603px) {
+    /* line 5, ../sass/phone/_viewport.scss */
+    #interactive.viewport {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    }
+  }
+</style>
+<div id="snackbar">Items received successfully</div>
+<div class="page-header">
+  <center>
+    <h3>Receive Inventory</h3>
+  </center>
+</div>
+<center style="padding-bottom: 20px;">
+  <input type="button" id="btn" value="Start/Stop the scanner" />
+  <div id="interactive" class="viewport">
   </div>
-  <center style="padding-bottom: 20px;">
-    <input type="file" accept="image/*;capture=camera"></input>
-  </center>
-  <center style="padding-bottom: 20px;">
-    <div id="scanner-container"></div>
-    <input type="button" id="btn" value="Start/Stop the scanner" />
-  </center>
-  <datalist id="Inventory">
-    <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
-  </datalist>
-  <center style="padding-bottom: 5px;">
-    <button class="addfields" ng-click="addNewChoice()">Add fields</button>
-  </center>
-  <center>
-    <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: upc | filter: upc: true">
-      <p>Item Tags: {{inventorymanagement.tags}}</p>
-      <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
-      <p>Inactive: {{inventorymanagement.discontinue}}</p>
+</center>
+<datalist id="Inventory">
+  <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
+</datalist>
+<center style="padding-bottom: 5px;">
+  <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+</center>
+<center>
+  <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: upc | filter: upc: true">
+    <p>Item Tags: {{inventorymanagement.tags}}</p>
+    <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
+    <p>Inactive: {{inventorymanagement.discontinue}}</p>
+  </div>
+</center>
+<center>
+  <fieldset data-ng-repeat="choice in choices" style="padding: 2px;">
+    <div class="col-sm-6">
+      <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="choice.upc.upc" style="width: 300px;"></input>
     </div>
-  </center>
-  <center>
-    <fieldset data-ng-repeat="choice in choices" style="padding: 2px;">
-      <div class="col-sm-6">
-        <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="choice.upc.upc" style="width: 300px;"></input>
-      </div>
-      <div class="col-sm-1">
-        <input name="quantity" type="text" id="quantity" class="form-control" placeholder="0" ng-model="choice.quantity" style="width: 50px;"></input>
-      </div>
-      <div class="col-sm-1">
-        <button class="remove" ng-click="removeChoice()">-</button>
-      </div>
-      <div class="col-sm-1">
-        <button class="remove" ng-click="">Scan(NO-WORK)</button>
-      </div>
-    </fieldset>
-  </center>
-  <center style="padding-top: 20px;">
-    <a class="btn btn-primary" ui-sref="inventorymanagements.list">Cancel</a>
-    <a class="btn btn-warning" ng-click="receive()">Move To Inventory</a>
-  </center>
+    <div class="col-sm-1">
+      <input name="quantity" type="text" id="quantity" class="form-control" placeholder="0" ng-model="choice.quantity" style="width: 50px;"></input>
+    </div>
+    <div class="col-sm-1">
+      <button class="remove" ng-click="removeChoice(choice.id)">-</button>
+    </div>
+    <div class="col-sm-1">
+      <button ng-class="buttonColor(choice.id)" ng-click="scanSelect(choice.id)">Scan {{choice.id}}</button>
+    </div>
+  </fieldset>
+</center>
+<center style="padding-top: 20px;">
+  <a class="btn btn-primary" ui-sref="inventorymanagements.list">Cancel</a>
+  <a class="btn btn-warning" ng-click="receive()">Move To Inventory</a>
+</center>
 </section>

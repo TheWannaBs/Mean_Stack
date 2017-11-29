@@ -11,17 +11,17 @@
     var vm = this;
     $scope.state = $state;
     vm.inventorymanagements = InventorymanagementsService.query();
-    $scope.choices = [{ id: 'choice1', upc: {}, quantity: '' }];
-
+    $scope.choices = [{ id: '1', upc: {}, quantity: '' }];  //array of items to be receieved
     var _scannerIsRunning = false;
-    var scanThis = 0;
+    var scanThis = null;
+    var scanArmed = [false];
 
+    //on-click for start/stop scanner button
     function startScanner() {
       Quagga.init({
         inputStream: {
           name: 'Live',
           type: 'LiveStream',
-          target: document.querySelector('#scanner-container'),
           constraints: {
             width: 480,
             height: 320,
@@ -41,7 +41,7 @@
             'i2of5_reader'
           ],
           debug: {
-            showCanvas: false,
+            showCanvas: true,
             showPatches: true,
             showFoundPatches: true,
             showSkeleton: true,
@@ -65,10 +65,12 @@
         console.log('Initialization finished. Ready to start');
         Quagga.start();
 
-        // Set flag to is running
+        // Set flag to "is running"
         _scannerIsRunning = true;
       });
 
+      //When barcode is processed. draws rectangle around barcode
+      //TODO: fix the drawing below camera issue
       Quagga.onProcessed(function (result) {
         var drawingCtx = Quagga.canvas.ctx.overlay,
           drawingCanvas = Quagga.canvas.dom.overlay;
@@ -93,40 +95,71 @@
         }
       });
 
+      //When barcode is detected. Puts barcode code into upc box
       Quagga.onDetected(function (result) {
         console.log('Barcode detected and processed : [' + result.codeResult.code + ']', result);
         $scope.choices[scanThis].upc.upc = result.codeResult.code;
         console.log($scope.choices[scanThis].upc.upc);
         $state.go('inventorymanagements.receive');
+        scanArmed[scanThis] = false;
+        scanThis = null;
       });
     }
 
     //Start/stop scanner
+    //TODO: check the restart functionality
     document.getElementById('btn').addEventListener('click', function () {
       if (_scannerIsRunning) {
         Quagga.stop();
       } else {
         startScanner();
       }
+      console.log(_scannerIsRunning);
     }, false);
 
+    //on-click for scan select btn
+    $scope.scanSelect = function(btnID1) {
+      scanThis = parseInt(btnID1)-1;
+      for (var i3 = 0; i3 < scanArmed.length; i3++) {
+        scanArmed[i3] = false;
+      }
+      scanArmed[scanThis] = true;
+    };
+
+    //controls color of scan select btns
+    $scope.buttonColor = function(btnID) {
+      if (!scanArmed[btnID-1]) {
+        return 'btn btn-primary';
+      }
+      else {
+        return 'btn btn-success';
+      }
+    };
+
+    //Adds new item to be scanned
     $scope.addNewChoice = function() {
       var newItemNo = $scope.choices.length+1;
-      $scope.choices.push({ 'id':'choice'+newItemNo, upc: {}, quantity: '' });
-      scanThis++;
+      $scope.choices.push({ 'id': newItemNo, upc: {}, quantity: '' });
     };
 
-    $scope.removeChoice = function() {
-      var lastItem = $scope.choices.length-1;
-      $scope.choices.splice(lastItem);
+    //Removes item to be scanned
+    $scope.removeChoice = function(btnID2) {
+      $scope.choices.splice(btnID2-1, 1);
+      var tmp = 1;
+      for (var i4 = 0; i4 < $scope.choices.length; i4++) {
+        $scope.choices[i4].id = tmp;
+        tmp++;
+      }
     };
 
+    //Displays toast message
     function toasty() {
       var x = document.getElementById('snackbar');
       x.className = 'show';
       setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
+    //Checks if str is non-zero int
     function isNonzeroInteger(str) {
       if (str !== 0 && !str) {
         return true;
@@ -136,6 +169,7 @@
       return String(n) === String(str) && n > 0;
     }
 
+    //on-click method for receieve button
     $scope.receive = function() {
       // search for UPC in DB. if there, add quantity. if not, send to create page.
       // initial check over array of choices for error
@@ -164,10 +198,14 @@
 
         // if upc isn't in database, go to create view
         if($scope.choices[i].invResult === -1) {
-          $state.go('inventorymanagements.create', {
-            'upc': $scope.choices[i].upc.upc,
-            'quantity': $scope.choices[i].quantity
-          });
+          if (confirm(('UPC '+$scope.choices[i].upc.upc+' does not exist. Would you like to create it?'))) {
+            $state.go('inventorymanagements.create', {
+              'upc': $scope.choices[i].upc.upc,
+              'quantity': $scope.choices[i].quantity
+            });
+          } else {
+            return;
+          }
           return;
         }
       }
