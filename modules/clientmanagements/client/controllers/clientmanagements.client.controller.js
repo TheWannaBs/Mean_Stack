@@ -39,7 +39,7 @@
 
     function removeItem(item) {
       var index = vm.clientmanagement.inventory.indexOf(item);
-      if ($window.confirm('Are you sure you want to delete this item?')) {
+      if ($window.confirm('Are you sure you want to delete this client?')) {
         vm.clientmanagement.inventory.splice(index, 1);
         vm.clientmanagement.$update()
           .then(function (res) {
@@ -89,10 +89,10 @@
         list += 'Volunteer, ';
       return list.slice(0,list.length-2);
     }
-    
+
     //Change Activity of Item
     function changeStatus() {
-      if ($window.confirm('Are you sure you want to change this item\'s activity?')) {
+      if ($window.confirm('Are you sure you want to change this client\'s activity?')) {
         vm.clientmanagement.inactive = !vm.clientmanagement.inactive;
         vm.clientmanagement.$update(vm.clientmanagement)
           .then(function () {
