@@ -5,12 +5,13 @@
   .module('inventorymanagements')
   .controller('InventorymanagementsReceiveController', InventorymanagementsReceiveController);
 
-  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', '$scope', '$state'];
+  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state'];
 
-  function InventorymanagementsReceiveController(InventorymanagementsService, $scope, $state) {
+  function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state) {
     var vm = this;
     $scope.state = $state;
     vm.inventorymanagements = InventorymanagementsService.query();
+    vm.userlog = userlog;
     $scope.choices = [{ id: '1', upc: {}, quantity: '' }];  //array of items to be receieved
     var _scannerIsRunning = false;
     var scanThis = null;
@@ -176,6 +177,7 @@
     $scope.receive = function() {
       // search for UPC in DB. if there, add quantity. if not, send to create page.
       // initial check over array of choices for error
+      var i2 = 0;
       for (var i = 0; i < $scope.choices.length; i++) {
         $scope.choices[i].invResult = -1;
         if (!$scope.choices[i].upc.upc && !$scope.choices[i].quantity) {
@@ -214,7 +216,7 @@
       }
 
       //if no errors, receive inventory
-      for (var i2 = 0; i2 < $scope.choices.length; i2++) {
+      for (i2 = 0; i2 < $scope.choices.length; i2++) {
         var quan = parseInt($scope.choices[i2].quantity);
         // reset quantity field
         $scope.choices[i2].quantity = null;
@@ -222,6 +224,8 @@
         vm.inventorymanagements[$scope.choices[i2].invResult].qty += quan;
         //update DB
         vm.inventorymanagements[$scope.choices[i2].invResult].$update(successCallback, errorCallback);
+        //save log
+        $scope.saveUserLog($scope.choices[i2].invResult, quan);
       }
 
       function successCallback(res) {
@@ -234,6 +238,22 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    };
+
+    //should save 
+    $scope.saveUserLog = function (i, q) {
+      var item = vm.inventorymanagements[i];
+
+      //create new user log with receve data
+      vm.userlog.username = Authentication.user.username; 
+      console.log(vm.userlog.username);
+      vm.userlog.clientName = 'RECIEVE';
+      vm.userlog.itemTags = vm.inventorymanagements[i].tags;
+      vm.userlog.itemUpc = vm.inventorymanagements[i].upc;
+      vm.userlog.direction = '->';
+      vm.userlog.qty_moved = q;
+      //save this log to the database
+      vm.userlog.$save();
     };
   }
 }());
