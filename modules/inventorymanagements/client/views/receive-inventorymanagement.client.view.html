@@ -227,7 +227,7 @@
   </center>
 </div>
 <center style="padding-bottom: 20px;">
-  <input type="button" id="btn" value="Start/Stop the scanner" />
+  <input type="button" id="btn" value="Start/Stop the scanner"/>
   <div id="interactive" class="viewport">
   </div>
 </center>
@@ -238,11 +238,11 @@
   <button class="addfields" ng-click="addNewChoice()">Add fields</button>
 </center>
 <center>
-  <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: upc | filter: upc: true">
+  <!--div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: upc | filter: upc: true">
     <p>Item Tags: {{inventorymanagement.tags}}</p>
     <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
     <p>Inactive: {{inventorymanagement.discontinue}}</p>
-  </div>
+  </div-->
 </center>
 <center>
   <fieldset data-ng-repeat="choice in choices" style="padding: 2px;">
