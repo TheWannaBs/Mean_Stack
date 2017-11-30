@@ -7,19 +7,15 @@
 
   angular
     .module('inventorymanagements')
+    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
+
+  angular
+    .module('userlogs')
     .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
-    .filter('emptyifblank', function () {
-      return function (object, query) {
-        if (!query)
-          return {};
-        else
-          return object;
-      };
-    });
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', '$scope', '$state', 'Authentication', '$compile'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, $scope, $state, Authentication, $compile) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
@@ -126,7 +122,7 @@
         }
         if (vm.inventorymanagements[invResult1].qty < (quant1 * clientFields)) {
           // out of stock
-          alerts.push('There is not enough of an item (UPC: ' + $scope.serial[i].upc + ') in stock\n\r');
+          alerts.push('There is not enough of an item (UPC: ' + $scope.serial[i].upc + ') in stock, skipped\n\r');
           // add this to the skip array
           skipUPC.push(i);
         }
@@ -191,6 +187,7 @@
             }
             vm.inventorymanagements[invResult].qty -= quant;
             vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
+            $scope.saveUserLog(clientResult, '<-', invResult, quant);
           }
           vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
         }
@@ -325,6 +322,7 @@
           }
           vm.inventorymanagements[invResult].qty += quant;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
+          $scope.saveUserLog(clientResult, '->', invResult, quant);
         }
         vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
@@ -343,6 +341,23 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    };
+
+    //should save 
+    $scope.saveUserLog = function (c, d, i, q) {
+      vm.userlog = new UserlogsService();
+      var item = vm.inventorymanagements[i];
+      var client = vm.clientmanagements[c];
+      //create new user log with receve data
+      vm.userlog.username = Authentication.user.username; 
+      // console.log(vm.userlogs.username);
+      vm.userlog.clientName = client.name;
+      vm.userlog.itemTags = vm.inventorymanagements[i].tags;
+      vm.userlog.itemUpc = vm.inventorymanagements[i].upc;
+      vm.userlog.direction = d;
+      vm.userlog.qty_moved = q;
+      //save this log to the database
+      vm.userlog.$save();
     };
   }
 }());
