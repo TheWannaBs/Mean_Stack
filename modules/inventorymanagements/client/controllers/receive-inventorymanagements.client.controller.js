@@ -11,57 +11,219 @@
     var vm = this;
     $scope.state = $state;
     vm.inventorymanagements = InventorymanagementsService.query();
+    $scope.choices = [{ id: '1', upc: {}, quantity: '' }];  //array of items to be receieved
+    var _scannerIsRunning = false;
+    var scanThis = null;
+    var scanArmed = [false];
 
-    function toasty() {
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-    }
-
-    $scope.receive = function() {
-      //search for UPC in DB. if there, add quantity. if not, send to create page.
-      var invResult = -1;
-      if (!$scope.upc.upc && !$scope.quantity) {
-        alert("You must fill in Quantity and UPC first");
-      } else if (!$scope.upc.upc) {
-        alert("You must fill in UPC first");
-      } else if (!$scope.quantity) {
-        alert("You must fill in Quantity first");
-      } else {
-        if($scope.quantity <= 0) {
-          alert("Quantity must be greater than 0");
-        }
-        else {
-          // look for upc in database
-          for (var i = 0; i < vm.inventorymanagements.length; i++) {
-            if (vm.inventorymanagements[i].upc === $scope.upc.upc) {
-              invResult = i;
-              break;
+    //on-click for start/stop scanner button
+    function startScanner() {
+      Quagga.init({
+        inputStream: {
+          name: 'Live',
+          type: 'LiveStream',
+          constraints: {
+            width: 480,
+            height: 320,
+            facingMode: 'environment'
+          },
+        },
+        decoder: {
+          readers: [
+            'code_128_reader',
+            'ean_reader',
+            'ean_8_reader',
+            'code_39_reader',
+            'code_39_vin_reader',
+            'codabar_reader',
+            'upc_reader',
+            'upc_e_reader',
+            'i2of5_reader'
+          ],
+          debug: {
+            showCanvas: true,
+            showPatches: true,
+            showFoundPatches: true,
+            showSkeleton: true,
+            showLabels: true,
+            showPatchLabels: true,
+            showRemainingPatchLabels: true,
+            boxFromPatches: {
+              showTransformed: true,
+              showTransformedBox: true,
+              showBB: true
             }
           }
-          // if upc isn't in database, go to create view
-          if(invResult === -1) {
-            $state.go('inventorymanagements.create', {
-              'upc': $scope.upc.upc,
-              'quantity': $scope.quantity
+        },
+
+      }, function (err) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        console.log('Initialization finished. Ready to start');
+        Quagga.start();
+
+        // Set flag to "is running"
+        _scannerIsRunning = true;
+      });
+
+      //When barcode is processed. draws rectangle around barcode
+      //TODO: fix the drawing below camera issue
+      Quagga.onProcessed(function (result) {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+          drawingCanvas = Quagga.canvas.dom.overlay;
+
+        if (result) {
+          if (result.boxes) {
+            drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute('width')), parseInt(drawingCanvas.getAttribute('height')));
+            result.boxes.filter(function (box) {
+              return box !== result.box;
+            }).forEach(function (box) {
+              Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: 'green', lineWidth: 2 });
             });
           }
-          //else update quantity and update database
-          else {
-            var quan = parseInt($scope.quantity);
-            vm.inventorymanagements[invResult].qty += quan;
 
-            vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
+          if (result.box) {
+            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: '#00F', lineWidth: 2 });
           }
+
+          if (result.codeResult && result.codeResult.code) {
+            Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+          }
+        }
+      });
+
+      //When barcode is detected. Puts barcode code into upc box
+      Quagga.onDetected(function (result) {
+        console.log('Barcode detected and processed : [' + result.codeResult.code + ']', result);
+        $scope.choices[scanThis].upc.upc = result.codeResult.code;
+        console.log($scope.choices[scanThis].upc.upc);
+        $state.go('inventorymanagements.receive');
+        scanArmed[scanThis] = false;
+        scanThis = null;
+      });
+    }
+
+    //Start/stop scanner
+    //TODO: check the restart functionality
+    document.getElementById('btn').addEventListener('click', function () {
+      if (_scannerIsRunning) {
+        Quagga.stop();
+      } else {
+        startScanner();
+      }
+      console.log(_scannerIsRunning);
+    }, false);
+
+    //on-click for scan select btn
+    $scope.scanSelect = function(btnID1) {
+      scanThis = parseInt(btnID1)-1;
+      for (var i3 = 0; i3 < scanArmed.length; i3++) {
+        scanArmed[i3] = false;
+      }
+      scanArmed[scanThis] = true;
+    };
+
+    //controls color of scan select btns
+    $scope.buttonColor = function(btnID) {
+      if (!scanArmed[btnID-1]) {
+        return 'btn btn-primary';
+      }
+      else {
+        return 'btn btn-success';
+      }
+    };
+
+    //Adds new item to be scanned
+    $scope.addNewChoice = function() {
+      var newItemNo = $scope.choices.length+1;
+      $scope.choices.push({ 'id': newItemNo, upc: {}, quantity: '' });
+    };
+
+    //Removes item to be scanned
+    $scope.removeChoice = function(btnID2) {
+      $scope.choices.splice(btnID2-1, 1);
+      var tmp = 1;
+      for (var i4 = 0; i4 < $scope.choices.length; i4++) {
+        $scope.choices[i4].id = tmp;
+        tmp++;
+      }
+    };
+
+    //Displays toast message
+    function toasty() {
+      var x = document.getElementById('snackbar');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
+    //Checks if str is non-zero int
+    function isNonzeroInteger(str) {
+      if (str !== 0 && !str) {
+        return true;
+      }
+      var n = Math.floor(Number(str));
+      // console.log(str + " vs " + n);
+      return String(n) === String(str) && n > 0;
+    }
+
+    //on-click method for receieve button
+    $scope.receive = function() {
+      // search for UPC in DB. if there, add quantity. if not, send to create page.
+      // initial check over array of choices for error
+      for (var i = 0; i < $scope.choices.length; i++) {
+        $scope.choices[i].invResult = -1;
+        if (!$scope.choices[i].upc.upc && !$scope.choices[i].quantity) {
+          alert('You must fill in Quantity and UPC first');
+          return;
+        } else if (!$scope.choices[i].upc.upc) {
+          alert('You must fill in UPC first');
+          return;
+        } else if (!$scope.choices[i].quantity) {
+          alert('You must fill in Quantity first');
+          return;
+        } else if (!isNonzeroInteger($scope.choices[i].quantity)) {
+          alert('Quantity must be a nonzero integer');
+          return;
+        }
+        // look for upc in database
+        for (var j = 0; j < vm.inventorymanagements.length; j++) {
+          if (vm.inventorymanagements[j].upc === $scope.choices[i].upc.upc) {
+            $scope.choices[i].invResult = j;
+            break;
+          }
+        }
+
+        // if upc isn't in database, go to create view
+        if($scope.choices[i].invResult === -1) {
+          if (confirm(('UPC '+$scope.choices[i].upc.upc+' does not exist. Would you like to create it?'))) {
+            $state.go('inventorymanagements.create', {
+              'upc': $scope.choices[i].upc.upc,
+              'quantity': $scope.choices[i].quantity
+            });
+          } else {
+            return;
+          }
+          return;
         }
       }
 
+      //if no errors, receive inventory
+      for (var i2 = 0; i2 < $scope.choices.length; i2++) {
+        var quan = parseInt($scope.choices[i2].quantity);
+        // reset quantity field
+        $scope.choices[i2].quantity = null;
+        // quantity update
+        vm.inventorymanagements[$scope.choices[i2].invResult].qty += quan;
+        //update DB
+        vm.inventorymanagements[$scope.choices[i2].invResult].$update(successCallback, errorCallback);
+      }
 
       function successCallback(res) {
         // toast
         toasty();
-        // reset quantity field
-        $scope.quantity = null;
         // reload page
         $state.go('inventorymanagements.receive');
       }
