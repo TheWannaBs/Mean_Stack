@@ -51,7 +51,7 @@
     $scope.addUPC = function () {
       var newCen = document.createElement('center');
       newCen.setAttribute('style', 'padding-bottom: 7px;');
-      newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[' + upcFields + '].upc" style="width: 270px;" required></input><input id="qty' + upcFields + '" placeholder="1" min="1" step="1" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
+      newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Autofill after scan" ng-model="serial[' + upcFields + '].upc" style="width: 170px;" required></input><input id="qty' + upcFields + '" placeholder="1" min="1" step="1" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
       $compile(newCen)($scope);
       document.getElementById('input_upc').appendChild(newCen);
       $scope.serial[upcFields] = {};
@@ -73,7 +73,7 @@
     $scope.addClient = function () {
       var newCen = document.createElement('center');
       newCen.setAttribute('style', 'padding-bottom: 7px;');
-      newCen.innerHTML = '<input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[' + clientFields + ']" style="width: 320px;" required></input>';
+      newCen.innerHTML = '<input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[' + clientFields + ']" style="width: 250px;" required></input>';
       $compile(newCen)($scope);
       document.getElementById('input_client').appendChild(newCen);
       clientFields++;
