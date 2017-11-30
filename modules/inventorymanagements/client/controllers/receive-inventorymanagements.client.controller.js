@@ -2,10 +2,6 @@
   'use strict';
 
   angular
-    .module('userlogs')
-    .controller('InventorymanagementsReceiveController', InventorymanagementsReceiveController);
-
-  angular
   .module('inventorymanagements')
   .controller('InventorymanagementsReceiveController', InventorymanagementsReceiveController);
 
@@ -112,10 +108,10 @@
       //create new user log with receve data
       vm.userlog.username = Authentication.user.username; 
       console.log(vm.userlog.username);
-      vm.userlog.clientName = "RECIEVE";
+      vm.userlog.clientName = 'RECIEVE';
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;
       vm.userlog.itemUpc = vm.inventorymanagements[i].upc;
-      vm.userlog.direction = "->";
+      vm.userlog.direction = '->';
       vm.userlog.qty_moved = q;
       //save this log to the database
       vm.userlog.$save();
