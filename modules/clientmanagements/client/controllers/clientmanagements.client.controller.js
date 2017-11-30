@@ -39,7 +39,7 @@
 
     function removeItem(item) {
       var index = vm.clientmanagement.inventory.indexOf(item);
-      if ($window.confirm('Are you sure you want to delete this client?')) {
+      if ($window.confirm('Are you sure you want to delete this item?')) {
         vm.clientmanagement.inventory.splice(index, 1);
         vm.clientmanagement.$update()
           .then(function (res) {
