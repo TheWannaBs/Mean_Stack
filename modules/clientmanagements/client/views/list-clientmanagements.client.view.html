@@ -19,26 +19,26 @@
         <br/>
         <div class="input-group" id="showdisc">
             <input class="form-check-input" type="checkbox" ng-model="checkModel" />
-            <small class="form-check-label"> Show Inactive Items</small>
+            <small class="form-check-label"> Show Inactive Clients</small>
         </div>
         <div class="tableWrapper">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-default">
                     <tr>
-                        <th ng-click="vm.headSort = 'name'">Name</th>
-                        <th ng-click="vm.headSort = 'phone'">Phone Number</th>
-                        <th ng-click="vm.headSort = 'email'">Email</th>
-                        <th ng-click="vm.headSort = 'dogName'">Dog Name</th>
-                        <th ng-click="vm.headSort = 'dogID'">Dog ID</th>
-                        <!--<th ng-click="vm.headSort = 'branch'">Branch</th>
+                        <th ng-click="vm.changeSort('name')">Name</th>
+                        <th ng-click="vm.changeSort('phone')">Phone Number</th>
+                        <th ng-click="vm.changeSort('email')">Email</th>
+                        <th ng-click="vm.changeSort('dogName')">Dog Name</th>
+                        <th ng-click="vm.changeSort('dogID')">Dog ID</th>
+                        <!--<th ng-click="vm.changeSort('branch')">Branch</th>
                         -->
-                        <th ng-click="vm.headSort = 'rank'">Rank</th>
-                        <th ng-click="vm.headSort = 'updated'">Last Updated</th>
+                        <th ng-click="vm.changeSort('rank')">Rank</th>
+                        <th ng-click="vm.changeSort('updated')">Last Updated</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort | filter : (checkModel ? '' : vm.showNoInactive)"
+                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)"
                         ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
                         <td>{{clientmanagement.name}}</td>
                         <td>{{clientmanagement.phone}}</td>

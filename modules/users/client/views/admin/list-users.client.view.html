@@ -4,7 +4,7 @@
       User List
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="user-create">Create User</a>
-        <a class="btn btn-default" ui-sref="admin.user-log">User Log</a>
+        <a class="btn btn-default" ui-sref="userlogs.list">User Log</a>
       </span>
     </h1>
   </div>
@@ -21,14 +21,14 @@
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
           <tr>
-            <th ng-click="headSort = 'username'">Username</th>
-            <th ng-click="headSort = 'roles'">Roles</th>
-            <th ng-click="headSort = 'email'">Email</th>
-            <th ng-click="headSort = 'updated'">Last Updated</th>
+            <th ng-click="changeSort('username')">Username</th>
+            <th ng-click="changeSort('roles')">Roles</th>
+            <th ng-click="changeSort('email')">Email</th>
+            <th ng-click="changeSort('updated')">Last Updated</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in pagedItems | orderBy : headSort" ui-sref="admin.user({userId: user._id})">
+          <tr ng-repeat="user in pagedItems | orderBy : headSort : reverse" ui-sref="admin.user({userId: user._id})">
             <td>{{user.username}}</td>
             <td>{{user.roles}}</td>
             <td>{{user.email}}</td>
