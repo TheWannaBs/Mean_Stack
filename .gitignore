@@ -18,7 +18,6 @@ coverage/
 
 # MEAN.js app and assets
 # ======================
-public/dist/
 uploads
 modules/users/client/img/profile/uploads
 config/env/local.js
@@ -72,3 +71,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# Visual Studio Code
+#==========
+.vscode/

@@ -1,0 +1,60 @@
+<section>
+    <div class="page-header row">
+        <h1>
+            Client List
+            <span class="pull-right">
+                <a class="btn btn-primary" ui-sref="clientmanagements.create">Create Client</a>
+                <a class="btn btn-default" ui-sref="">Print</a>
+            </span>
+        </h1>
+    </div>
+
+    <div class="col-md-offset-1 col-md-10">
+        <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+        </div>
+        <br/>
+        <div class="input-group" id="showdisc">
+            <input class="form-check-input" type="checkbox" ng-model="checkModel" />
+            <small class="form-check-label"> Show Inactive Clients</small>
+        </div>
+        <div class="tableWrapper">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-default">
+                    <tr>
+                        <th ng-click="vm.changeSort('name')">Name</th>
+                        <th ng-click="vm.changeSort('phone')">Phone Number</th>
+                        <th ng-click="vm.changeSort('email')">Email</th>
+                        <th ng-click="vm.changeSort('dogName')">Dog Name</th>
+                        <th ng-click="vm.changeSort('dogID')">Dog ID</th>
+                        <!--<th ng-click="vm.changeSort('branch')">Branch</th>
+                        -->
+                        <th ng-click="vm.changeSort('rank')">Rank</th>
+                        <th ng-click="vm.changeSort('updated')">Last Updated</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)"
+                        ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
+                        <td>{{clientmanagement.name}}</td>
+                        <td>{{clientmanagement.phone}}</td>
+                        <td>{{clientmanagement.email}}</td>
+                        <td>{{clientmanagement.dogName}}</td>
+                        <td>{{clientmanagement.dogID}}</td>
+                        <!--<td ng-bind="vm.branchText()"></td>
+                        !-->
+                        <td>{{clientmanagement.rank}}</td>
+                        <!--<td ng-bind="vm.displayClientRoles()"></td>
+                        -->
+                        <td ng-bind="clientmanagement.updated | date : 'short'"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <img id="loader" ng-show="loading" src="/../../img/484.gif">
+    </div>
+  </section>

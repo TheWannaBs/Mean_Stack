@@ -15,9 +15,19 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 
+    // Redirect to appropriate main menu
+    $scope.goToMainMenu = function() {
+      if ('admin' === Authentication.user.roles[0]) {
+        $state.go('mainmenuadmin');
+      } else {
+        $state.go('mainmenu');
+      }
+    };
+
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
+
   }
 ]);

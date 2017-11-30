@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users.admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve',
-  function ($scope, $state, Authentication, userResolve) {
+angular.module('users.admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve', 'Users',
+  function ($scope, $state, Authentication, userResolve, Users) {
     $scope.authentication = Authentication;
     $scope.user = userResolve;
 
@@ -35,6 +35,15 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+
+    $scope.editCheck = function (editName, editID) {
+      if(editName === Authentication.user.username) {
+        alert('You cannot edit yourself.');
+      }
+      else {
+        $state.go('admin.user-edit',{ userId: editID });
+      }
     };
   }
 ]);

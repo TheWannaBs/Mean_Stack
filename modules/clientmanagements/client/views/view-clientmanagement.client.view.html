@@ -1,0 +1,116 @@
+<section>
+    <div class="page-header row">
+        <h1>
+            {{vm.clientmanagement.name}}
+            <small ng-class="vm.labelDisp()" ng-hide="{vm.clientmanagement.inactive === false}">{{vm.labelText()}}</small>
+            <span class="pull-right">
+                <a class="btn btn-primary" ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">Edit</a>
+                <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
+                <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
+            </span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Phone Number</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.phone"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Email</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.email"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Dog Name</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.dogName"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Dog ID</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.dogID"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Client Roles</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.displayClientRoles()"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Created</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.created | date : 'short'"></div>
+            </div>
+            <hr/>
+            <div ng-hide="!vm.clientmanagement.clientrolesVeteran">
+              <div class="row">
+                  <div class="col-md-3">
+                      <strong>Branch</strong>
+                  </div>
+                  <div class="col-md-6" ng-bind="vm.branchText()"></div>
+              </div>
+              <hr/>
+              <div class="row">
+                  <div class="col-md-3">
+                      <strong>Rank</strong>
+                  </div>
+                  <div class="col-md-6" ng-bind="vm.clientmanagement.rank"></div>
+              </div>
+              <hr/>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Last Updated</strong>
+                </div>
+                <div class="col-md-6" ng-bind="vm.clientmanagement.updated | date : 'short'"></div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Inventory</strong>
+                </div>
+                <div class="col-md-6">
+                    <div class="tableWrapper">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-default">
+                                <tr>
+                                    <th>Tags</th>
+                                    <th>UPC</th>
+                                    <th>Quantity</th>
+                                    <th>Delete Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in vm.clientmanagement.inventory">
+                                    <td>{{item.tags}}</td>
+                                    <td>{{item.upc}}</td>
+                                    <td>{{item.qty}}</td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" ng-click="vm.removeItem(item)">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <img id="loader" ng-show="loading" src="/../../img/484.gif">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-default" ui-sref="clientmanagements.list">Back to List</a>
+    </div>
+</section>

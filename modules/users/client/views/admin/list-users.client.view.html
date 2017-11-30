@@ -1,21 +1,42 @@
 <section>
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Users</h1>
-      </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-      </div>
-    </div>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
-      <p class="list-group-item-text" ng-bind="user.email"></p>
-    </a>
+  <div class="page-header row">
+    <h1>
+      User List
+      <span class="pull-right">
+        <a class="btn btn-primary" ui-sref="user-create">Create User</a>
+        <a class="btn btn-default" ui-sref="admin.user-log">User Log</a>
+      </span>
+    </h1>
   </div>
 
-  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+  <div class="col-md-offset-1 col-md-10">
+    <div class="input-group" id="searchBar">
+      <span class="input-group-addon" id="sizing-addon1">
+        <span class="glyphicon glyphicon-search"></span>
+      </span>
+      <input type="text" class="form-control" placeholder="Search" ng-model="search" ng-change="figureOutItemsToDisplay()">
+    </div>
+    <br/>
+    <div class="tableWrapper">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-default">
+          <tr>
+            <th ng-click="changeSort('username')">Username</th>
+            <th ng-click="changeSort('roles')">Roles</th>
+            <th ng-click="changeSort('email')">Email</th>
+            <th ng-click="changeSort('updated')">Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in pagedItems | orderBy : headSort : reverse" ui-sref="admin.user({userId: user._id})">
+            <td>{{user.username}}</td>
+            <td>{{user.roles}}</td>
+            <td>{{user.email}}</td>
+            <td ng-bind="user.updated | date : 'short'"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <img id="loader" ng-show="loading" src="/../../img/484.gif">
+  </div>
 </section>
