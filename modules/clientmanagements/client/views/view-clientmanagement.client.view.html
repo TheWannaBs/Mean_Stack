@@ -55,21 +55,22 @@
                 <div class="col-md-6" ng-bind="vm.clientmanagement.created | date : 'short'"></div>
             </div>
             <hr/>
-            
-            <div class="row">
-                <div class="col-md-3">
-                    <strong>Branch</strong>
-                </div>
-                <div class="col-md-6" ng-bind="vm.branchText()"></div>
+            <div ng-hide="!vm.clientmanagement.clientrolesVeteran">
+              <div class="row">
+                  <div class="col-md-3">
+                      <strong>Branch</strong>
+                  </div>
+                  <div class="col-md-8" ng-bind="vm.branchText()"></div>
+              </div>
+              <hr/>
+              <div class="row">
+                  <div class="col-md-3">
+                      <strong>Rank</strong>
+                  </div>
+                  <div class="col-md-6" ng-bind="vm.clientmanagement.rank"></div>
+              </div>
+              <hr/>
             </div>
-            <hr/>
-            <div class="row">
-                <div class="col-md-3">
-                    <strong>Rank</strong>
-                </div>
-                <div class="col-md-6" ng-bind="vm.clientmanagement.rank"></div>
-            </div>
-            <hr/>
             <div class="row">
                 <div class="col-md-3">
                     <strong>Last Updated</strong>
