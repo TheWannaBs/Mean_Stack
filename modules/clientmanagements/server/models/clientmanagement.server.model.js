@@ -12,7 +12,6 @@ var ClientmanagementSchema = new Schema({
   phone: {
     type: String, //just in case there are hyphens or paraenthesis
     default: '',
-    required: 'Please fill in client phone number',
     trim: true
   },
   email: {
@@ -24,13 +23,11 @@ var ClientmanagementSchema = new Schema({
   dogName: {
     type: String,
     default: '',
-    required: 'Please fill in dog name',
     trim: true
   },
   dogID: {
     type: String,
     default: '',
-    required: 'Please fill in dog ID',
     trim: true
   },
   clientrolesFoster: {
@@ -96,7 +93,6 @@ var ClientmanagementSchema = new Schema({
   rank: {
     type: String,
     default: '',
-    required: 'Please fill in a rank',
     trim: true
   },
   branchString: {

@@ -28,7 +28,7 @@
       })
       .state('clientmanagements.create', {
         url: '/create',
-        templateUrl: 'modules/clientmanagements/client/views/form-clientmanagement.client.view.html',
+        templateUrl: 'modules/clientmanagements/client/views/create-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',
         resolve: {
@@ -40,7 +40,7 @@
       })
       .state('clientmanagements.edit', {
         url: '/:clientmanagementId/edit',
-        templateUrl: 'modules/clientmanagements/client/views/form-clientmanagement.client.view.html',
+        templateUrl: 'modules/clientmanagements/client/views/edit-clientmanagement.client.view.html',
         controller: 'ClientmanagementsController',
         controllerAs: 'vm',
         resolve: {

@@ -36,5 +36,14 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
         $scope.error = errorResponse.data.message;
       });
     };
+
+    $scope.editCheck = function (editName, editID) {
+      if(editName === Authentication.user.username) {
+        alert('You cannot edit yourself.');
+      }
+      else {
+        $state.go('admin.user-edit',{ userId: editID });
+      }
+    };
   }
 ]);
