@@ -2,20 +2,20 @@
   'use strict';
 
   angular
-    .module('clientmanagements')
-    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
+  .module('clientmanagements')
+  .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
 
   angular
-    .module('inventorymanagements')
-    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
-    .filter('emptyifblank', function () {
-      return function (object, query) {
-        if (!query)
-          return {};
-        else
-          return object;
-      };
-    });
+  .module('inventorymanagements')
+  .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
+  .filter('emptyifblank', function () {
+    return function (object, query) {
+      if (!query)
+        return {};
+      else
+      return object;
+    };
+  });
 
   ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', '$scope', '$state', 'Authentication', '$compile'];
 
@@ -29,6 +29,11 @@
     $scope.serial = [];
     $scope.qty = [];
     $scope.nameAndEmail = [];
+    var _scannerIsRunning = false;
+
+    $scope.serial[0] = {};
+    startScanner();
+
     // used for making toast appear
     function toasty() {
       var x = document.getElementById('snackbar');
@@ -53,7 +58,9 @@
       newCen.innerHTML = '<input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[' + upcFields + '].upc" style="width: 270px;" required></input><input id="qty' + upcFields + '" placeholder="1" min="1" step="1" type="number" ng-model="qty[' + upcFields + ']" style="width: 50px;"></input>';
       $compile(newCen)($scope);
       document.getElementById('input_upc').appendChild(newCen);
+      $scope.serial[upcFields] = {};
       upcFields++;
+      startScanner();
     };
 
     // removes the last upc and quantity field
@@ -84,6 +91,108 @@
         clientFields--;
       }
     };
+
+    //on-click for start/stop scanner button
+    function startScanner() {
+      Quagga.init({
+        inputStream: {
+          name: 'Live',
+          type: 'LiveStream',
+          constraints: {
+            width: 480,
+            height: 320,
+            facingMode: 'environment'
+          },
+        },
+        decoder: {
+          readers: [
+            'code_128_reader',
+            'ean_reader',
+            'ean_8_reader',
+            'code_39_reader',
+            'code_39_vin_reader',
+            'codabar_reader',
+            'upc_reader',
+            'upc_e_reader',
+            'i2of5_reader'
+          ],
+          debug: {
+            showCanvas: true,
+            showPatches: true,
+            showFoundPatches: true,
+            showSkeleton: true,
+            showLabels: true,
+            showPatchLabels: true,
+            showRemainingPatchLabels: true,
+            boxFromPatches: {
+              showTransformed: true,
+              showTransformedBox: true,
+              showBB: true
+            }
+          }
+        },
+
+      }, function (err) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        console.log('Initialization finished. Ready to start');
+        Quagga.start();
+
+        // Set flag to "is running"
+        _scannerIsRunning = true;
+      });
+
+      //Start/stop scanner
+      //TODO: check the restart functionality
+      document.getElementById('btn').addEventListener('click', function () {
+        if (_scannerIsRunning) {
+          Quagga.stop();
+          _scannerIsRunning = false;
+        } else {
+          startScanner();
+        }
+        console.log(_scannerIsRunning);
+      }, false);
+
+      //When barcode is processed. draws rectangle around barcode
+      //TODO: fix the drawing below camera issue
+      Quagga.onProcessed(function (result) {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+          drawingCanvas = Quagga.canvas.dom.overlay;
+
+        if (result) {
+          if (result.boxes) {
+            drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute('width')), parseInt(drawingCanvas.getAttribute('height')));
+            result.boxes.filter(function (box) {
+              return box !== result.box;
+            }).forEach(function (box) {
+              Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: 'green', lineWidth: 2 });
+            });
+          }
+
+          if (result.box) {
+            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: '#00F', lineWidth: 2 });
+          }
+
+          if (result.codeResult && result.codeResult.code) {
+            Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+          }
+        }
+      });
+
+      //When barcode is detected. Puts barcode code into upc box
+      Quagga.onDetected(function (result) {
+        console.log('Barcode detected and processed : [' + result.codeResult.code + ']', result);
+        $scope.serial[upcFields-1].upc = result.codeResult.code;
+        console.log($scope.serial[upcFields-1]);
+        //Quagga.stop();
+        //_scannerIsRunning = false;
+        $state.go('moveinventory');
+      });
+    }
 
     // checks validity of all upcs/quantities/clients and then moves items from the inventory to the clients
     $scope.moveToClient = function () {
@@ -197,9 +306,9 @@
       }
       if (alerts.length !== 0) {
         // throw the alerts
-        alert(alerts);  
+        alert(alerts);
       }
-      
+
       if (skipUPC.length !== upcFields) {
         // gimme that toast
         toasty();
@@ -333,7 +442,9 @@
         alert(alerts);
       }
       // get toasty
-      toasty();
+      if (alerts.length !== upcFields*clientFields) {
+        toasty();
+      }
 
       function successCallback(res) {
         // more toast

@@ -16,6 +16,8 @@
     var scanThis = null;
     var scanArmed = [false];
 
+    startScanner();
+
     //on-click for start/stop scanner button
     function startScanner() {
       Quagga.init({
@@ -111,6 +113,7 @@
     document.getElementById('btn').addEventListener('click', function () {
       if (_scannerIsRunning) {
         Quagga.stop();
+        _scannerIsRunning = false;
       } else {
         startScanner();
       }
