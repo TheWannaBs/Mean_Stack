@@ -68,7 +68,7 @@
     function changeStatus () {
       if ($window.confirm('Are you sure you want to change this item\'s activity?')) {
         vm.inventorymanagement.inactive = !vm.inventorymanagement.inactive;
-        vm.inventorymanagement.$update(vm.inventorymanagement)
+        vm.inventorymanagement.$update()
           .then(function () {
             $state.go('inventorymanagements.view');
           });

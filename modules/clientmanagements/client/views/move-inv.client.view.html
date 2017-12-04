@@ -1,126 +1,280 @@
 <section ng-controller="ClientInventorymanagementsListController">
-  <style>
-    #snackbar {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 2px;
-      padding: 16px;
-      position: fixed;
-      z-index: 1;
-      left: 50%;
-      bottom: 30px;
-      font-size: 17px;
-    }
+<style>
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
 
-    #snackbar.show {
-      visibility: visible;
-      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    }
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
 
-    @-webkit-keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
 
-    @keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
 
-    @-webkit-keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
 
-    @keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
-  </style>
-  <var ng-model="upcs" value="1"></var>
-  <datalist id="Inventory">
-    <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
-  </datalist>
-  <datalist id="Clients">
-    <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} --- {{clientmanagement.email}}"></option>
-  </datalist>
-  <div id="snackbar">Item(s) Moved Successfully</div>
-  <div class="page-header">
-    <center>
-      <h3>Move Inventory</h3>
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+@charset "UTF-8";
+
+.collapsable-source pre {
+  font-size: small;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  width: 260px;
+}
+
+.input-field label {
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+}
+
+.input-field input {
+  flex: 1 1 auto;
+  height: 20px;
+}
+
+.input-field button {
+  flex: 0 0 auto;
+  height: 28px;
+  font-size: 20px;
+  width: 40px;
+}
+
+.icon-barcode {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZD0iTTAgNGg0djIwaC00ek02IDRoMnYyMGgtMnpNMTAgNGgydjIwaC0yek0xNiA0aDJ2MjBoLTJ6TTI0IDRoMnYyMGgtMnpNMzAgNGgydjIwaC0yek0yMCA0aDF2MjBoLTF6TTE0IDRoMXYyMGgtMXpNMjcgNGgxdjIwaC0xek0wIDI2aDJ2MmgtMnpNNiAyNmgydjJoLTJ6TTEwIDI2aDJ2MmgtMnpNMjAgMjZoMnYyaC0yek0zMCAyNmgydjJoLTJ6TTI0IDI2aDR2MmgtNHpNMTQgMjZoNHYyaC00eiI+PC9wYXRoPjwvc3ZnPg==);
+}
+
+.overlay {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.overlay__content {
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-height: 90%;
+  max-width: 800px;
+}
+
+.overlay__close {
+  position: absolute;
+  right: 0;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+  border: 3px solid black;
+  font-size: 1.5rem;
+  margin: -1rem;
+  border-radius: 2rem;
+  z-index: 100;
+  box-sizing: content-box;
+}
+
+.overlay__content video {
+  width: 100%;
+  height: 100%;
+}
+
+.overlay__content canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+#interactive.viewport {
+  position: relative;
+}
+
+#interactive.viewport > canvas, #interactive.viewport > video {
+  max-width: 100%;
+  width: 100%;
+}
+
+canvas.drawing, canvas.drawingBuffer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* line 16, ../sass/_viewport.scss */
+.controls fieldset {
+  border: none;
+}
+/* line 19, ../sass/_viewport.scss */
+.controls .input-group {
+  float: left;
+}
+/* line 21, ../sass/_viewport.scss */
+.controls .input-group input, .controls .input-group button {
+  display: block;
+}
+/* line 25, ../sass/_viewport.scss */
+.controls .reader-config-group {
+  float: right;
+}
+/* line 28, ../sass/_viewport.scss */
+.controls .reader-config-group label {
+  display: block;
+}
+/* line 30, ../sass/_viewport.scss */
+.controls .reader-config-group label span {
+  width: 11rem;
+  display: inline-block;
+  text-align: right;
+}
+/* line 37, ../sass/_viewport.scss */
+.controls:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+@media (max-width: 603px) {
+  /* line 2, ../sass/phone/_core.scss */
+  #container {
+    margin: 10px auto;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+@media (max-width: 603px) {
+  /* line 5, ../sass/phone/_viewport.scss */
+  #interactive.viewport {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+}
+</style>
+<var ng-model="upcs" value="1"></var>
+<datalist id="Inventory">
+  <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
+</datalist>
+<datalist id="Clients">
+  <option ng-repeat="clientmanagement in vm.clientmanagements" value="{{clientmanagement.name}} --- {{clientmanagement.email}}"></option>
+</datalist>
+<div id="snackbar">Item(s) Moved Successfully</div>
+<div class="page-header">
+  <center>
+    <h3>Move Inventory</h3>
+  </center>
+</div>
+<center>
+  <input type="button" id="btn" ng-show="false" value="Start/Stop the scanner"/>
+  <div id="interactive" class="viewport"></div>
+</center>
+<hr style="width: 400px;">
+<!--center>
+<div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: serial | filter: serial: true">
+<p>Item Tags: {{inventorymanagement.tags}}</p>
+<p>Quantity in Stock: {{inventorymanagement.qty}}</p>
+<p>Inactive: {{inventorymanagement.discontinue}}</p>
+</div>
+</center-->
+<form>
+  <div id="input_upc">
+    <center style="padding-bottom: 7px;">
+      <input type="text" list="Inventory" placeholder="UPC - Autofill after scan" ng-model="serial[0].upc" style="width: 170px;"
+      required></input>
+      <input id="qty0" type="number" placeholder="1" min="1" step="1" ng-model="qty[0]" value="null" style="width: 50px;"></input>
+      <button class="btn btn-default btn-sm" ng-click="deleteUPC()">
+        <span class="glyphicon glyphicon-minus"></span>
+      </button>
+      <button class="btn btn-default btn-sm" ng-click="addUPC()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
     </center>
   </div>
-  <center>
-    <input type="file" accept="image/*;capture=camera"></input>
-  </center>
   <hr style="width: 400px;">
-  <!--center>
-      <div ng-repeat="inventorymanagement in vm.inventorymanagements | emptyifblank: serial | filter: serial: true">
-        <p>Item Tags: {{inventorymanagement.tags}}</p>
-        <p>Quantity in Stock: {{inventorymanagement.qty}}</p>
-        <p>Inactive: {{inventorymanagement.discontinue}}</p>
-      </div>
-    </center-->
-  <form>
-    <div id="input_upc">
-      <center style="padding-bottom: 7px;">
-        <input type="text" list="Inventory" placeholder="UPC - Will autofill after successful scan" ng-model="serial[0].upc" style="width: 270px;"
-          required></input>
-        <input id="qty0" type="number" placeholder="1" min="1" step="1" ng-model="qty[0]" value="null" style="width: 50px;"></input>
-        <button class="btn btn-default btn-sm" ng-click="deleteUPC()">
-          <span class="glyphicon glyphicon-minus"></span>
-        </button>
-        <button class="btn btn-default btn-sm" ng-click="addUPC()">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </center>
-    </div>
-    <hr style="width: 400px;">
-    <div id="input_client">
-      <center style="padding-bottom: 7px;">
-        <input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[0]" style="width: 320px;" required></input>
-        <button class="btn btn-default btn-sm" ng-click="deleteClient()">
-          <span class="glyphicon glyphicon-minus"></span>
-        </button>
-        <button class="btn btn-default btn-sm" ng-click="addClient()">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </center>
-    </div>
-    <hr style="width: 400px;">
-    <center>
-      <a class="btn btn-primary" ng-click="cancelButton()">Cancel</a>
-      <a type="submit" class="btn btn-warning" ng-click="moveToClient()">Move To Client</a>
-      <a type="submit" class="btn btn-warning" ng-click="moveToInventory()">Move To Inventory</a>
+  <div id="input_client">
+    <center style="padding-bottom: 7px;">
+      <input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[0]" style="width: 250px;" required></input>
+      <button class="btn btn-default btn-sm" ng-click="deleteClient()">
+        <span class="glyphicon glyphicon-minus"></span>
+      </button>
+      <button class="btn btn-default btn-sm" ng-click="addClient()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
     </center>
-  </form>
+  </div>
+  <hr style="width: 400px;">
+  <center>
+    <a class="btn btn-primary" ng-click="cancelButton()">Cancel</a>
+    <a type="submit" class="btn btn-warning" ng-click="moveToClient()">Move To Client</a>
+    <a type="submit" class="btn btn-warning" ng-click="moveToInventory()">Move To Inventory</a>
+  </center>
+</form>
 </section>
