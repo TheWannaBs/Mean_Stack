@@ -108,6 +108,7 @@ var ClientmanagementSchema = new Schema({
   updated: Date
 });
 
+//this automatically updates the created and update features
 ClientmanagementSchema.pre('save', function (next) {
   var currentTime = new Date();
   this.updated = currentTime;
