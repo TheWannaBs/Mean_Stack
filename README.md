@@ -20,7 +20,7 @@ In command prompt type npm start, go to http://localhost:3000 to see site.
 User Features
 Provide a screenshot of the major features you developed and a brief description of what the feature does.
 
-![alt text](https://imgur.com/056w9ci.png)
+![alt text](https://i.imgur.com/056w9ci.png)
 
 The above page is the move inventory that uses a live barcode scanning to move items out of the inventory into the client or out of the client into the inventory. This is the only feature that is included within the user implementation; thus, the main menu is not needed to be included.
 
