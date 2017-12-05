@@ -15,6 +15,7 @@
     vm.reverse = true;
     vm.changeSort = changeSort;
 
+    //Sort heads of the userlog list in order or reverse order
     function changeSort(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;

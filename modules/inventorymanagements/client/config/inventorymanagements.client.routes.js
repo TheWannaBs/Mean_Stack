@@ -94,6 +94,7 @@
     });
   }
   
+  //this injects the the user log service into the recieve inventory controller
   newUserlog.$inject = ['UserlogsService'];
 
   function newUserlog(UserlogsService) {
