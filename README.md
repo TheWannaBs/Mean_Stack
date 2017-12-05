@@ -20,14 +20,14 @@ In command prompt type npm start, go to http://localhost:3000 to see site.
 User Features
 Provide a screenshot of the major features you developed and a brief description of what the feature does.
 
-![alt text](https://i.imgur.com/056w9ci.png)
+![alt text](https://i.imgur.com/o56w9ci.png)
 
 The above page is the move inventory that uses a live barcode scanning to move items out of the inventory into the client or out of the client into the inventory. This is the only feature that is included within the user implementation; thus, the main menu is not needed to be included.
 
 Admin Features
 Provide a screenshot of the major admin features you developed and a brief description. Especially, the admin dashboards you may have developed. This is one of the clients most need to use the web application you created for them.
 
-![alt text](https://imgur.com/RdWeeD7)
+![alt text](https://i.imgur.com/RdWeeD7.png)
 
 Above can be shown the client management list view. From here, the admin can organize and sort the clients from the database on the page. The admin can also manage the view based on inactive clients, too.
 
