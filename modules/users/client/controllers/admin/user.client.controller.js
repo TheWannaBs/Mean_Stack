@@ -5,6 +5,7 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
     $scope.authentication = Authentication;
     $scope.user = userResolve;
 
+    //remove a user from database
     $scope.remove = function (user) {
       if (confirm('Are you sure you want to delete this user?')) {
         if (user) {
@@ -19,6 +20,7 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
       }
     };
 
+    //update a user after editing
     $scope.update = function (isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'userForm');
@@ -37,6 +39,7 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
       });
     };
 
+    //validate the edit before updating 
     $scope.editCheck = function (editName, editID) {
       if(editName === Authentication.user.username) {
         alert('You cannot edit yourself.');

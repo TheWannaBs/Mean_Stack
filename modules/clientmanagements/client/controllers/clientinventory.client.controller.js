@@ -11,7 +11,7 @@
 
   angular
     .module('userlogs')
-    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController)
+    .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
 
   ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile'];
 

@@ -75,6 +75,7 @@
       }
     }
 
+    //This function puts a list of the roles associated with the client into the client details page
     function displayClientRoles() {
       var list = '';
       if(vm.clientmanagement.clientrolesFoster)
@@ -140,6 +141,8 @@
         return 'Deactivate';
       }
     }
+
+    //This function puts a list of the branches associated with the client into the client details page
     function branchText(){
       var branch = '';
       if(vm.clientmanagement.airForce){
