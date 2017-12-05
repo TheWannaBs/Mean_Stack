@@ -9,7 +9,9 @@
 
   function InventorymanagementsListController(InventorymanagementsService) {
     var vm = this;
-
+      
+    console.log(angular.version);
+      
     vm.inventorymanagements = InventorymanagementsService.query();
     vm.headSort = 'tags';
     vm.reverse = false;
