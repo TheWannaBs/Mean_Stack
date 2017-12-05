@@ -31,35 +31,35 @@ Provide a screenshot of the major admin features you developed and a brief descr
 
 Above can be shown the client management list view. From here, the admin can organize and sort the clients from the database on the page. The admin can also manage the view based on inactive clients, too.
 
-![alt text](https://imgur.com/qT2S9pM)
+![alt text](https://i.imgur.com/qT2S9pM.png)
 
 The above page is where admins can create new clients to add to the database. If the veteran checkbox is clicked, then the branch checkboxes and rank field appears, as shown above. An appropriate edit page exists that is quite similar to this one.
 
-![alt text](https://imgur.com/7HQEepV)
+![alt text](https://i.imgur.com/7HQEepV.png)
 
 The above page shows the details page when a client is selected. It shows the fields and roles associated with each client, as well as the inventory the client has.
 
-![alt text](https://imgur.com/qT2S9pM)
+![alt text](https://i.imgur.com/qT2S9pM.png)
 
 The above page is where admins can manage their inventory and see the list they currently have. They have the option to create, receive, and move items through the inventory.
 
-![alt text](https://imgur.com/TKTPnOZ)
+![alt text](https://i.imgur.com/NIZ9tDy.png)
 
 The above page is the receive inventory that uses a live barcode scanning to move items out of the inventory into the client or out of the client into the inventory.
 
-![alt text](https://imgur.com/WLmeger)
+![alt text](https://i.imgur.com/WLmeger.png)
 
 The above page shows the details page for an inventory item. It displays the UPC, description, and quantity of each respective item.
 
-![alt text](https://imgur.com/WLmeger)
+![alt text](https://i.imgur.com/pZ58lvM.png)
 
 The above page shows the list of users that exist in the application.
 
-![alt text](https://imgur.com/xqXtNNX)
+![alt text](https://i.imgur.com/xqXtNNX.png)
 
 The above page shows the user creation page where different fields are inserted to create new users. An appropriate edit page is associated with a similar view, as well.
 
-![alt text](https://imgur.com/hji3OFi)
+![alt text](https://i.imgur.com/hji3OFi.png)
 
 The above page shows the details page for a user. It describes the name, email, provider, and roles of each respective user in the system.
 
