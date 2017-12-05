@@ -63,6 +63,6 @@ The above page shows the user creation page where different fields are inserted 
 
 The above page shows the details page for a user. It describes the name, email, provider, and roles of each respective user in the system.
 
-![alt text](https://imgur.com/j6DzbqB)
+![alt text](https://i.imgur.com/j6DzbqB.png)
 
 The above page shows the user log of the users in the system. This is a list of interactions users did between clients and inventory. The view also shows which direction items went (to and fro).
