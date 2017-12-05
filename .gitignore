@@ -38,6 +38,7 @@ _site/
 *.tmp
 *.bak
 *.swp
+*.pyc
 logs/
 build/
 
