@@ -1,3 +1,8 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <section>
     <div class="page-header row">
         <h1>
@@ -17,16 +22,19 @@
             <input type="text" class="form-control" placeholder="Search" ng-model="query">
         </div>
         <br/>
-        <div class="input-group" id="showdisc">
+        <div style="margin-left:757px;" class="input-group" id="showdisc">
             <input class="form-check-input" type="checkbox" ng-model="checkModel" />
-            <small class="form-check-label"> Show Inactive Clients</small>
+          <bold class="form-check-label"> <b>Show Inactive Clients</b> </bold>
         </div>
         <div class="tableWrapper">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-default">
                     <tr>
-                        <th ng-click="vm.changeSort('name')">Name</th>
-                        <th ng-click="vm.changeSort('phone')">Phone Number</th>
+                        <th ng-click="vm.changeSort('name')">Name
+                        <i ng-hide="!vm.reverse" style="font-size:24px;margin-right:100px;" class="fa">&#xf102;</i>
+                        <i ng-hide="vm.reverse" style="font-size:24px" class="fa">&#xf103;</i>
+                        </th>
+                        <th ng-click="vm.changeSort('phone')">Phone Number<i style="font-size:24px" class="fa">&#xf103;</i></th>
                         <th ng-click="vm.changeSort('email')">Email</th>
                         <th ng-click="vm.changeSort('dogName')">Dog Name</th>
                         <th ng-click="vm.changeSort('dogID')">Dog ID</th>

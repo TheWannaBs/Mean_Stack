@@ -18,7 +18,7 @@
     //this function sorts the heads of the table either in order or reverse order on the list view for clients
     function changeSort(headName) {
       vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;      
     }
 
     //this shows the inactive clients on the view of the client list
