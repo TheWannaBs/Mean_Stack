@@ -1,13 +1,8 @@
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
 <section>
   <div class="page-header row">
-    <h1>
-      <div style="text-align:center">User Log</div>
+    <h1>User Log
       <span class="pull-right">
+        <a class="btn btn-default" ui-sref="admin.users">Back</a>
         <a class="btn btn-default" ui-sref="">Print</a>
       </span>
     </h1>
@@ -64,9 +59,6 @@
           </tr>
         </tbody>
       </table>
-      <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
-        ng-change="pageChanged()"></pagination>
-      </section>
     </div>
   </div>
 </section>

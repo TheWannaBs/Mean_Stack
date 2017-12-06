@@ -11,7 +11,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     $scope.changeSort = function (headName) {
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
       $scope.headSort = headName;
-    }
+    };
 
     //This decides if the up or down arrow is displayed in a specific table head
     $scope.hideArrow = function (arrowCatagory, arrowReverse) {
@@ -21,7 +21,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       else {
         return true;
       }
-    }
+    };
 
     //stores users locally to the webpage
     Admin.query(function (data) {

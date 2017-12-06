@@ -22,7 +22,7 @@
     vm.changeSort = function (headName) {
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
       vm.headSort = headName;
-    }
+    };
 
     //This decides if the up or down arrow is displayed in a specific table head
     vm.hideArrow = function (arrowCatagory, arrowReverse) {
@@ -32,7 +32,7 @@
       else {
         return true;
       }
-    }
+    };
 
     //this shows the inactive items on the view of the inventory list
     vm.showNoInactive = function (item) {
