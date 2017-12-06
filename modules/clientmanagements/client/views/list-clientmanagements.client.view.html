@@ -32,44 +32,39 @@
                     <tr class="sortable">
                         <!--<th st-sort="id" st-sort-default="reverse">ID<i st-sort="id"></i></th>
                         <th st-sort="status">Status<i st-sort="status"></i></th>-->
-                        <th ng-click="vm.changeSortName('name')">Name
-                        <i ng-hide="!vm.reverseName" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseName" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('name')">Name
+                        <i ng-hide="vm.hideArrow('name', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('name', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
-                        <th ng-click="vm.changeSortPhone('phone')">Phone Number
-                        <i ng-hide="!vm.reversePhone" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reversePhone" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('phone')">Phone Number
+                        <i ng-hide="vm.hideArrow('phone', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('phone', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
-                        <th ng-click="vm.changeSortEmail('email')">Email
-                        <i ng-hide="!vm.reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('email')">Email
+                        <i ng-hide="vm.hideArrow('email', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('email', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
-                        <th ng-click="vm.changeSortDogName('dogName')">Dog Name
-                        <i ng-hide="!vm.reverseDogName" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseDogName" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
-                        </th>
-                        <th ng-click="vm.changeSortDogID('dogID')">Dog ID
-                        <i ng-hide="!vm.reverseDogID" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseDogID" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('dogName')">Dog Name
+                        <i ng-hide="vm.hideArrow('dogName', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('dogName', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
                         <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
-                        <th ng-click="vm.changeSortRank('rank')">Rank
-                        <i ng-hide="!vm.reverseRank" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseRank" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('rank')">Rank
+                        <i ng-hide="vm.hideArrow('rank', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('rank', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
-                        <th ng-click="vm.changeSortUpdated('updated')">Last Updated
-                        <i ng-hide="!vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-                        <i ng-hide="vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        <th ng-click="vm.changeSort('updated')">Last Updated
+                        <i ng-hide="vm.hideArrow('updated', vm.C_T)" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.hideArrow('updated', vm.C_F)" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                       </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)"
-                        ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
+                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel) ? '' : vm.showNoInactive" ng-class="vm.inactiveRow(clientmanagement)" ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
                         <td>{{clientmanagement.name}}
                         <!--  
-                        <div ng-hide="{vm.showNoInactive === true}">{{vm.labelText()}}
-                        <div ng-hide="{vm.clientmanagement.inactive === true}">{{vm.labelText()}}
+                        <div ng-hide="{vm.showNoInactive === vm.C_T}">{{vm.labelText()}}
+                        <div ng-hide="{vm.clientmanagement.inactive === vm.C_T}">{{vm.labelText()}}
                         <div class="form-group" ng-hide="vm.showNoInactive">
                         <div ng-hide="vm.showNoInactive">  
                         <i style="font-size:25px;" class="fa fa-arrow-circle-o-right pull-right"></i>
@@ -79,7 +74,6 @@
                         <td>{{clientmanagement.phone}}</td>
                         <td>{{clientmanagement.email}}</td>
                         <td>{{clientmanagement.dogName}}</td>
-                        <td>{{clientmanagement.dogID}}</td>
                         <!--<td ng-bind="vm.branchText()"></td>
                         !-->
                         <td>{{clientmanagement.rank}}</td>

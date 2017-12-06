@@ -13,106 +13,25 @@
     vm.clientmanagements = ClientmanagementsService.query();
     vm.headSort = 'name';
     vm.reverse = false;
-    vm.reverseName = false;
-    vm.reversePhone = false;
-    vm.reverseEmail = false;
-    vm.reverseDogName = false;
-    vm.reverseDogID = false;
-    vm.reverseRank = false;
-    vm.reverseUpdated = false;
-    //vm.changeSort = changeSort;
-    vm.changeSortName = changeSortName;
-    vm.changeSortPhone = changeSortPhone;
-    vm.changeSortEmail = changeSortEmail;
-    vm.changeSortDogName = changeSortDogName;
-    vm.changeSortDogID = changeSortDogID;
-    vm.changeSortRank = changeSortRank;
-    vm.changeSortUpdated = changeSortUpdated;
-    //vm.sort = false;
+    vm.C_T = true;
+    vm.C_F = false;
+    vm.changeSort = changeSort;
+    vm.hideArrow = hideArrow;
 
-    //these function sort the heads of the table either in order or reverse order on the list view for clients
-    function changeSortName(headName) {
+    //This changes the sorting of the table by the head selected and reverses it if it is selected again
+    function changeSort(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseName = vm.reverse;
-      vm.reversePhone = false;
-      vm.reverseEmail = false;
-      vm.reverseDogName = false;
-      vm.reverseDogID = false;
-      vm.reverseRank = false;
-      vm.reverseUpdated = false;
     }
 
-    function changeSortPhone(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reversePhone = vm.reverse;
-      vm.reverseName = false;
-      vm.reverseEmail = false;
-      vm.reverseDogName = false;
-      vm.reverseDogID = false;
-      vm.reverseRank = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortEmail(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseEmail = vm.reverse;
-      vm.reverseName = false;
-      vm.reversePhone = false;
-      vm.reverseDogName = false;
-      vm.reverseDogID = false;
-      vm.reverseRank = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortDogName(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseDogName = vm.reverse;
-      vm.reverseName = false;
-      vm.reversePhone = false;
-      vm.reverseEmail = false;
-      vm.reverseDogID = false;
-      vm.reverseRank = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortDogID(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseDogID = vm.reverse;
-      vm.reverseName = false;
-      vm.reversePhone = false;
-      vm.reverseEmail = false;
-      vm.reverseDogName = false;
-      vm.reverseRank = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortRank(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseRank = vm.reverse;
-      vm.reverseName = false;
-      vm.reversePhone = false;
-      vm.reverseEmail = false;
-      vm.reverseDogName = false;
-      vm.reverseDogID = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortUpdated(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseUpdated = vm.reverse;
-      vm.reverseName = false;
-      vm.reversePhone = false;
-      vm.reverseEmail = false;
-      vm.reverseDogName = false;
-      vm.reverseDogID = false;
-      vm.reverseRank = false;
+    //This decides if the up or down arrow is displayed in a specific table head
+    function hideArrow(arrowCatagory, arrowReverse) {
+      if (arrowCatagory === vm.headSort && arrowReverse === vm.reverse) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
 
     //this shows the inactive clients on the view of the client list
@@ -120,5 +39,13 @@
       return item.inactive === false;
     };
 
+    vm.inactiveRow = function (item) {
+      if (item.inactive) {
+        return 'danger';
+      }
+      else {
+        return '';
+      }
+    };
   }
 }());
