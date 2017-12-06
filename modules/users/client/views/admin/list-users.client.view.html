@@ -1,3 +1,8 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <section>
   <div class="page-header row">
     <h1>
@@ -20,11 +25,23 @@
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="changeSort('username')">Username</th>
-            <th ng-click="changeSort('roles')">Roles</th>
-            <th ng-click="changeSort('email')">Email</th>
-            <th ng-click="changeSort('updated')">Last Updated</th>
+          <tr class="sortable">
+            <th ng-click="changeSortUsername('username')">Username
+            <i ng-hide="!reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="changeSortRoles('roles')">Roles
+            <i ng-hide="!reverseRoles" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="reverseRoles" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="changeSortEmail('email')">Email
+            <i ng-hide="!reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>          
+            </th>
+            <th ng-click="changeSortUpdated('updated')">Last Updated
+            <i ng-hide="!reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
           </tr>
         </thead>
         <tbody>

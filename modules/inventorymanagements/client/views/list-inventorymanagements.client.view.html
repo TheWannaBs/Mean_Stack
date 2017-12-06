@@ -1,3 +1,8 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <section>
   <div class="page-header row">
     <h1>
@@ -16,17 +21,30 @@
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
       <input type="text" class="form-control" placeholder="Search" ng-model="query">
     </div><br/>
-    <div class="input-group" id="showdisc">
-      <input class="form-check-input" type="checkbox" ng-model="checkModel"/><small class="form-check-label">Show Inactive Items</small>
+    <div style="margin-left:766px;" class="input-group" id="showdisc">
+      <input class="form-check-input" type="checkbox" ng-model="checkModel"/>
+      <bold class="form-check-label"> <b>Show Inactive Items</b> </bold>
     </div>
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="vm.changeSort('tags')">Tags</th>
-            <th ng-click="vm.changeSort('upc')">UPC</th>
-            <th ng-click="vm.changeSort('qty')">Quantity</th>
-            <th ng-click="vm.changeSort('updated')">Last Updated</th>
+          <tr class="sortable">
+            <th ng-click="vm.changeSortTags('tags')">Tags
+              <i ng-hide="!vm.reverseTags" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+              <i ng-hide="vm.reverseTags" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSortUPC('upc')">UPC
+              <i ng-hide="!vm.reverseUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+              <i ng-hide="vm.reverseUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            </th>
+            <th ng-click="vm.changeSortQuantity('qty')">Quantity
+              <i ng-hide="!vm.reverseQuantity" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+              <i ng-hide="vm.reverseQuantity" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            </th>
+            <th ng-click="vm.changeSortUpdated('updated')">Last Updated
+              <i ng-hide="!vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+              <i ng-hide="vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -14,8 +14,8 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
-            
+        <div class="col-md-7">
+
             <div class="row">
               <div class="col-md-3">
                 <strong>Phone Number</strong>
@@ -23,12 +23,13 @@
             <div class="col-md-6" ng-bind="vm.clientmanagement.phone"></div>
             </div>
             <br>
-            <div style="position:absolute;width:110px;right:0;top:0;"  class="row">
-                <div style="margin-left: 128px;margin-bottom:10px;" class="col-md-6">
-                  <strong><span>Inventory</span></strong>
-                </div>
+            <div style="position:absolute;width:100px;right:0;top:0;"  class="row pull-left">
+
                 <div style="margin-left:128px;width: 200px;" class="col-md-6"> <!--class="col-xs-20 col-sm-1" class="col-md-6"-->
-                    <div class="tableWrapper">
+                    <div style="margin-left: 128px;margin-bottom:10px;" class="col-md-6 pull-left">
+                      <strong><span>Inventory</span></strong>
+                    </div>
+                    <div class="tableWrapper pull-left">
                         <table class="table table-bordered table-striped">
                             <thead class="thead-default">
                                 <tr>
@@ -53,7 +54,7 @@
                     <img id="loader" ng-show="loading" src="/../../img/484.gif">
                 </div>
             </div>
-          
+
             <!--
             <div class="row">
                 <div class="col-md-3">

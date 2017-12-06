@@ -1,7 +1,12 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <section>
   <div class="page-header row">
     <h1>
-      User Log
+      <div style="text-align:center">User Log</div>
       <span class="pull-right">
         <a class="btn btn-default" ui-sref="">Print</a>
       </span>
@@ -9,7 +14,7 @@
   </div>
 
 
-  <div class="col-md-offset-1 col-md-10">
+  <div class="col-md-offset-1 col-md-11">
     <div class="input-group" id="searchBar">
       <span class="input-group-addon" id="sizing-addon1">
         <span class="glyphicon glyphicon-search"></span>
@@ -20,14 +25,32 @@
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="vm.changeSort('username')">User</th>
-            <th ng-click="vm.changeSort('clientName')">Client Name</th>
+          <tr class="sortable">
+            <th ng-click="vm.changeSortUsername('username')">User
+            <i ng-hide="!vm.reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSortClientName('clientName')">Client Name
+            <i ng-hide="!vm.reverseClientName" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseClientName" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
             <th ng-click="vm.changeSort('move_from_inventory')">Direction</th>
-            <th ng-click="vm.changeSort('itemUpc')">Inventory UPC</th>
-            <th ng-click="vm.changeSort('itemTags')">Inventory Tags</th>
-            <th ng-click="vm.changeSort('qty_moved')">Quantity Moved</th>
-            <th ng-click="vm.changeSort('timestamp')">Timestamp</th>
+            <th ng-click="vm.changeSortItemUPC('itemUpc')">Inventory UPC
+            <i ng-hide="!vm.reverseItemUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseItemUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSortItemTags('itemTags')">Inventory Tags
+            <i ng-hide="!vm.reverseItemTags" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseItemTags" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSortQty_Moved('qty_moved')">Quantity Moved
+            <i ng-hide="!vm.reverseQty_Moved" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseQty_Moved" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSortTimestamp('timestamp')">Timestamp
+            <i ng-hide="!vm.reverseTimestamp" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+            <i ng-hide="vm.reverseTimestamp" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            </th>
           </tr>
         </thead>
         <tbody>

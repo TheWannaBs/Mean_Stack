@@ -13,14 +13,63 @@
     vm.userlogs = UserlogsService.query();
     vm.headSort = 'timestamp';
     vm.reverse = true;
+    vm.reverseUsername = true;
+    vm.reverseClientName = true;
+    vm.reverseItemUPC = true;
+    vm.reverseItemTags = true;
+    vm.reverseQty_Moved = true;
+    vm.reverseTimestamp = true;
     vm.changeSort = changeSort;
+    vm.changeSortUsername = changeSortUsername;
+    vm.changeSortClientName = changeSortClientName;
+    vm.changeSortItemUPC = changeSortItemUPC;
+    vm.changeSortItemTags = changeSortItemTags;
+    vm.changeSortQty_Moved = changeSortQty_Moved;
+    vm.changeSortTimestamp = changeSortTimestamp;
 
     //Sort heads of the userlog list in order or reverse order
+    
     function changeSort(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
     }
+    
+    function changeSortUsername(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseUsername = vm.reverse;
+    }
+    
+    function changeSortClientName(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseClientName = vm.reverse;
+    }
 
+    function changeSortItemUPC(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseItemUPC = vm.reverse;
+    }
+
+    function changeSortItemTags(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseItemTags = vm.reverse;
+    }
+  
+    function changeSortQty_Moved(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseQty_Moved = vm.reverse;
+    }
+
+    function changeSortTimestamp(headName) {
+      vm.headSort = headName;
+      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.reverseTimestamp = vm.reverse;
+    }
+      
     /*
     function reverseSort() {
       var len = vm.headsort.length;

@@ -14,7 +14,7 @@
         </h1>
     </div>
 
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-md-offset-1 col-md-11.5">
         <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1">
                 <span class="glyphicon glyphicon-search"></span>
@@ -22,33 +22,60 @@
             <input type="text" class="form-control" placeholder="Search" ng-model="query">
         </div>
         <br/>
-        <div style="margin-left:757px;" class="input-group" id="showdisc">
+        <div style="margin-left:880px;" class="input-group" id="showdisc">
             <input class="form-check-input" type="checkbox" ng-model="checkModel" />
           <bold class="form-check-label"> <b>Show Inactive Clients</b> </bold>
         </div>
         <div class="tableWrapper">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-default">
-                    <tr>
-                        <th ng-click="vm.changeSort('name')">Name
-                        <i ng-hide="!vm.reverse" style="font-size:24px;margin-right:100px;" class="fa">&#xf102;</i>
-                        <i ng-hide="vm.reverse" style="font-size:24px" class="fa">&#xf103;</i>
+                    <tr class="sortable">
+                        <!--<th st-sort="id" st-sort-default="reverse">ID<i st-sort="id"></i></th>
+                        <th st-sort="status">Status<i st-sort="status"></i></th>-->
+                        <th ng-click="vm.changeSortName('name')">Name
+                        <i ng-hide="!vm.reverseName" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseName" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
                         </th>
-                        <th ng-click="vm.changeSort('phone')">Phone Number<i style="font-size:24px" class="fa">&#xf103;</i></th>
-                        <th ng-click="vm.changeSort('email')">Email</th>
-                        <th ng-click="vm.changeSort('dogName')">Dog Name</th>
-                        <th ng-click="vm.changeSort('dogID')">Dog ID</th>
-                        <!--<th ng-click="vm.changeSort('branch')">Branch</th>
-                        -->
-                        <th ng-click="vm.changeSort('rank')">Rank</th>
-                        <th ng-click="vm.changeSort('updated')">Last Updated</th>
-
+                        <th ng-click="vm.changeSortPhone('phone')">Phone Number
+                        <i ng-hide="!vm.reversePhone" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reversePhone" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        </th>
+                        <th ng-click="vm.changeSortEmail('email')">Email
+                        <i ng-hide="!vm.reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        </th>
+                        <th ng-click="vm.changeSortDogName('dogName')">Dog Name
+                        <i ng-hide="!vm.reverseDogName" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseDogName" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        </th>
+                        <th ng-click="vm.changeSortDogID('dogID')">Dog ID
+                        <i ng-hide="!vm.reverseDogID" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseDogID" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        </th>
+                        <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
+                        <th ng-click="vm.changeSortRank('rank')">Rank
+                        <i ng-hide="!vm.reverseRank" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseRank" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                        </th>
+                        <th ng-click="vm.changeSortUpdated('updated')">Last Updated
+                        <i ng-hide="!vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
+                        <i ng-hide="vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+                      </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)"
                         ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
-                        <td>{{clientmanagement.name}}</td>
+                        <td>{{clientmanagement.name}}
+                        <!--  
+                        <div ng-hide="{vm.showNoInactive === true}">{{vm.labelText()}}
+                        <div ng-hide="{vm.clientmanagement.inactive === true}">{{vm.labelText()}}
+                        <div class="form-group" ng-hide="vm.showNoInactive">
+                        <div ng-hide="vm.showNoInactive">  
+                        <i style="font-size:25px;" class="fa fa-arrow-circle-o-right pull-right"></i>
+                        </div>
+                        -->
+                        </td>
                         <td>{{clientmanagement.phone}}</td>
                         <td>{{clientmanagement.email}}</td>
                         <td>{{clientmanagement.dogName}}</td>
