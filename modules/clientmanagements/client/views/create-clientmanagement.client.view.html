@@ -1,12 +1,12 @@
 <section>
-  <div class="page-header">
-    <h1>Create A New Client</h1>
+  <div class="page-header" ng-hide="">
+    <h1><div style="text-align:center">Create A New Client</div></h1>
   </div>
   <div class="col-md-offset-1 col-md-10">
     <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
       <fieldset>
-        <div class="form-group" show-errors>
-          <div>
+        <!--<div class="form-group">-->
+          <div class="form-group">
             <div style="margin-right:201px;">
               <label class="control-label">
                 <span>Types of Clients:</span>
@@ -20,8 +20,8 @@
               <input name="volunteer" type="checkbox" ng-model="vm.clientmanagement.clientrolesVolunteer" id="volunteer" placeholder="Volunteer">&nbsp;Volunteer
             </div>
             <br>
-            <div style="position:absolute;width:530px;right:0;top:0;" ng-hide="!vm.clientmanagement.clientrolesVeteran">
-              <label class="control-label" for="branch">Branch:</label>
+            <div class="form-group" style="position:absolute;width:491px;right:0;top:0;" ng-hide="!vm.clientmanagement.clientrolesVeteran">
+              <label class="control-label" for="branch">&nbsp;Branch:</label>
               <br>
               <input type="checkbox" ng-model="vm.clientmanagement.airForce">&nbsp;Airforce&nbsp;&nbsp;
               
@@ -36,25 +36,40 @@
               <input type="checkbox" ng-model="vm.clientmanagement.nationalGuard">&nbsp;National Guard
             </div>
           </div>
-          <p><font color="grey" style="margin-top: 1000px"><b>The following entires are <em>required</em> fields: Name and Email</b></font></p>
-          <label class="control-label" for="name">Name:</label>
-          <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
-          <label class="control-label" for="name">Phone:</label>
-          <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone">
-          <label class="control-label" for="name">Email:</label>
-          <input name="email" type="text" ng-model="vm.clientmanagement.email" id="email" class="form-control" placeholder="Email" required>
-          <label class="control-label" for="name">Dog Name:</label>
-          <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName">
-          <label class="control-label" for="name">Dog ID:</label>
-          <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID">
-          <div ng-hide="!vm.clientmanagement.clientrolesVeteran">
-            <label class="control-label" for="name">Rank:</label>
+          <p class="form-group"><font color="grey" style="margin-top: 1000px"><b>The following entires are <em>required</em> fields: Name and Email</b></font></p>
+          
+          <div class="form-group" show-errors>
+            <label class="control-label" for="name">Name:</label>
+            <input name="name" type="text" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>
+            <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label" for="phone">Phone:</label>
+            <input name="phone" type="text" ng-model="vm.clientmanagement.phone" id="phone" class="form-control" placeholder="Phone">
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="email">Email:</label>
+            <input name="email" type="text" ng-model="vm.clientmanagement.email" id="email" class="form-control" placeholder="Email" required>
+            <div ng-messages="vm.form.clientmanagementForm.email.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">The phone entry must be entered. Thank you.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="dogName">Dog Name:</label>
+            <input name="dogName" type="text" ng-model="vm.clientmanagement.dogName" id="dogName" class="form-control" placeholder="DogName">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="dogID">Dog ID:</label>
+            <input name="dogID" type="text" ng-model="vm.clientmanagement.dogID" id="dogID" class="form-control" placeholder="DogID">
+          </div>
+          <div class="form-group" ng-hide="!vm.clientmanagement.clientrolesVeteran">
+            <label class="control-label" for="rank">Rank:</label>
             <input name="rank" type="text" ng-model="vm.clientmanagement.rank" id="rank" class="form-control" placeholder="Rank">
           </div>
-        </div>
-        <div ng-messages="vm.form.clientmanagementForm.name.$error" role="alert">
-          <p class="help-block error-text" ng-message="required">The name entry must be entered. Thank you.</p>
-        </div>
+        <!--</div>-->
         <br>
         <div class="form-group">
           <div class="form-group pull-right">
