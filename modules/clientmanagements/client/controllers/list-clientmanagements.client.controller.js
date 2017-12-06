@@ -15,17 +15,15 @@
     vm.reverse = false;
     vm.C_T = true;
     vm.C_F = false;
-    vm.changeSort = changeSort;
-    vm.hideArrow = hideArrow;
 
     //This changes the sorting of the table by the head selected and reverses it if it is selected again
-    function changeSort(headName) {
-      vm.headSort = headName;
+    vm.changeSort = function (headName) {
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
+      vm.headSort = headName;
     }
 
     //This decides if the up or down arrow is displayed in a specific table head
-    function hideArrow(arrowCatagory, arrowReverse) {
+    vm.hideArrow = function (arrowCatagory, arrowReverse) {
       if (arrowCatagory === vm.headSort && arrowReverse === vm.reverse) {
         return false;
       }
@@ -39,6 +37,7 @@
       return item.inactive === false;
     };
 
+    //changes color of a row if that row is inactive
     vm.inactiveRow = function (item) {
       if (item.inactive) {
         return 'danger';

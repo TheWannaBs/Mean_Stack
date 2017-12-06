@@ -29,26 +29,27 @@
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
           <tr class="sortable">
-            <th ng-click="vm.changeSortTags('tags')">Tags
-              <i ng-hide="!vm.reverseTags" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-              <i ng-hide="vm.reverseTags" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            <th ng-click="vm.changeSort('tags')">Tags
+              <i ng-hide="vm.hideArrow('tags', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet-alt pull-right"></i>
+              <i ng-hide="vm.hideArrow('tags', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet pull-right"></i>
             </th>
-            <th ng-click="vm.changeSortUPC('upc')">UPC
-              <i ng-hide="!vm.reverseUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-              <i ng-hide="vm.reverseUPC" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            <th ng-click="vm.changeSort('upc')">UPC
+              <i ng-hide="vm.hideArrow('upc', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
+              <i ng-hide="vm.hideArrow('upc', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
             </th>
-            <th ng-click="vm.changeSortQuantity('qty')">Quantity
-              <i ng-hide="!vm.reverseQuantity" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-              <i ng-hide="vm.reverseQuantity" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
+            <th ng-click="vm.changeSort('qty')">Quantity
+              <i ng-hide="vm.hideArrow('qty', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
+              <i ng-hide="vm.hideArrow('qty', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
             </th>
-            <th ng-click="vm.changeSortUpdated('updated')">Last Updated
-              <i ng-hide="!vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-              <i ng-hide="vm.reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>  
+            <th ng-click="vm.changeSort('updated')">Last Updated
+              <i ng-hide="vm.hideArrow('updated', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
+              <i ng-hide="vm.hideArrow('updated', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="inventorymanagement in vm.inventorymanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)" ui-sref="inventorymanagements.view({ inventorymanagementId: inventorymanagement._id})">
+          <tr ng-repeat="inventorymanagement in vm.inventorymanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)" ng-class="vm.inactiveRow(inventorymanagement)" ui-sref="inventorymanagements.view({ inventorymanagementId: inventorymanagement._id})">
             <td>{{inventorymanagement.tags}}</td>
             <td>{{inventorymanagement.upc}}</td>
             <td>{{inventorymanagement.qty}}</td>

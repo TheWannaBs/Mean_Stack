@@ -15,56 +15,38 @@
     vm.inventorymanagements = InventorymanagementsService.query();
     vm.headSort = 'tags';
     vm.reverse = false;
-    vm.reverseTags = false;
-    vm.reverseUPC = false;
-    vm.reverseQuantity = false;
-    vm.reverseUpdated = false;
-    //vm.changeSort = changeSort;
-    vm.changeSortTags = changeSortTags;
-    vm.changeSortUPC = changeSortUPC;
-    vm.changeSortQuantity = changeSortQuantity;
-    vm.changeSortUpdated = changeSortUpdated;
+    vm.C_T = true;
+    vm.C_F = false;
 
-    //sort table by header in order or out of order on list view of inventory
-    function changeSortTags(headName) {
-      vm.headSort = headName;
+    //Sorts table by header; second click reverses the order
+    vm.changeSort = function (headName) {
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseTags = vm.reverse;
-      vm.reverseUPC = false;
-      vm.reverseQuantity = false;
-      vm.reverseUpdated = false;
+      vm.headSort = headName;
     }
 
-    function changeSortUPC(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseUPC = vm.reverse;
-      vm.reverseTags = false;
-      vm.reverseQuantity = false;
-      vm.reverseUpdated = false;
+    //This decides if the up or down arrow is displayed in a specific table head
+    vm.hideArrow = function (arrowCatagory, arrowReverse) {
+      if (arrowCatagory === vm.headSort && arrowReverse === vm.reverse) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
 
-    function changeSortQuantity(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseQuantity = vm.reverse;
-      vm.reverseTags = false;
-      vm.reverseUPC = false;
-      vm.reverseUpdated = false;
-    }
-
-    function changeSortUpdated(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseUpdated = vm.reverse;
-      vm.reverseTags = false;
-      vm.reverseUPC = false;
-      vm.reverseQuantity = false;
-    }
-
-    //show inactive items in the inventory list
+    //this shows the inactive items on the view of the inventory list
     vm.showNoInactive = function (item) {
       return item.inactive === false;
+    };
+
+    //Changes color of a row if that item is inactive
+    vm.inactiveRow = function (item) {
+      if (item.inactive) {
+        return 'danger';
+      }
+      else {
+        return '';
+      }
     };
   }
 }());

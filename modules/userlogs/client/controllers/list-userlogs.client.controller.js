@@ -12,76 +12,26 @@
 
     vm.userlogs = UserlogsService.query();
     vm.headSort = 'timestamp';
-    vm.reverse = true;
-    vm.reverseUsername = true;
-    vm.reverseClientName = true;
-    vm.reverseItemUPC = true;
-    vm.reverseItemTags = true;
-    vm.reverseQty_Moved = true;
-    vm.reverseTimestamp = true;
-    vm.changeSort = changeSort;
-    vm.changeSortUsername = changeSortUsername;
-    vm.changeSortClientName = changeSortClientName;
-    vm.changeSortItemUPC = changeSortItemUPC;
-    vm.changeSortItemTags = changeSortItemTags;
-    vm.changeSortQty_Moved = changeSortQty_Moved;
-    vm.changeSortTimestamp = changeSortTimestamp;
+    vm.reverse = false;
+    vm.C_T = true;
+    vm.C_F = false;
 
-    //Sort heads of the userlog list in order or reverse order
-    
-    function changeSort(headName) {
-      vm.headSort = headName;
+    //Sorts table by header; second click reverses the order
+    vm.changeSort = function (headName) {
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-    }
-    
-    function changeSortUsername(headName) {
       vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseUsername = vm.reverse;
-    }
-    
-    function changeSortClientName(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseClientName = vm.reverse;
     }
 
-    function changeSortItemUPC(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseItemUPC = vm.reverse;
-    }
-
-    function changeSortItemTags(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseItemTags = vm.reverse;
-    }
-  
-    function changeSortQty_Moved(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseQty_Moved = vm.reverse;
-    }
-
-    function changeSortTimestamp(headName) {
-      vm.headSort = headName;
-      vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-      vm.reverseTimestamp = vm.reverse;
-    }
-      
-    /*
-    function reverseSort() {
-      var len = vm.headsort.length;
-      if (vm.headsort.substring(len - 4, len) == 'true') {
-        vm.headsort = vm.headsort.replaceAt(len - 4, 'false');
+    //This decides if the up or down arrow is displayed in a specific table head
+    vm.hideArrow = function (arrowCatagory, arrowReverse) {
+      if (arrowCatagory === vm.headSort && arrowReverse === vm.reverse) {
+        return false;
       }
       else {
-        vm.headsort = vm.headsort.replaceAt(len - 4, 'false');
+        return true;
       }
     }
-
-    //this is a helper function to replace strings at specific indicies with a substring 
+    /*this is a helper function to replace strings at specific indicies with a substring 
     String.prototype.replaceAt = function (index, replacement) {
       return this.substr(0, index) + replacement + this.substr(index + replacement.length);
     }

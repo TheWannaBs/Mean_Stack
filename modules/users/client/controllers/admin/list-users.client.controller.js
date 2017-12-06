@@ -4,50 +4,23 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
   function ($scope, $filter, Admin) {
     $scope.headSort = 'username';
     $scope.reverse = false;
-    $scope.reverseUsername = false;
-    $scope.reverseRoles = false;
-    $scope.reverseEmail = false;
-    $scope.reverseUpdated = false;
-    $scope.changeSortUsername = changeSortUsername;
-    $scope.changeSortRoles = changeSortRoles;
-    $scope.changeSortEmail = changeSortEmail;
-    $scope.changeSortUpdated = changeSortUpdated;
+    $scope.C_T = true;
+    $scope.C_F = false;
 
-    //sort list of users by header; in order or out of order
-    function changeSortUsername(headName) {
-      $scope.headSort = headName;
+    //This changes the sorting of the table by the head selected and reverses it if it is selected again
+    $scope.changeSort = function (headName) {
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
-      $scope.reverseUsername = $scope.reverse;
-      $scope.reverseRoles = false;
-      $scope.reverseEmail = false;
-      $scope.reverseUpdated = false;
+      $scope.headSort = headName;
     }
 
-    function changeSortRoles(headName) {
-      $scope.headSort = headName;
-      $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
-      $scope.reverseRoles = $scope.reverse;
-      $scope.reverseUsername = false;
-      $scope.reverseEmail = false;
-      $scope.reverseUpdated = false;
-    }
-
-    function changeSortEmail(headName) {
-      $scope.headSort = headName;
-      $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
-      $scope.reverseEmail = $scope.reverse;
-      $scope.reverseUsername = false;
-      $scope.reverseRoles = false;
-      $scope.reverseUpdated = false;
-    }
-
-    function changeSortUpdated(headName) {
-      $scope.headSort = headName;
-      $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
-      $scope.reverseUpdated = $scope.reverse;
-      $scope.reverseUsername = false;
-      $scope.reverseRoles = false;
-      $scope.reverseEmail = false;
+    //This decides if the up or down arrow is displayed in a specific table head
+    $scope.hideArrow = function (arrowCatagory, arrowReverse) {
+      if (arrowCatagory === $scope.headSort && arrowReverse === $scope.reverse) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
 
     //stores users locally to the webpage

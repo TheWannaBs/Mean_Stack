@@ -26,21 +26,21 @@
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
           <tr class="sortable">
-            <th ng-click="changeSortUsername('username')">Username
-            <i ng-hide="!reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-            <i ng-hide="reverseUsername" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            <th ng-click="changeSort('username')">Username
+              <i ng-hide="hideArrow('username', C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet-alt pull-right"></i>
+              <i ng-hide="hideArrow('username', C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet pull-right"></i>
             </th>
-            <th ng-click="changeSortRoles('roles')">Roles
-            <i ng-hide="!reverseRoles" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-            <i ng-hide="reverseRoles" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            <th ng-click="changeSort('roles')">User Roles
+              <i ng-hide="hideArrow('roles', C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet-alt pull-right"></i>
+              <i ng-hide="hideArrow('roles', C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet pull-right"></i>
             </th>
-            <th ng-click="changeSortEmail('email')">Email
-            <i ng-hide="!reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-            <i ng-hide="reverseEmail" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>          
+            <th ng-click="changeSort('email')">Email
+              <i ng-hide="hideArrow('email', C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet-alt pull-right"></i>
+              <i ng-hide="hideArrow('email', C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet pull-right"></i>
             </th>
-            <th ng-click="changeSortUpdated('updated')">Last Updated
-            <i ng-hide="!reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-up pull-right"></i>
-            <i ng-hide="reverseUpdated" style="font-size:25px;" class="fa fa-arrow-circle-o-down pull-right"></i>
+            <th ng-click="changeSort('updated')">Last Updated
+              <i ng-hide="hideArrow('updated', C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
+              <i ng-hide="hideArrow('updated', C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
             </th>
           </tr>
         </thead>
