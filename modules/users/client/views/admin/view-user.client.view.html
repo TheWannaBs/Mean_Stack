@@ -3,6 +3,7 @@
     <h1>
       {{user.username}}
       <span class="pull-right">
+        <a class="btn btn-default" ui-sref="admin.users">Back to User List</a>
         <a class="btn btn-primary" ng-click="editCheck(user.username, user._id)">Edit</a>
         <a class="btn btn-danger" ng-click="remove();" ng-if="user._id !== authentication.user._id">Delete</a>
       </span>
@@ -51,8 +52,5 @@
         <div class="col-md-6" ng-bind="user.roles"></div>
       </div>
     </div>
-  </div>
-  <div class="pull-right">
-    <a class="btn btn-default" ui-sref="admin.users">Back to User List</a>
   </div>
 </section>

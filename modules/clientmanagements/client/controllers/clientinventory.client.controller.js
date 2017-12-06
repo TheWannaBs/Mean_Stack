@@ -431,7 +431,7 @@
           }
           vm.inventorymanagements[invResult].qty += quant;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
-          $scope.saveUserLog(clientResult, '->', invResult, quant);//'\u00A9'
+          $scope.saveUserLog(clientResult, '->', invResult, quant); //'\u00A9'
         }
         vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
@@ -454,7 +454,7 @@
       }
     };
 
-    //should save
+    //should save 
     $scope.saveUserLog = function (c, d, i, q) {
       vm.userlog = new UserlogsService();
       var item = vm.inventorymanagements[i];

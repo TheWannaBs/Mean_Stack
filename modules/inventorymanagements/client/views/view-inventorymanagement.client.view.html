@@ -4,6 +4,7 @@
       {{vm.inventorymanagement.tags}}
       <small ng-class="vm.labelDisp()" ng-hide="{vm.inventorymanagement.discontinue === false}">{{vm.labelText()}}</small>
       <span class="pull-right">
+        <a class="btn btn-default" ui-sref="inventorymanagements.list">Back to Inventory</a>
         <a class="btn btn-primary" ui-sref="inventorymanagements.edit({ inventorymanagementId: vm.inventorymanagement._id })">Edit</a>
         <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
         <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
@@ -38,8 +39,5 @@
         <div class="col-md-6" ng-bind="vm.inventorymanagement.updated | date : 'short'"></div>
       </div>
     </div>
-  </div>
-  <div class="pull-right">
-    <a class="btn btn-default" ui-sref="inventorymanagements.list">Back to Inventory</a>
   </div>
 </section>

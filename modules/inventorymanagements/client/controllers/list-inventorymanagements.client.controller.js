@@ -9,9 +9,9 @@
 
   function InventorymanagementsListController(InventorymanagementsService) {
     var vm = this;
-      
+
     //console.log(angular.version);
-      
+
     vm.inventorymanagements = InventorymanagementsService.query();
     vm.headSort = 'tags';
     vm.reverse = false;
@@ -30,24 +30,36 @@
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
       vm.reverseTags = vm.reverse;
+      vm.reverseUPC = false;
+      vm.reverseQuantity = false;
+      vm.reverseUpdated = false;
     }
-    
-     function changeSortUPC(headName) {
+
+    function changeSortUPC(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-       vm.reverseUPC = vm.reverse;
+      vm.reverseUPC = vm.reverse;
+      vm.reverseTags = false;
+      vm.reverseQuantity = false;
+      vm.reverseUpdated = false;
     }
-    
-     function changeSortQuantity(headName) {
+
+    function changeSortQuantity(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
       vm.reverseQuantity = vm.reverse;
+      vm.reverseTags = false;
+      vm.reverseUPC = false;
+      vm.reverseUpdated = false;
     }
-    
-     function changeSortUpdated(headName) {
+
+    function changeSortUpdated(headName) {
       vm.headSort = headName;
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
       vm.reverseUpdated = vm.reverse;
+      vm.reverseTags = false;
+      vm.reverseUPC = false;
+      vm.reverseQuantity = false;
     }
 
     //show inactive items in the inventory list

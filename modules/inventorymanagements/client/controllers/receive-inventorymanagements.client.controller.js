@@ -8,8 +8,8 @@
   InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state'];
 
   function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state) {
-    var a = document.getElementById('link-id'); //or grab it by tagname etc
-    a.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+    //var a = document.getElementById('link-id'); //or grab it by tagname etc
+    //a.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
     var vm = this;
     $scope.state = $state;
     vm.inventorymanagements = InventorymanagementsService.query();
@@ -247,7 +247,7 @@
       var item = vm.inventorymanagements[i];
 
       //create new user log with receve data
-      vm.userlog.username = Authentication.user.username;
+      vm.userlog.username = Authentication.user.username; 
       console.log(vm.userlog.username);
       vm.userlog.clientName = 'RECIEVE';
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;

@@ -18,24 +18,36 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       $scope.headSort = headName;
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
       $scope.reverseUsername = $scope.reverse;
+      $scope.reverseRoles = false;
+      $scope.reverseEmail = false;
+      $scope.reverseUpdated = false;
     }
-    
-     function changeSortRoles(headName) {
+
+    function changeSortRoles(headName) {
       $scope.headSort = headName;
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
       $scope.reverseRoles = $scope.reverse;
+      $scope.reverseUsername = false;
+      $scope.reverseEmail = false;
+      $scope.reverseUpdated = false;
     }
-    
-     function changeSortEmail(headName) {
+
+    function changeSortEmail(headName) {
       $scope.headSort = headName;
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
       $scope.reverseEmail = $scope.reverse;
+      $scope.reverseUsername = false;
+      $scope.reverseRoles = false;
+      $scope.reverseUpdated = false;
     }
-    
-     function changeSortUpdated(headName) {
+
+    function changeSortUpdated(headName) {
       $scope.headSort = headName;
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
       $scope.reverseUpdated = $scope.reverse;
+      $scope.reverseUsername = false;
+      $scope.reverseRoles = false;
+      $scope.reverseEmail = false;
     }
 
     //stores users locally to the webpage
