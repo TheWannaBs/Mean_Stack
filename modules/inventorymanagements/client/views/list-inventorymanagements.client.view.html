@@ -4,9 +4,9 @@
       Inventory List
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Item</a>
-        <a class="btn btn-warning" ui-sref="inventorymanagements.receive">Receive Items</a>
+        <a class="btn btn-primary" ui-sref="inventorymanagements.receive">Receive Items</a>
         <a class="btn btn-primary" ui-sref="moveinventory">Move Items</a>
-        <a class="btn btn-default" ui-sref="">Print</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
       </span>
     </h1>
   </div>
@@ -32,7 +32,6 @@
               <i ng-hide="vm.hideArrow('upc', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
               <i ng-hide="vm.hideArrow('upc', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
-            <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
             <th ng-click="vm.changeSort('qty')">Quantity
               <i ng-hide="vm.hideArrow('qty', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
               <i ng-hide="vm.hideArrow('qty', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>

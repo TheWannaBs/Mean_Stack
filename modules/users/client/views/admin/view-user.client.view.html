@@ -3,9 +3,10 @@
     <h1>
       {{user.username}}
       <span class="pull-right">
-        <a class="btn btn-default" ui-sref="admin.users">Back to User List</a>
         <a class="btn btn-primary" ng-click="editCheck(user.username, user._id)">Edit</a>
         <a class="btn btn-danger" ng-click="remove();" ng-if="user._id !== authentication.user._id">Delete</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
+        <a class="btn btn-default" ui-sref="admin.users">Back to User List</a>
       </span>
     </h1>
   </div>
@@ -27,11 +28,6 @@
         <div class="col-md-6" ng-bind="user.email"></div>
       </div>
       <hr/>
-      <!--div class="row">
-        <div class="col-md-3"><strong>Password</strong></div>
-        <div class="col-md-6" ng-bind="user.password"></div>
-      </div>
-      <hr/-->
       <div class="row">
         <div class="col-md-3"><strong>Provider</strong></div>
         <div class="col-md-6" ng-bind="user.provider"></div>

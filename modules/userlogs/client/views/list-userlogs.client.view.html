@@ -2,8 +2,8 @@
   <div class="page-header row">
     <h1>User Log
       <span class="pull-right">
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
         <a class="btn btn-default" ui-sref="admin.users">Back</a>
-        <a class="btn btn-default" ui-sref="">Print</a>
       </span>
     </h1>
   </div>
@@ -37,7 +37,6 @@
               <i ng-hide="vm.hideArrow('itemUpc', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
               <i ng-hide="vm.hideArrow('itemUpc', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
-            <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
             <th ng-click="vm.changeSort('qty_moved')">Quantity Moved
               <i ng-hide="vm.hideArrow('qty_moved', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
               <i ng-hide="vm.hideArrow('qty_moved', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
