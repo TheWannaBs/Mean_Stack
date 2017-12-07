@@ -17,7 +17,7 @@
             <input type="text" class="form-control" placeholder="Search" ng-model="query">
         </div>
         <br/>
-        <div style="margin-left:880px;" class="input-group" id="showdisc">
+        <div class="input-group pull-right" id="showdisc">
             <input class="form-check-input" type="checkbox" ng-model="checkModel" />
           <bold class="form-check-label"> <b>Show Inactive Clients</b> </bold>
         </div>
@@ -57,11 +57,11 @@
                 <tbody>
                     <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel) ? '' : vm.showNoInactive" ng-class="vm.inactiveRow(clientmanagement)" ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
                         <td>{{clientmanagement.name}}
-                        <!--  
+                        <!--
                         <div ng-hide="{vm.showNoInactive === vm.C_T}">{{vm.labelText()}}
                         <div ng-hide="{vm.clientmanagement.inactive === vm.C_T}">{{vm.labelText()}}
                         <div class="form-group" ng-hide="vm.showNoInactive">
-                        <div ng-hide="vm.showNoInactive">  
+                        <div ng-hide="vm.showNoInactive">
                         <i style="font-size:20px;" class="fa fa-arrow-circle-o-right pull-right"></i>
                         </div>
                         -->

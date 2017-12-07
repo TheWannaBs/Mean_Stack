@@ -13,43 +13,38 @@
   <div class="row">
     <div class="col-md-8">
       <div class="row">
-        <div class="col-md-3"><strong>First Name</strong></div>
-        <div class="col-md-6" ng-bind="user.firstName"></div>
+        <strong class="col-md-3" style="font-size: 16px">First Name</strong>
+        <p class="col-md-6" ng-bind="user.firstName"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Last Name</strong></div>
-        <div class="col-md-6" ng-bind="user.lastName"></div>
+        <strong class="col-md-3" style="font-size: 16px">Last Name</strong>
+        <p class="col-md-6" ng-bind="user.lastName"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Email</strong></div>
-        <div class="col-md-6" ng-bind="user.email"></div>
-      </div>
-      <hr/>
-      <!--div class="row">
-        <div class="col-md-3"><strong>Password</strong></div>
-        <div class="col-md-6" ng-bind="user.password"></div>
-      </div>
-      <hr/-->
-      <div class="row">
-        <div class="col-md-3"><strong>Provider</strong></div>
-        <div class="col-md-6" ng-bind="user.provider"></div>
+        <strong class="col-md-3" style="font-size: 16px">Email</strong>
+        <p class="col-md-6" ng-bind="user.email"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="user.created | date : 'short'"></div>
+        <strong class="col-md-3" style="font-size: 16px">Provider</strong>
+        <p class="col-md-6" ng-bind="user.provider"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Updated</strong></div>
-        <div class="col-md-6" ng-bind="user.updated | date : 'short'"></div>
+        <strong class="col-md-3" style="font-size: 16px">Created</strong>
+        <p class="col-md-6" ng-bind="user.created | date : 'short'"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Roles</strong></div>
-        <div class="col-md-6" ng-bind="user.roles"></div>
+        <strong class="col-md-3" style="font-size: 16px">Updated</strong>
+        <p class="col-md-6" ng-bind="user.updated | date : 'short'"/>
+      </div>
+      <hr/>
+      <div class="row">
+        <strong class="col-md-3" style="font-size: 16px">Roles</strong>
+        <p class="col-md-6" ng-bind="user.roles"/>
       </div>
     </div>
   </div>
