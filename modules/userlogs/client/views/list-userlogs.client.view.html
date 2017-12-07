@@ -2,8 +2,8 @@
   <div class="page-header row">
     <h1>User Log
       <span class="pull-right">
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
         <a class="btn btn-default" ui-sref="admin.users">Back</a>
-        <a class="btn btn-default" ui-sref="">Print</a>
       </span>
     </h1>
   </div>
@@ -22,29 +22,28 @@
         <thead class="thead-default">
           <tr class="sortable">
             <th ng-click="vm.changeSort('username')">Username
-              <i ng-hide="vm.hideArrow('username', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet-alt pull-right"></i>
-              <i ng-hide="vm.hideArrow('username', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-alphabet pull-right"></i>
+              <i ng-hide="vm.hideArrow('username', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('username', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
             <th ng-click="vm.changeSort('clientName')">Client Name
-              <i ng-hide="vm.hideArrow('clientName', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
-              <i ng-hide="vm.hideArrow('clientName', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
+              <i ng-hide="vm.hideArrow('clientName', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('clientName', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
             <th ng-click="vm.changeSort('direction')">Direction
-              <i ng-hide="vm.hideArrow('direction', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-arrow-left pull-right"></i>
-              <i ng-hide="vm.hideArrow('direction', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-arrow-right pull-right"></i>
+              <i ng-hide="vm.hideArrow('direction', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-arrow-left pull-right"></i>
+              <i ng-hide="vm.hideArrow('direction', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-arrow-right pull-right"></i>
             </th>
             <th ng-click="vm.changeSort('itemUpc')"> Inventory Item
-              <i ng-hide="vm.hideArrow('itemUpc', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
-              <i ng-hide="vm.hideArrow('itemUpc', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
+              <i ng-hide="vm.hideArrow('itemUpc', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('itemUpc', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
-            <!--<th ng-click="vm.changeSort('branch')">Branch</th>-->
             <th ng-click="vm.changeSort('qty_moved')">Quantity Moved
-              <i ng-hide="vm.hideArrow('qty_moved', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
-              <i ng-hide="vm.hideArrow('qty_moved', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
+              <i ng-hide="vm.hideArrow('qty_moved', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('qty_moved', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
             <th ng-click="vm.changeSort('timestamp')">Timestamp
-              <i ng-hide="vm.hideArrow('timestamp', vm.C_T)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order-alt pull-right"></i>
-              <i ng-hide="vm.hideArrow('timestamp', vm.C_F)" style="font-size:20px;" class="glyphicon glyphicon-sort-by-order pull-right"></i>
+              <i ng-hide="vm.hideArrow('timestamp', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('timestamp', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
             </th>
           </tr>
         </thead>

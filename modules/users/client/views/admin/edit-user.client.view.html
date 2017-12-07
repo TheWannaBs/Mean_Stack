@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1><div style="text-align:center">User Edit</div></h1>
+    <h1>User Edit</h1>
   </div>
   <div class="col-md-12">
     <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
@@ -26,13 +26,6 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
-        <!--div class="form-group" show-errors>
-          <label for="password">Password</label>
-          <input type="text" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password" required />
-          <div ng-messages="userForm.password.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Password is required.</p>
-          </div>
-        </div-->
         <div class="form-group" show-errors>
           <label class="control-label" for="roles">Roles</label>
           <select class="form-control" name="roles" ng-model="user.roles" id="roles" required>
@@ -42,8 +35,8 @@
           </select>
         </div>
         <div class="form-group">
-          <a class="btn btn-default" ui-sref="admin.user({userId: user._id})">Cancel</a>
           <input type="submit" value="Update" class="btn btn-default">
+          <a class="btn btn-default" ui-sref="admin.user({userId: user._id})">Cancel</a>
         </div>
         <div ng-show="error" class="text-danger">
           <strong ng-bind="error"></strong>

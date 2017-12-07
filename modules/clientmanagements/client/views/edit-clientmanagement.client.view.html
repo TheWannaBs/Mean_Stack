@@ -1,6 +1,6 @@
 <section>
-    <div class="page-header" ng-hide="">
-        <h1><div style="text-align:center">Edit Client</div></h1>
+    <div class="page-header">
+        <h1>Edit Client</h1>
     </div>
     <div class="col-md-offset-1 col-md-10">
         <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
@@ -8,7 +8,6 @@
                 <div class="form-group" style="margin-right:201px;">
                   <label class="control-label">
                     <span>Types of Clients:</span>
-                    <!--<span ng hide="!vm.clientmanagement.clientrolesVeteran"> Branch </span>-->
                   </label>
                   <br>
                   <input name="foster" type="checkbox" ng-model="vm.clientmanagement.clientrolesFoster" id="foster" placeholder="foster">&nbsp;Foster&nbsp;&nbsp;
@@ -64,7 +63,7 @@
               <div class="form-group">
                 <div class="form-group pull-right">
                   <input type="submit" value="Update Client" class="btn btn-primary" />
-                  <input type="button" value="Cancel" class="btn" ui-sref="clientmanagements.view({clientmanagementId: vm.clientmanagement._id})" />
+                  <a class="btn btn-default" ui-sref="clientmanagements.view({clientmanagementId: vm.clientmanagement._id})">Cancel</a>
                 </div>
                 <alert type="danger" ng-show="vm.error" class="text-center text-danger">
                   <strong ng-bind="vm.error"></strong>
