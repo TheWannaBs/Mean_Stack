@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel) ? '' : vm.showNoInactive" ng-class="vm.inactiveRow(clientmanagement)" ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
+                    <tr ng-repeat="clientmanagement in vm.clientmanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel) ? '' : vm.showNoInactive" ng-style="vm.inactiveRow(clientmanagement)" ui-sref="clientmanagements.view({ clientmanagementId: clientmanagement._id})">
                         <td>{{clientmanagement.name}}
                         <!--  
                         <div ng-hide="{vm.showNoInactive === vm.C_T}">{{vm.labelText()}}

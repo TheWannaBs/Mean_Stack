@@ -42,10 +42,13 @@
     //Changes color of a row if that item is inactive
     vm.inactiveRow = function (item) {
       if (item.inactive) {
-        return 'danger';
+        return {
+          "opacity" : "1",
+          "background-color": "orange"
+        };
       }
       else {
-        return '';
+        return {};
       }
     };
   }
