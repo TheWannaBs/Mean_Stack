@@ -1,11 +1,12 @@
 <section>
   <div class="page-header">
-    <h1><div style="text-align:center">Create A New Client</div></h1>
+    <h1>Create A New Client</h1>
   </div>
   <div class="col-md-offset-1 col-md-10">
     <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
       <fieldset>
-            <div class="form-group" style="margin-right:201px;">
+          <div class="container">
+            <div class="row">
               <label class="control-label">
                 <span>Types of Clients:</span>
               </label>
@@ -17,7 +18,7 @@
               <input name="volunteer" type="checkbox" ng-model="vm.clientmanagement.clientrolesVolunteer" id="volunteer" placeholder="Volunteer">&nbsp;Volunteer
             </div>
             <br>
-            <div class="form-group" style="position:absolute;width:491px;right:0;top:0;" ng-hide="!vm.clientmanagement.clientrolesVeteran">
+            <div class="form-group pull-right" style="position:absolute;width:491px;right:0;top:0;" ng-hide="!vm.clientmanagement.clientrolesVeteran">
               <label class="control-label" for="branch">Branch:</label>
               <br>
               <input type="checkbox" ng-model="vm.clientmanagement.airForce">&nbsp;Airforce&nbsp;&nbsp;
@@ -27,6 +28,7 @@
               <input type="checkbox" ng-model="vm.clientmanagement.coastGuard">&nbsp;Coast Guard&nbsp;&nbsp;
               <input type="checkbox" ng-model="vm.clientmanagement.nationalGuard">&nbsp;National Guard
             </div>
+          </div>
           <p class="form-group"><font color="grey" style="margin-top: 1000px"><b>The following entires are <em>required</em> fields: Name and Email</b></font></p>
 
           <div class="form-group" show-errors>
