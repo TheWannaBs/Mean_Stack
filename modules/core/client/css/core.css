@@ -38,5 +38,15 @@ a:hover .header-profile-image {
 
 body
 {
-  background-color: white;
+  background-color: #e0e3e5;
+}
+
+.jumbotron
+{
+  background: #272f77; 
+}
+
+thead th {
+    background-color: #1f6bb7; /* #1f6bb7; *//* #2067ad; */
+    color: #f7f8f9;
 }
