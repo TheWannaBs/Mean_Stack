@@ -4,13 +4,24 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
   function ($scope, $filter, Admin) {
     $scope.headSort = 'username';
     $scope.reverse = false;
-    $scope.changeSort = changeSort;
+    $scope.C_T = true;
+    $scope.C_F = false;
 
-    //sort list of users by header; in order or out of order
-    function changeSort(headName) {
-      $scope.headSort = headName;
+    //This changes the sorting of the table by the head selected and reverses it if it is selected again
+    $scope.changeSort = function (headName) {
       $scope.reverse = (headName === $scope.headSort) ? !$scope.reverse : false;
-    }
+      $scope.headSort = headName;
+    };
+
+    //This decides if the up or down arrow is displayed in a specific table head
+    $scope.hideArrow = function (arrowCatagory, arrowReverse) {
+      if (arrowCatagory === $scope.headSort && arrowReverse === $scope.reverse) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    };
 
     //stores users locally to the webpage
     Admin.query(function (data) {

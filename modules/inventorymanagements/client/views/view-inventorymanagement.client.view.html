@@ -7,6 +7,8 @@
         <a class="btn btn-primary" ui-sref="inventorymanagements.edit({ inventorymanagementId: vm.inventorymanagement._id })">Edit</a>
         <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
         <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
+        <a class="btn btn-default" ui-sref="inventorymanagements.list">Back to List</a>
       </span>
     </h1>
   </div>
@@ -14,32 +16,29 @@
   <div class="row">
     <div class="col-md-8">
       <div class="row">
-        <div class="col-md-3"><strong>UPC</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.upc"></div>
+        <strong class="col-md-3" style="font-size: 16px">upc</strong>
+        <p class="col-md-6" ng-bind="vm.inventorymanagement.upc"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Description</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.description"></div>
+        <strong class="col-md-3" style="font-size: 16px">Description</strong>
+        <p class="col-md-6" ng-bind="vm.inventorymanagement.description"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Quantity in Inventory</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.qty"></div>
+        <strong class="col-md-3" style="font-size: 16px">Quantity</strong>
+        <p class="col-md-6" ng-bind="vm.inventorymanagement.qty"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.created | date : 'short'"></div>
+        <strong class="col-md-3" style="font-size: 16px">Created</strong>
+        <p class="col-md-6" ng-bind="vm.inventorymanagement.created | date : 'short'"/>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><strong>Last Updated</strong></div>
-        <div class="col-md-6" ng-bind="vm.inventorymanagement.updated | date : 'short'"></div>
+        <strong class="col-md-3" style="font-size: 16px">Last Updated</strong>
+        <p class="col-md-6" ng-bind="vm.inventorymanagement.updated | date : 'short'"/>
       </div>
     </div>
-  </div>
-  <div class="pull-right">
-    <a class="btn btn-default" ui-sref="inventorymanagements.list">Back to Inventory</a>
   </div>
 </section>

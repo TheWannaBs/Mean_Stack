@@ -5,9 +5,11 @@
   .module('inventorymanagements')
   .controller('InventorymanagementsReceiveController', InventorymanagementsReceiveController);
 
-  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state'];
+  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state', '$window'];
 
-  function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state) {
+  function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state, $window) {
+    //var a = document.getElementById('link-id'); //or grab it by tagname etc
+    //a.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
     var vm = this;
     $scope.state = $state;
     vm.inventorymanagements = InventorymanagementsService.query();
@@ -19,6 +21,20 @@
 
     startScanner();
 
+    //Displays toast message
+    function toasty() {
+      var x = document.getElementById('snackbar');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
+    //Displays toast message
+    function toasty1() {
+      var x = document.getElementById('snackbar1');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
     //on-click for start/stop scanner button
     function startScanner() {
       Quagga.init({
@@ -26,8 +42,8 @@
           name: 'Live',
           type: 'LiveStream',
           constraints: {
-            width: 480,
-            height: 320,
+            width: 1920,
+            height: 1080,
             facingMode: 'environment'
           },
         },
@@ -103,6 +119,7 @@
         console.log('Barcode detected and processed : [' + result.codeResult.code + ']', result);
         $scope.choices[scanThis].upc.upc = result.codeResult.code;
         console.log($scope.choices[scanThis].upc.upc);
+        toasty1();
         $state.go('inventorymanagements.receive');
         scanArmed[scanThis] = false;
         scanThis = null;
@@ -111,7 +128,7 @@
 
     //Start/stop scanner
     //TODO: check the restart functionality
-    document.getElementById('btn').addEventListener('click', function () {
+    /*document.getElementById('btn').addEventListener('click', function () {
       if (_scannerIsRunning) {
         Quagga.stop();
         _scannerIsRunning = false;
@@ -119,7 +136,7 @@
         startScanner();
       }
       console.log(_scannerIsRunning);
-    }, false);
+    }, false);*/
 
     //on-click for scan select btn
     $scope.scanSelect = function(btnID1) {
@@ -155,13 +172,6 @@
         tmp++;
       }
     };
-
-    //Displays toast message
-    function toasty() {
-      var x = document.getElementById('snackbar');
-      x.className = 'show';
-      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
-    }
 
     //Checks if str is non-zero int
     function isNonzeroInteger(str) {
@@ -240,17 +250,23 @@
       }
     };
 
-    //should save 
+    $scope.cancel = function () {
+      Quagga.stop();
+      $state.go('inventorymanagements.list');
+      Quagga.stop();
+    };
+
+    //should save
     $scope.saveUserLog = function (i, q) {
       var item = vm.inventorymanagements[i];
 
       //create new user log with receve data
-      vm.userlog.username = Authentication.user.username; 
+      vm.userlog.username = Authentication.user.username;
       console.log(vm.userlog.username);
       vm.userlog.clientName = 'RECIEVE';
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;
       vm.userlog.itemUpc = vm.inventorymanagements[i].upc;
-      vm.userlog.direction = '->';
+      vm.userlog.direction = '->';//'\u00A9'
       vm.userlog.qty_moved = q;
       //save this log to the database
       vm.userlog.$save();

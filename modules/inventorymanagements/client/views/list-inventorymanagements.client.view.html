@@ -4,9 +4,10 @@
       Inventory List
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="inventorymanagements.create">Create Item</a>
-        <a class="btn btn-warning" ui-sref="inventorymanagements.receive">Receive Items</a>
+        <a class="btn btn-primary" ui-sref="inventorymanagements.receive">Receive Items</a>
         <a class="btn btn-primary" ui-sref="moveinventory">Move Items</a>
-        <a class="btn btn-default" ui-sref="">Print</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
+        <a class="btn btn-default" ui-sref="mainmenuadmin">Back to Menu</a>
       </span>
     </h1>
   </div>
@@ -16,21 +17,34 @@
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
       <input type="text" class="form-control" placeholder="Search" ng-model="query">
     </div><br/>
-    <div class="input-group" id="showdisc">
-      <input class="form-check-input" type="checkbox" ng-model="checkModel"/><small class="form-check-label">Show Inactive Items</small>
+    <div class="input-group pull-right" id="showdisc">
+      <input class="form-check-input" type="checkbox" ng-model="checkModel"/>
+      <bold class="form-check-label"> <b>Show Inactive Items</b> </bold>
     </div>
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="vm.changeSort('tags')">Tags</th>
-            <th ng-click="vm.changeSort('upc')">UPC</th>
-            <th ng-click="vm.changeSort('qty')">Quantity</th>
-            <th ng-click="vm.changeSort('updated')">Last Updated</th>
+          <tr class="sortable">
+            <th ng-click="vm.changeSort('tags')">Tags
+              <i ng-hide="vm.hideArrow('tags', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('tags', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('upc')">UPC
+              <i ng-hide="vm.hideArrow('upc', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('upc', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('qty')">Quantity
+              <i ng-hide="vm.hideArrow('qty', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('qty', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('updated')">Last Updated
+              <i ng-hide="vm.hideArrow('updated', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('updated', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="inventorymanagement in vm.inventorymanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)" ui-sref="inventorymanagements.view({ inventorymanagementId: inventorymanagement._id})">
+          <tr ng-repeat="inventorymanagement in vm.inventorymanagements  | filter : query | orderBy : vm.headSort : vm.reverse | filter : (checkModel ? '' : vm.showNoInactive)" ng-style="vm.inactiveRow(inventorymanagement)" ui-sref="inventorymanagements.view({ inventorymanagementId: inventorymanagement._id})">
             <td>{{inventorymanagement.tags}}</td>
             <td>{{inventorymanagement.upc}}</td>
             <td>{{inventorymanagement.qty}}</td>

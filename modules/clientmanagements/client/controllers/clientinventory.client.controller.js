@@ -13,9 +13,9 @@
     .module('userlogs')
     .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile', '$window'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile, $window) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
@@ -37,13 +37,22 @@
       setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
+    // used for making toast appear
+    function toasty1() {
+      var x = document.getElementById('snackbar1');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
     // redirects user back to home
     $scope.cancelButton = function () {
+      Quagga.stop();
       if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
       } else {
         $state.go('mainmenu');
       }
+      Quagga.stop();
     };
 
     // adds another upc and quantity field
@@ -56,7 +65,7 @@
       document.getElementById('input_upc').appendChild(newCen);
       $scope.serial[upcFields] = {};
       upcFields++;
-      startScanner();
+      //startScanner();
     };
 
     // removes the last upc and quantity field
@@ -186,6 +195,7 @@
         console.log($scope.serial[upcFields-1]);
         //Quagga.stop();
         //_scannerIsRunning = false;
+        toasty1();
         $state.go('moveinventory');
       });
     }
@@ -431,7 +441,7 @@
           }
           vm.inventorymanagements[invResult].qty += quant;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
-          $scope.saveUserLog(clientResult, '->', invResult, quant);
+          $scope.saveUserLog(clientResult, '->', invResult, quant); //'\u00A9'
         }
         vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
@@ -454,13 +464,13 @@
       }
     };
 
-    //should save 
+    //should save
     $scope.saveUserLog = function (c, d, i, q) {
       vm.userlog = new UserlogsService();
       var item = vm.inventorymanagements[i];
       var client = vm.clientmanagements[c];
       //create new user log with receve data
-      vm.userlog.username = Authentication.user.username; 
+      vm.userlog.username = Authentication.user.username;
       // console.log(vm.userlogs.username);
       vm.userlog.clientName = client.name;
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;

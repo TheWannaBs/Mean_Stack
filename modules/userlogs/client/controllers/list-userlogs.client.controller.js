@@ -13,51 +13,32 @@
     vm.userlogs = UserlogsService.query();
     vm.headSort = 'timestamp';
     vm.reverse = true;
-    vm.changeSort = changeSort;
+    vm.C_T = true;
+    vm.C_F = false;
 
-    //Sort heads of the userlog list in order or reverse order
-    function changeSort(headName) {
-      vm.headSort = headName;
+    //Sorts table by header; second click reverses the order
+    vm.changeSort = function (headName) {
       vm.reverse = (headName === vm.headSort) ? !vm.reverse : false;
-    }
+      vm.headSort = headName;
+    };
 
-    /*
-    function reverseSort() {
-      var len = vm.headsort.length;
-      if (vm.headsort.substring(len - 4, len) == 'true') {
-        vm.headsort = vm.headsort.replaceAt(len - 4, 'false');
+    //This decides if the up or down arrow is displayed in a specific table head
+    vm.hideArrow = function (arrowCatagory, arrowReverse) {
+      if (arrowCatagory === vm.headSort && arrowReverse === vm.reverse) {
+        return false;
       }
       else {
-        vm.headsort = vm.headsort.replaceAt(len - 4, 'false');
+        return true;
       }
-    }
-
-    //this is a helper function to replace strings at specific indicies with a substring 
-    String.prototype.replaceAt = function (index, replacement) {
-      return this.substr(0, index) + replacement + this.substr(index + replacement.length);
-    }
-
-    THIS IS FOR PAGENATION DO NOT DELETE
-    vm.buildPager = function () {
-      vm.pagedItems = [];
-      vm.itemsPerPage = 20;
-      vm.currentPage = 1;
-      vm.figureOutItemsToDisplay();
     };
 
-    vm.figureOutItemsToDisplay = function () {
-      vm.filteredItems = $filter('filter')(vm.userlogs, {
-        $: vm.search
-      });
-      vm.filterLength = vm.filteredItems.length;
-      var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-      var end = begin + vm.itemsPerPage;
-      vm.pagedItems = vm.filteredItems.slice(begin, end);
+    vm.directionGlyph = function (dir) {
+      if (dir === '->') {
+        return 'glyphicon glyphicon-arrow-right';
+      }
+      else {
+        return 'glyphicon glyphicon-arrow-left';
+      }
     };
-
-    vm.pageChanged = function () {
-      vm.figureOutItemsToDisplay();
-    };
-    */
   }
 }());

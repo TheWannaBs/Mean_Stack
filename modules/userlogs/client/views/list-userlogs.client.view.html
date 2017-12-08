@@ -1,15 +1,15 @@
 <section>
   <div class="page-header row">
-    <h1>
-      User Log
+    <h1>User Log
       <span class="pull-right">
-        <a class="btn btn-default" ui-sref="">Print</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
+        <a class="btn btn-default" ui-sref="admin.users">Back</a>
       </span>
     </h1>
   </div>
 
 
-  <div class="col-md-offset-1 col-md-10">
+  <div class="col-md-offset-1 col-md-11">
     <div class="input-group" id="searchBar">
       <span class="input-group-addon" id="sizing-addon1">
         <span class="glyphicon glyphicon-search"></span>
@@ -20,31 +20,44 @@
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="vm.changeSort('username')">User</th>
-            <th ng-click="vm.changeSort('clientName')">Client Name</th>
-            <th ng-click="vm.changeSort('move_from_inventory')">Direction</th>
-            <th ng-click="vm.changeSort('itemUpc')">Inventory UPC</th>
-            <th ng-click="vm.changeSort('itemTags')">Inventory Tags</th>
-            <th ng-click="vm.changeSort('qty_moved')">Quantity Moved</th>
-            <th ng-click="vm.changeSort('timestamp')">Timestamp</th>
+          <tr class="sortable">
+            <th ng-click="vm.changeSort('username')">Username
+              <i ng-hide="vm.hideArrow('username', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('username', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('clientName')">Client Name
+              <i ng-hide="vm.hideArrow('clientName', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('clientName', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('direction')">Direction
+              <i ng-hide="vm.hideArrow('direction', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-arrow-left pull-right"></i>
+              <i ng-hide="vm.hideArrow('direction', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-arrow-right pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('itemUpc')"> Inventory Item
+              <i ng-hide="vm.hideArrow('itemUpc', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('itemUpc', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('qty_moved')">Quantity Moved
+              <i ng-hide="vm.hideArrow('qty_moved', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('qty_moved', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="vm.changeSort('timestamp')">Timestamp
+              <i ng-hide="vm.hideArrow('timestamp', vm.C_T)" style="font-size:15px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="vm.hideArrow('timestamp', vm.C_F)" style="font-size:15px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort : vm.reverse">
             <td>{{userlog.username}}</td>
             <td>{{userlog.clientName}}</td>
-            <td>{{userlog.direction}}</td>
-            <td>{{userlog.itemUpc}}</td>  
-            <td>{{userlog.itemTags}}</td>
+            <td><i ng-class="vm.directionGlyph(userlog.direction)"></i></td>
+            <td>{{userlog.itemUpc}}&nbsp&nbsp{{userlog.itemTags}}</td>
             <td>{{userlog.qty_moved}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
           </tr>
         </tbody>
       </table>
-      <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage"
-        ng-change="pageChanged()"></pagination>
-      </section>
     </div>
   </div>
 </section>
