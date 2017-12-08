@@ -31,5 +31,14 @@
         return true;
       }
     };
+
+    vm.directionGlyph = function (dir) {
+      if (dir === '->') {
+        return 'glyphicon glyphicon-arrow-right';
+      }
+      else {
+        return 'glyphicon glyphicon-arrow-left';
+      }
+    };
   }
 }());
