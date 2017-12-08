@@ -21,6 +21,20 @@
 
     startScanner();
 
+    //Displays toast message
+    function toasty() {
+      var x = document.getElementById('snackbar');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
+    //Displays toast message
+    function toasty1() {
+      var x = document.getElementById('snackbar1');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
     //on-click for start/stop scanner button
     function startScanner() {
       Quagga.init({
@@ -105,6 +119,7 @@
         console.log('Barcode detected and processed : [' + result.codeResult.code + ']', result);
         $scope.choices[scanThis].upc.upc = result.codeResult.code;
         console.log($scope.choices[scanThis].upc.upc);
+        toasty1();
         $state.go('inventorymanagements.receive');
         scanArmed[scanThis] = false;
         scanThis = null;
@@ -157,13 +172,6 @@
         tmp++;
       }
     };
-
-    //Displays toast message
-    function toasty() {
-      var x = document.getElementById('snackbar');
-      x.className = 'show';
-      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
-    }
 
     //Checks if str is non-zero int
     function isNonzeroInteger(str) {
@@ -247,7 +255,7 @@
       var item = vm.inventorymanagements[i];
 
       //create new user log with receve data
-      vm.userlog.username = Authentication.user.username; 
+      vm.userlog.username = Authentication.user.username;
       console.log(vm.userlog.username);
       vm.userlog.clientName = 'RECIEVE';
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;
