@@ -51,7 +51,7 @@
           <tr ng-repeat="userlog in vm.userlogs  | filter : query | orderBy : vm.headSort : vm.reverse">
             <td>{{userlog.username}}</td>
             <td>{{userlog.clientName}}</td>
-            <td>{{userlog.direction}}</td>
+            <td><i ng-class="vm.directionGlyph(userlog.direction)"></i></td>
             <td>{{userlog.itemUpc}}&nbsp&nbsp{{userlog.itemTags}}</td>
             <td>{{userlog.qty_moved}}</td>
             <td ng-bind="userlog.timestamp | date : 'short'"></td>
