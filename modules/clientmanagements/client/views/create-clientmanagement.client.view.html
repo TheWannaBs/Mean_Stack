@@ -5,7 +5,8 @@
   <div class="col-md-offset-1 col-md-10">
     <form name="vm.form.clientmanagementForm" class="form-horizontal" ng-submit="vm.save(vm.form.clientmanagementForm.$valid)" novalidate>
       <fieldset>
-            <div class="form-group">
+        <div class="container">
+            <div class="form-group col-sm-5">
               <label class="control-label">
                 <span>Types of Clients:</span>
               </label>
@@ -16,8 +17,8 @@
               <input name="veteran" type="checkbox" ng-model ="vm.clientmanagement.clientrolesVeteran" id="veteran" placeholder="Veteran">&nbsp;Veteran&nbsp;&nbsp;
               <input name="volunteer" type="checkbox" ng-model="vm.clientmanagement.clientrolesVolunteer" id="volunteer" placeholder="Volunteer">&nbsp;Volunteer
             </div>
-            
-            <div class="form-group" ng-hide="!vm.clientmanagement.clientrolesVeteran">
+            <br>
+            <div class="form-group col-sm-5" ng-hide="!vm.clientmanagement.clientrolesVeteran">
               <label class="control-label" for="branch">Branch:</label>
               <br>
               <input type="checkbox" ng-model="vm.clientmanagement.airForce">&nbsp;Airforce&nbsp;&nbsp;
@@ -26,9 +27,10 @@
               <input type="checkbox" ng-model="vm.clientmanagement.army">&nbsp;Army&nbsp;&nbsp;
               <input type="checkbox" ng-model="vm.clientmanagement.coastGuard">&nbsp;Coast Guard&nbsp;&nbsp;
               <input type="checkbox" ng-model="vm.clientmanagement.nationalGuard">&nbsp;National Guard
+            </div>
           </div>
           <p class="form-group"><font color="grey" style="margin-top: 1000px"><b>The following entires are <em>required</em> fields: Name and Email</b></font></p>
-          
+
           <div class="form-group" show-errors>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" class="form-control" ng-model="vm.clientmanagement.name" id="name" class="form-control" placeholder="Name" required>

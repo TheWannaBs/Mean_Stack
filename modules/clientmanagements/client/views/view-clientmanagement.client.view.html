@@ -5,10 +5,11 @@
         {{vm.clientmanagement.name}}
         <small ng-class="vm.labelDisp()" ng-hide="{vm.clientmanagement.inactive === false}">{{vm.labelText()}}</small>
         <span class="pull-right">
-          <a class="btn btn-default" ui-sref="clientmanagements.list">Back to List</a>
           <a class="btn btn-primary" ui-sref="clientmanagements.edit({ clientmanagementId: vm.clientmanagement._id })">Edit</a>
           <a ng-class="vm.buttonColor()" ng-click="vm.changeStatus()">{{vm.buttonText()}}</a>
           <a class="btn btn-danger" ng-click="vm.remove()">Delete</a>
+          <a class="btn btn-default" href="javascript:window.print()">Print</a>
+          <a class="btn btn-default" ui-sref="clientmanagements.list">Back to List</a>
         </span>
       </h1>
     </div>

@@ -13,9 +13,9 @@
     .module('userlogs')
     .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile', '$window'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile, $window) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
@@ -46,11 +46,13 @@
 
     // redirects user back to home
     $scope.cancelButton = function () {
+      Quagga.stop();
       if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
       } else {
         $state.go('mainmenu');
       }
+      Quagga.stop();
     };
 
     // adds another upc and quantity field
@@ -63,7 +65,7 @@
       document.getElementById('input_upc').appendChild(newCen);
       $scope.serial[upcFields] = {};
       upcFields++;
-      startScanner();
+      //startScanner();
     };
 
     // removes the last upc and quantity field
