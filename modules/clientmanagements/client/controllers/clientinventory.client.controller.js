@@ -46,12 +46,13 @@
 
     // redirects user back to home
     $scope.cancelButton = function () {
+      Quagga.stop();
       if ('admin' === Authentication.user.roles[0]) {
         $state.go('mainmenuadmin');
       } else {
         $state.go('mainmenu');
       }
-      $window.location.reload();
+      Quagga.stop();
     };
 
     // adds another upc and quantity field

@@ -251,8 +251,9 @@
     };
 
     $scope.cancel = function () {
+      Quagga.stop();
       $state.go('inventorymanagements.list');
-      $window.location.reload();
+      Quagga.stop();
     };
 
     //should save
