@@ -50,3 +50,7 @@ thead th {
     background-color: #1f6bb7; /* #1f6bb7; *//* #2067ad; */
     color: #f7f8f9;
 }
+
+.table-striped{ /*>tr:nth-child(odd){*/
+   background: #dadada;
+}
