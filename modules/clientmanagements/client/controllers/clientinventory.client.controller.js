@@ -37,6 +37,13 @@
       setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
     }
 
+    // used for making toast appear
+    function toasty1() {
+      var x = document.getElementById('snackbar1');
+      x.className = 'show';
+      setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+    }
+
     // redirects user back to home
     $scope.cancelButton = function () {
       if ('admin' === Authentication.user.roles[0]) {
@@ -186,6 +193,7 @@
         console.log($scope.serial[upcFields-1]);
         //Quagga.stop();
         //_scannerIsRunning = false;
+        toasty1();
         $state.go('moveinventory');
       });
     }
@@ -454,7 +462,7 @@
       }
     };
 
-    //should save 
+    //should save
     $scope.saveUserLog = function (c, d, i, q) {
       vm.userlog = new UserlogsService();
       var item = vm.inventorymanagements[i];
