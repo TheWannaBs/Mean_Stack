@@ -1,10 +1,10 @@
 <div ng-controller="AuthenticationController">
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4"  style="color:black;">
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4" style="color:#f7f8f9;">
     <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <div class="w3-container">
         <div class="jumbotron">
           <div class="container">
-            <center><h1>Login</h3></center>
+            <center><h1>Login</h1></center>
               <br/>
               <fieldset>
                 <div class="form-group" show-errors>
@@ -21,7 +21,7 @@
                     <p class="help-block error-text" ng-message="required">Password is required.</p>
                   </div>
                 </div>
-                <div class="text-center form-group">
+                <div class="text-center form-group" style="padding-top:10px;">
                   <button type="submit" class="btn btn-primary">Log in</button>
                 </div>
                 <alert type="danger" ng-show="error" class="text-center text-danger">
@@ -30,8 +30,7 @@
               </fieldset>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
-</div>
