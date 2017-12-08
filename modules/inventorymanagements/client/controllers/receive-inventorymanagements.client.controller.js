@@ -5,9 +5,9 @@
   .module('inventorymanagements')
   .controller('InventorymanagementsReceiveController', InventorymanagementsReceiveController);
 
-  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state'];
+  InventorymanagementsReceiveController.$inject = ['InventorymanagementsService', 'userlogResolve', 'Authentication', '$scope', '$state', '$window'];
 
-  function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state) {
+  function InventorymanagementsReceiveController(InventorymanagementsService, userlog, Authentication, $scope, $state, $window) {
     //var a = document.getElementById('link-id'); //or grab it by tagname etc
     //a.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
     var vm = this;
@@ -42,8 +42,8 @@
           name: 'Live',
           type: 'LiveStream',
           constraints: {
-            width: 480,
-            height: 320,
+            width: 1920,
+            height: 1080,
             facingMode: 'environment'
           },
         },
@@ -128,7 +128,7 @@
 
     //Start/stop scanner
     //TODO: check the restart functionality
-    document.getElementById('btn').addEventListener('click', function () {
+    /*document.getElementById('btn').addEventListener('click', function () {
       if (_scannerIsRunning) {
         Quagga.stop();
         _scannerIsRunning = false;
@@ -136,7 +136,7 @@
         startScanner();
       }
       console.log(_scannerIsRunning);
-    }, false);
+    }, false);*/
 
     //on-click for scan select btn
     $scope.scanSelect = function(btnID1) {
@@ -248,6 +248,11 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    };
+
+    $scope.cancel = function () {
+      $state.go('inventorymanagements.list');
+      $window.location.reload();
     };
 
     //should save

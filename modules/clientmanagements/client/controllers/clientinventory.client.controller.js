@@ -13,9 +13,9 @@
     .module('userlogs')
     .controller('ClientInventorymanagementsListController', ClientInventorymanagementsListController);
 
-  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile'];
+  ClientInventorymanagementsListController.$inject = ['ClientmanagementsService', 'InventorymanagementsService', 'UserlogsService', '$scope', '$state', 'Authentication', '$compile', '$window'];
 
-  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile) {
+  function ClientInventorymanagementsListController(ClientmanagementsService, InventorymanagementsService, UserlogsService, $scope, $state, Authentication, $compile, $window) {
     var vm = this;
 
     vm.clientmanagements = ClientmanagementsService.query();
@@ -51,6 +51,7 @@
       } else {
         $state.go('mainmenu');
       }
+      $window.location.reload();
     };
 
     // adds another upc and quantity field
@@ -63,7 +64,7 @@
       document.getElementById('input_upc').appendChild(newCen);
       $scope.serial[upcFields] = {};
       upcFields++;
-      startScanner();
+      //startScanner();
     };
 
     // removes the last upc and quantity field

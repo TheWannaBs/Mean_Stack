@@ -253,7 +253,7 @@
   <option ng-repeat="inventorymanagement in vm.inventorymanagements" value="{{inventorymanagement.upc}}"></option>
 </datalist>
 <center style="padding-bottom: 20px;">
-  <input type="button" id="btn" value="Start/Stop the scanner"/>
+  <!--input type="button" id="btn" value="Start/Stop the scanner"/-->
   <div id="interactive" class="viewport">
   </div>
 </center>
@@ -286,7 +286,7 @@
   </center>
 </fieldset>
 <center style="padding-top: 20px;">
-  <a class="btn btn-primary" ui-sref="inventorymanagements.list">Cancel</a>
+  <a class="btn btn-primary" ng-click="cancel()">Cancel</a>
   <a class="btn btn-warning" ng-click="receive()">Move To Inventory</a>
 </center>
 <p></p>
