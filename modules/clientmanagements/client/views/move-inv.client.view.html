@@ -247,27 +247,33 @@ canvas.drawing, canvas.drawingBuffer {
 <form>
   <div id="input_upc">
     <center style="padding-bottom: 7px;">
+      <p style="color:black;">Scanner Fills Out UPCs of Items To Be Transferred </p>
+      <center style="padding-bottom: 7px;">
+        <button class="btn btn-default btn-sm" ng-click="deleteUPC()">
+          <span class="glyphicon glyphicon-minus"></span>
+        </button>
+        <button class="btn btn-default btn-sm" ng-click="addUPC()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </center>
       <input type="text" list="Inventory" placeholder="UPC - Autofill after scan" ng-model="serial[0].upc" style="width: 170px;"
       required></input>
       <input id="qty0" type="number" placeholder="1" min="1" step="1" ng-model="qty[0]" value="null" style="width: 50px;"></input>
-      <button class="btn btn-default btn-sm" ng-click="deleteUPC()">
-        <span class="glyphicon glyphicon-minus"></span>
-      </button>
-      <button class="btn btn-default btn-sm" ng-click="addUPC()">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
     </center>
   </div>
   <hr style="width: 400px;">
   <div id="input_client">
     <center style="padding-bottom: 7px;">
-      <input type="text" list="Clients" placeholder="Client Name" ng-model="nameAndEmail[0]" style="width: 250px;" required></input>
-      <button class="btn btn-default btn-sm" ng-click="deleteClient()">
-        <span class="glyphicon glyphicon-minus"></span>
-      </button>
-      <button class="btn btn-default btn-sm" ng-click="addClient()">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
+      <p style="color:black;">Select Different Clients To Transfer Multiple Items To And Fro</p>
+      <center style="padding-bottom: 7px;">
+        <button class="btn btn-default btn-sm" ng-click="deleteClient()">
+          <span class="glyphicon glyphicon-minus"></span>
+        </button>
+        <button class="btn btn-default btn-sm" ng-click="addClient()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </center>
+      <input type="text" list="Clients" placeholder="Select Clients To Transfer Items" ng-model="nameAndEmail[0]" style="width: 250px;" required></input>
     </center>
   </div>
   <hr style="width: 400px;">
@@ -277,4 +283,5 @@ canvas.drawing, canvas.drawingBuffer {
     <a type="submit" class="btn btn-warning" ng-click="moveToInventory()">Move To Inventory</a>
   </center>
 </form>
+<p></p>
 </section>

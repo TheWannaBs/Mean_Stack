@@ -5,6 +5,7 @@
       <span class="pull-right">
         <a class="btn btn-primary" ui-sref="user-create">Create User</a>
         <a class="btn btn-default" ui-sref="userlogs.list">User Log</a>
+        <a class="btn btn-default" href="javascript:window.print()">Print</a>
       </span>
     </h1>
   </div>
@@ -20,11 +21,23 @@
     <div class="tableWrapper">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-default">
-          <tr>
-            <th ng-click="changeSort('username')">Username</th>
-            <th ng-click="changeSort('roles')">Roles</th>
-            <th ng-click="changeSort('email')">Email</th>
-            <th ng-click="changeSort('updated')">Last Updated</th>
+          <tr class="sortable">
+            <th ng-click="changeSort('username')">Username
+              <i ng-hide="hideArrow('username', C_T)" style="font-size:20px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="hideArrow('username', C_F)" style="font-size:20px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="changeSort('roles')">User Roles
+              <i ng-hide="hideArrow('roles', C_T)" style="font-size:20px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="hideArrow('roles', C_F)" style="font-size:20px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="changeSort('email')">Email
+              <i ng-hide="hideArrow('email', C_T)" style="font-size:20px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="hideArrow('email', C_F)" style="font-size:20px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
+            <th ng-click="changeSort('updated')">Last Updated
+              <i ng-hide="hideArrow('updated', C_T)" style="font-size:20px;" class="glyphicon glyphicon-chevron-up pull-right"></i>
+              <i ng-hide="hideArrow('updated', C_F)" style="font-size:20px;" class="glyphicon glyphicon-chevron-down pull-right"></i>
+            </th>
           </tr>
         </thead>
         <tbody>

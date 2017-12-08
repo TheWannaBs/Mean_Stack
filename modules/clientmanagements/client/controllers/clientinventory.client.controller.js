@@ -431,7 +431,7 @@
           }
           vm.inventorymanagements[invResult].qty += quant;
           vm.clientmanagements[clientResult].$update(successCallback, errorCallback);
-          $scope.saveUserLog(clientResult, '->', invResult, quant);
+          $scope.saveUserLog(clientResult, '->', invResult, quant); //'\u00A9'
         }
         vm.inventorymanagements[invResult].$update(successCallback, errorCallback);
       }
@@ -460,7 +460,7 @@
       var item = vm.inventorymanagements[i];
       var client = vm.clientmanagements[c];
       //create new user log with receve data
-      vm.userlog.username = Authentication.user.username; 
+      vm.userlog.username = Authentication.user.username;
       // console.log(vm.userlogs.username);
       vm.userlog.clientName = client.name;
       vm.userlog.itemTags = vm.inventorymanagements[i].tags;

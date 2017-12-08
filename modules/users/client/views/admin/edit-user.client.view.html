@@ -26,13 +26,6 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
-        <!--div class="form-group" show-errors>
-          <label for="password">Password</label>
-          <input type="text" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password" required />
-          <div ng-messages="userForm.password.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Password is required.</p>
-          </div>
-        </div-->
         <div class="form-group" show-errors>
           <label class="control-label" for="roles">Roles</label>
           <select class="form-control" name="roles" ng-model="user.roles" id="roles" required>
@@ -43,6 +36,7 @@
         </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
+          <a class="btn btn-default" ui-sref="admin.user({userId: user._id})">Cancel</a>
         </div>
         <div ng-show="error" class="text-danger">
           <strong ng-bind="error"></strong>
